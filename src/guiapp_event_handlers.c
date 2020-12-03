@@ -78,12 +78,12 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_ON):
                 button_enabled = true;
                 update_prompt_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_ON);
-                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_HIGH);
+                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_LOW);
                 break;
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_OFF):
                 button_enabled = false;
                 update_prompt_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
-                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_LOW);
+                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_HIGH);
                 break;
         default:
             result = gx_window_event_process(widget, event_ptr);

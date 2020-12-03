@@ -1,13 +1,13 @@
 synergy/ssp/src/framework/tes/dave2d/dave_pattern.o: ../synergy/ssp/src/framework/tes/dave2d/dave_pattern.c \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_base.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_math.h \
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h \
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_registermap.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h \
@@ -26,23 +26,23 @@ C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\
 ../synergy/ssp/src/framework/tes/dave2d/dave_render.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_pattern.h
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_base.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes/dave_math.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h:
 
-C:\\Users\\Steven\\e2_studio\\hello_word\\GUIX_Hello_World_SK_S7G2.zip_expanded\\GUIX_Hello_World_SK_S7G2\\dont\ change\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h:
 
