@@ -10,40 +10,35 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include synergy/ssp_supplemental/touch_drivers/touch_panel_i2c_sx8654/subdir.mk
--include synergy/ssp/src/framework/tes/dave2d/subdir.mk
--include synergy/ssp/src/framework/sf_touch_panel_i2c/subdir.mk
--include synergy/ssp/src/framework/sf_tes_2d_drw/subdir.mk
--include synergy/ssp/src/framework/sf_message/subdir.mk
--include synergy/ssp/src/framework/sf_jpeg_decode/subdir.mk
--include synergy/ssp/src/framework/sf_external_irq/subdir.mk
--include synergy/ssp/src/framework/sf_el_gx/subdir.mk
--include synergy/ssp/src/driver/r_sci_spi/subdir.mk
--include synergy/ssp/src/driver/r_riic/subdir.mk
--include synergy/ssp/src/driver/r_jpeg_decode/subdir.mk
--include synergy/ssp/src/driver/r_jpeg_common/subdir.mk
 -include synergy/ssp/src/driver/r_ioport/subdir.mk
--include synergy/ssp/src/driver/r_icu/subdir.mk
 -include synergy/ssp/src/driver/r_gpt/subdir.mk
--include synergy/ssp/src/driver/r_glcd/subdir.mk
 -include synergy/ssp/src/driver/r_fmi/subdir.mk
 -include synergy/ssp/src/driver/r_elc/subdir.mk
--include synergy/ssp/src/driver/r_dtc/subdir.mk
 -include synergy/ssp/src/driver/r_cgc/subdir.mk
 -include synergy/ssp/src/bsp/mcu/s7g2/subdir.mk
 -include synergy/ssp/src/bsp/mcu/all/subdir.mk
 -include synergy/ssp/src/bsp/cmsis/Device/RENESAS/S7G2/Source/subdir.mk
 -include synergy/board/s7g2_sk/subdir.mk
 -include src/synergy_gen/subdir.mk
--include src/hardware/subdir.mk
--include src/gui/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(CC_DEPS)),)
+-include $(CC_DEPS)
+endif
 ifneq ($(strip $(SX_DEPS)),)
 -include $(SX_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+-include $(C_UPPER_DEPS)
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+-include $(CXX_DEPS)
 endif
 ifneq ($(strip $(ASM_DEPS)),)
 -include $(ASM_DEPS)
@@ -54,53 +49,76 @@ endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
+endif
 endif
 
 -include ../makefile.defs
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-EmbeddedControl.srec \
+Timer_int_example.srec \
 
 SECONDARY_SIZE += \
-EmbeddedControl.siz \
+Timer_int_example.siz \
 
 
 # All Target
-all: EmbeddedControl.elf secondary-outputs
+all: Timer_int_example.elf secondary-outputs
 
 # Tool invocations
-EmbeddedControl.elf: $(OBJS) $(USER_OBJS)
+Timer_int_example.elf: $(OBJS) $(USER_OBJS) $(LINKER_SCRIPT)
 	@echo 'Building target: $@'
-	@echo 'Invoking: Cross ARM C Linker'
-	$(file > EmbeddedControl.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\gx\\cm4_gcc" -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\tx\\cm4_gcc" -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"EmbeddedControl.map" --specs=rdimon.specs -o "EmbeddedControl.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
-	arm-none-eabi-gcc @"EmbeddedControl.elf.in"
+	@echo 'Invoking: GNU ARM Cross C++ Linker'
+	$(file > Timer_int_example.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\basha\\Documents\\e2 studio\\Timer_int_example\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\Users\\basha\\Documents\\e2 studio\\Timer_int_example\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"Timer_int_example.map" --specs=nano.specs --specs=rdimon.specs -o "Timer_int_example.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
+	arm-none-eabi-g++ @"Timer_int_example.elf.in"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-EmbeddedControl.srec: EmbeddedControl.elf
-	@echo 'Invoking: Cross ARM GNU Create Flash Image'
-	arm-none-eabi-objcopy -O srec "EmbeddedControl.elf"  "EmbeddedControl.srec"
+Timer_int_example.srec: Timer_int_example.elf
+	@echo 'Invoking: GNU ARM Cross Create Flash Image'
+	arm-none-eabi-objcopy -O srec "Timer_int_example.elf"  "Timer_int_example.srec"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-EmbeddedControl.siz: EmbeddedControl.elf
-	@echo 'Invoking: Cross ARM GNU Print Size'
-	arm-none-eabi-size --format=berkeley "EmbeddedControl.elf"
+Timer_int_example.siz: Timer_int_example.elf
+	@echo 'Invoking: GNU ARM Cross Print Size'
+	arm-none-eabi-size --format=berkeley "Timer_int_example.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
+ifneq ($(strip $(CC_DEPS)),)
+	-$(file > clean_CC_DEPS.tmp, $(CC_DEPS))
+	-@ xargs -s 6000 -t -a clean_CC_DEPS.tmp $(RM)
+	-@$(RM) clean_CC_DEPS.tmp
+endif
 ifneq ($(strip $(SX_DEPS)),)
 	-$(file > clean_SX_DEPS.tmp, $(SX_DEPS))
 	-@ xargs -s 6000 -t -a clean_SX_DEPS.tmp $(RM)
 	-@$(RM) clean_SX_DEPS.tmp
 endif
+ifneq ($(strip $(C++_DEPS)),)
+	-$(file > clean_C++_DEPS.tmp, $(C++_DEPS))
+	-@ xargs -s 6000 -t -a clean_C++_DEPS.tmp $(RM)
+	-@$(RM) clean_C++_DEPS.tmp
+endif
 ifneq ($(strip $(OBJS)),)
 	-$(file > clean_OBJS.tmp, $(OBJS))
 	-@ xargs -s 6000 -t -a clean_OBJS.tmp $(RM)
 	-@$(RM) clean_OBJS.tmp
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+	-$(file > clean_C_UPPER_DEPS.tmp, $(C_UPPER_DEPS))
+	-@ xargs -s 6000 -t -a clean_C_UPPER_DEPS.tmp $(RM)
+	-@$(RM) clean_C_UPPER_DEPS.tmp
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+	-$(file > clean_CXX_DEPS.tmp, $(CXX_DEPS))
+	-@ xargs -s 6000 -t -a clean_CXX_DEPS.tmp $(RM)
+	-@$(RM) clean_CXX_DEPS.tmp
 endif
 ifneq ($(strip $(SECONDARY_FLASH)),)
 	-$(file > clean_SECONDARY_FLASH.tmp, $(SECONDARY_FLASH))
@@ -127,7 +145,12 @@ ifneq ($(strip $(C_DEPS)),)
 	-@ xargs -s 6000 -t -a clean_C_DEPS.tmp $(RM)
 	-@$(RM) clean_C_DEPS.tmp
 endif
-	-$(RM)  EmbeddedControl.elf
+ifneq ($(strip $(CPP_DEPS)),)
+	-$(file > clean_CPP_DEPS.tmp, $(CPP_DEPS))
+	-@ xargs -s 6000 -t -a clean_CPP_DEPS.tmp $(RM)
+	-@$(RM) clean_CPP_DEPS.tmp
+endif
+	-$(RM)  Timer_int_example.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

@@ -3,7 +3,7 @@
 #define BSP_CLOCK_CFG_H_
 #define BSP_CFG_XTAL_HZ (24000000) /* XTAL 24000000Hz */
 #define BSP_CFG_PLL_SOURCE (CGC_CLOCK_MAIN_OSC) /* PLL Src: XTAL */
-#define BSP_CFG_HOCO_FREQUENCY (0) /* HOCO 16MHz */
+#define BSP_CFG_HOCO_FREQUENCY (2) /* HOCO 20MHz */
 #define BSP_CFG_PLL_DIV (CGC_PLL_DIV_2) /* PLL Div /2 */
 #define BSP_CFG_PLL_MUL (20.0) /* PLL Mul x20.0 */
 #define BSP_CFG_CLOCK_SOURCE (CGC_CLOCK_PLL) /* Clock Src: PLL */
