@@ -10,7 +10,7 @@ void InteruptThread_entry(void)
     }
 }
 
-void LEDTimer1Callback(void){
+void ledtimer1callback(timer_callback_args_t * p_args){
     if (g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, IOPORT_LEVEL_LOW)){
         g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, IOPORT_LEVEL_HIGH);
     }

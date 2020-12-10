@@ -308,9 +308,6 @@ Synergy Configuration
     
   Module "Touch Panel Driver on touch_panel_sx8654"
   Module "JPEG Common"
-  Module "Timer Driver on r_gpt"
-    Parameter Checking: Default (BSP)
-    
   HAL
     Instance "g_ioport I/O Port Driver on r_ioport"
       Name [Fixed]: g_ioport
@@ -686,31 +683,6 @@ Synergy Configuration
       Name: Main Semaphore
       Symbol: g_main_semaphore_lcdc
       Initial count: 0
-      
-  Thread "interupt thread"
-    Symbol: InteruptThread
-    Name: interupt thread
-    Stack size (bytes): 1024
-    Priority: 2
-    Auto start: Enabled
-    Time slicing interval (ticks): 1
-    
-    Instance "LEDTimer Timer Driver on r_gpt"
-      Name: LEDTimer
-      Channel: 0
-      Mode: Periodic
-      Duty Cycle Range (only applicable in PWM mode): Shortest: 2 PCLK, Longest: (Period - 1) PCLK
-      Period Value: 10
-      Period Unit: Milliseconds
-      Duty Cycle Value: 50
-      Duty Cycle Unit: Unit Raw Counts
-      Auto Start: True
-      GTIOCA Output Enabled: False
-      GTIOCA Stop Level: Pin Level Low
-      GTIOCB Output Enabled: False
-      GTIOCB Stop Level: Pin Level Low
-      Callback: LEDTimer1Callback
-      Overflow Interrupt Priority: Priority 1
       
   Messaging
     Subscriber "Main Thread" 0 0
