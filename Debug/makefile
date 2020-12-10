@@ -60,33 +60,33 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-EmbeddedControl.srec \
+GUIApp.srec \
 
 SECONDARY_SIZE += \
-EmbeddedControl.siz \
+GUIApp.siz \
 
 
 # All Target
-all: EmbeddedControl.elf secondary-outputs
+all: GUIApp.elf secondary-outputs
 
 # Tool invocations
-EmbeddedControl.elf: $(OBJS) $(USER_OBJS) $(LINKER_SCRIPT)
+GUIApp.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GNU ARM Cross C Linker'
-	$(file > EmbeddedControl.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\gx\\cm4_gcc" -L "C:\\Users\\Steven\\e2_studio\\hello_word\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\tx\\cm4_gcc" -Wl,-Map,"EmbeddedControl.map" --specs=nano.specs --specs=rdimon.specs -o "EmbeddedControl.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
-	arm-none-eabi-gcc @"EmbeddedControl.elf.in"
+	@echo 'Invoking: Cross ARM C Linker'
+	$(file > GUIApp.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\Steven\\git\\EmbeddedControl\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\Users\\Steven\\git\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\gx\\cm4_gcc" -L "C:\\Users\\Steven\\git\\EmbeddedControl\\synergy\\ssp\\src\\framework\\el\\tx\\cm4_gcc" -L "C:\\Users\\Steven\\git\\EmbeddedControl\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"GUIApp.map" --specs=rdimon.specs -o "GUIApp.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
+	arm-none-eabi-gcc @"GUIApp.elf.in"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-EmbeddedControl.srec: EmbeddedControl.elf
-	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O srec "EmbeddedControl.elf"  "EmbeddedControl.srec"
+GUIApp.srec: GUIApp.elf
+	@echo 'Invoking: Cross ARM GNU Create Flash Image'
+	arm-none-eabi-objcopy -O srec "GUIApp.elf"  "GUIApp.srec"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-EmbeddedControl.siz: EmbeddedControl.elf
-	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "EmbeddedControl.elf"
+GUIApp.siz: GUIApp.elf
+	@echo 'Invoking: Cross ARM GNU Print Size'
+	arm-none-eabi-size --format=berkeley "GUIApp.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
@@ -127,7 +127,7 @@ ifneq ($(strip $(C_DEPS)),)
 	-@ xargs -s 6000 -t -a clean_C_DEPS.tmp $(RM)
 	-@$(RM) clean_C_DEPS.tmp
 endif
-	-$(RM)  EmbeddedControl.elf
+	-$(RM)  GUIApp.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

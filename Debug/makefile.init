@@ -7,6 +7,7 @@ export PATH=C:\Renesas\Synergy\e2studio_v7.5.1_ssp_v1.7.8\toolchains\gcc_arm\7.2
 export TCINSTALL=C:\Renesas\Synergy\e2studio_v7.5.1_ssp_v1.7.8\toolchains\gcc_arm\7.2.1_2017q4$(call arg1,\)
 export CWD=$(CURDIR)
 export AMS_LICENSE_PATH=C:\Renesas\Synergy\e2studio_v7.5.1_ssp_v1.7.8\internal\projectgen\arm\licenses\SSP_License_Example_EvalLicense_20180725.xml
+export SECURE_BUILD_COMMAND=C:\Renesas\Synergy\e2studio_v7.5.1_ssp_v1.7.8\eclipse\../Utilities/isdebuild
 export TC_VERSION=7.2.1.20170904
 export AMS_KEEP_FILE=false
 export PWD=$(CURDIR)

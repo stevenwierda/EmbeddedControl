@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lDSP_Lib -lgx -ltx
+LIBS := -lgx -ltx -lDSP_Lib
 
