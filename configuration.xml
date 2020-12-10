@@ -620,12 +620,12 @@
       <property id="module.driver.transfer.p_callback" value="NULL"/>
       <property id="module.driver.transfer.irq_ipl" value="board.icu.common.irq.disabled"/>
     </module>
-    <module id="module.driver.timer_on_gpt.1114696356">
+    <module id="module.driver.timer_on_gpt.1215145544">
       <property id="module.driver.timer.name" value="led_timer0"/>
       <property id="module.driver.timer.channel" value="0"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
       <property id="module.driver.timer.shortest_pwm_signal" value="module.driver.timer.mode.shortest_pwm_signal_disabled"/>
-      <property id="module.driver.timer.period" value="2"/>
+      <property id="module.driver.timer.period" value="250"/>
       <property id="module.driver.timer.unit" value="module.driver.timer.unit.unit_period_msec"/>
       <property id="module.driver.timer.duty_cycle" value="50"/>
       <property id="module.driver.timer.duty_cycle_unit" value="module.driver.timer.duty_cycle_unit.unit_percent"/>
@@ -642,7 +642,6 @@
       <stack module="module.driver.cgc_on_cgc.1335811009"/>
       <stack module="module.driver.elc_on_elc.1873102203"/>
       <stack module="module.driver.fmi_on_fmi.1981095816"/>
-      <stack module="module.driver.timer_on_gpt.1114696356"/>
     </context>
     <context id="rtos.threadx.thread.239426899">
       <property id="_symbol" value="main_thread"/>
@@ -679,6 +678,7 @@
         </stack>
         <stack module="module.external.ex_touch_panel_i2c_sx8654_on_ex_touch_panel_i2c_sx8654.1791918554" requires="module.framework.sf_touch_panel_on_sf_touch_panel_i2c.requires.ex_touch_panel"/>
       </stack>
+      <stack module="module.driver.timer_on_gpt.1215145544"/>
       <object id="rtos.threadx.object.semaphore.2029776137">
         <property id="rtos.threadx.object.semaphore.name" value="Main Semaphore"/>
         <property id="rtos.threadx.object.semaphore.symbol" value="g_main_semaphore_lcdc"/>

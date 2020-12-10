@@ -78,9 +78,7 @@ src/hal_entry.o: ../src/hal_entry.c \
  C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h \
- C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
- C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
- C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h
+ C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h
 
 C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/hal_data.h:
 
@@ -241,7 +239,3 @@ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h:
 C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h:
 
 C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h:
-
-C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
-
-C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:

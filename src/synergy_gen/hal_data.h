@@ -4,16 +4,9 @@
 #include <stdint.h>
 #include "bsp_api.h"
 #include "common_data.h"
-#include "r_gpt.h"
-#include "r_timer_api.h"
 #ifdef __cplusplus
 extern "C"
 {
-#endif
-/** Timer on GPT Instance. */
-extern const timer_instance_t led_timer0;
-#ifndef led_timer0_callback
-void led_timer0_callback(timer_callback_args_t *p_args);
 #endif
 void hal_entry(void);
 void g_hal_init(void);
