@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 26.11.2020   Time (hh:mm): 11:14                        */
+/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 12:31                        */
 /*******************************************************************************/
 
 
@@ -89,6 +89,8 @@
 #define GX_STRING_ID_LED_ON 7
 #define GX_STRING_ID_LED_OFF 8
 #define GX_STRING_ID_LEDCONTROL 9
-#define DISPLAY_1_STRING_TABLE_SIZE 10
+#define GX_STRING_ID_UP_COUNTER 10
+#define GX_STRING_ID_DOWN_COUNTER 11
+#define DISPLAY_1_STRING_TABLE_SIZE 12
 
 #endif                                       /* sentry                         */

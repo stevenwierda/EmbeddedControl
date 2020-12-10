@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 26.11.2020   Time (hh:mm): 11:14                        */
+/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 12:31                        */
 /*******************************************************************************/
 
 
@@ -30,10 +30,13 @@ extern   "C" {
 #define BUTTERUGTIME 6
 #define WINDOW_SETTINGS 7
 #define BUTTERUGSETTINGS 8
-#define WINDOW_MAIN 9
-#define BUTSETTINGS 10
-#define BUTTIME 11
-#define BUTLED 12
+#define BUTINCREASE 9
+#define BUTDECREASE 10
+#define TIME 11
+#define WINDOW_MAIN 12
+#define BUTSETTINGS 13
+#define BUTTIME 14
+#define BUTLED 15
 
 
 /* Define animation ids                                                        */
@@ -111,6 +114,17 @@ typedef struct
 
 typedef struct
 {
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
+    GX_RESOURCE_ID disabled_text_color_id;
+    VOID (*format_func)(GX_NUMERIC_PROMPT *, INT);
+    INT            numeric_prompt_value;
+} GX_NUMERIC_PROMPT_PROPERTIES;
+
+typedef struct
+{
     GX_RESOURCE_ID wallpaper_id;
 } GX_WINDOW_PROPERTIES;
 
@@ -137,6 +151,9 @@ typedef struct SETTINGS_CONTROL_BLOCK_STRUCT
     GX_WINDOW_MEMBERS_DECLARE
     GX_TEXT_BUTTON Settings_buttonTerugSettings;
     GX_PROMPT Settings_prompt;
+    GX_TEXT_BUTTON Settings_buttonIncrease;
+    GX_TEXT_BUTTON Settings_buttonDecrease;
+    GX_NUMERIC_PROMPT Settings_Time;
 } SETTINGS_CONTROL_BLOCK;
 
 typedef struct MAIN_CONTROL_BLOCK_STRUCT
@@ -252,6 +269,7 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_checkbox_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
+UINT gx_studio_numeric_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
 UINT gx_studio_named_widget_create(char *name, GX_WIDGET *parent, GX_WIDGET **new_widget);

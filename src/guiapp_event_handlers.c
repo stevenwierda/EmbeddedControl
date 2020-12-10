@@ -1,8 +1,5 @@
-
-
 #include "gui/guiapp_resources.h"
 #include "gui/guiapp_specifications.h"
-
 #include "main_thread.h"
 
 static bool button_enabled = false;

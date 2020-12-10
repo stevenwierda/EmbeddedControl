@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 26.11.2020   Time (hh:mm): 11:14                        */
+/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 12:31                        */
 /*******************************************************************************/
 
 
@@ -336,10 +336,12 @@ GX_CONST GX_UBYTE display_1_LED_SWITCH_English[] = "led switch";
 GX_CONST GX_UBYTE display_1_LED_ON_English[] = "LED on";
 GX_CONST GX_UBYTE display_1_LED_OFF_English[] = "LED off";
 GX_CONST GX_UBYTE display_1_LEDCONTROL_English[] = "LED switch";
+GX_CONST GX_UBYTE display_1_UP_COUNTER_English[] = "increase";
+GX_CONST GX_UBYTE display_1_DOWN_COUNTER_English[] = "decrease";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[10] =
+GX_CONST GX_STRING display_1_English_string_table[12] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -350,7 +352,9 @@ GX_CONST GX_STRING display_1_English_string_table[10] =
     {(GX_CONST GX_CHAR *)display_1_LED_SWITCH_English, sizeof(display_1_LED_SWITCH_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_LED_ON_English, sizeof(display_1_LED_ON_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_LED_OFF_English, sizeof(display_1_LED_OFF_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_LEDCONTROL_English, sizeof(display_1_LEDCONTROL_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_LEDCONTROL_English, sizeof(display_1_LEDCONTROL_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_UP_COUNTER_English, sizeof(display_1_UP_COUNTER_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_DOWN_COUNTER_English, sizeof(display_1_DOWN_COUNTER_English) - 1}
 };
 
 /*  Language Table                                                             */
