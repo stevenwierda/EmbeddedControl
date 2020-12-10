@@ -111,6 +111,7 @@ void g_lcd_spi_callback(spi_callback_args_t *p_args);
 
 #define g_spi_lcdc_P_EXTEND (&g_spi_lcdc_cfg_extend)
 extern TX_SEMAPHORE g_main_semaphore_lcdc;
+extern TX_SEMAPHORE g_Timer_semaphore0;
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

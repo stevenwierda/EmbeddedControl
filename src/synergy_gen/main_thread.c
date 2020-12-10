@@ -278,6 +278,7 @@ const spi_cfg_t g_spi_lcdc_cfg =
 const spi_instance_t g_spi_lcdc =
 { .p_ctrl = &g_spi_lcdc_ctrl, .p_cfg = &g_spi_lcdc_cfg, .p_api = &g_spi_on_sci };
 TX_SEMAPHORE g_main_semaphore_lcdc;
+TX_SEMAPHORE g_Timer_semaphore0;
 extern bool g_ssp_common_initialized;
 extern uint32_t g_ssp_common_thread_count;
 extern TX_SEMAPHORE g_ssp_common_initialized_semaphore;
@@ -293,6 +294,12 @@ void main_thread_create(void)
     if (TX_SUCCESS != err_g_main_semaphore_lcdc)
     {
         tx_startup_err_callback (&g_main_semaphore_lcdc, 0);
+    }
+    UINT err_g_Timer_semaphore0;
+    err_g_Timer_semaphore0 = tx_semaphore_create (&g_Timer_semaphore0, (CHAR *) "Timer_semaphore", 0);
+    if (TX_SUCCESS != err_g_Timer_semaphore0)
+    {
+        tx_startup_err_callback (&g_Timer_semaphore0, 0);
     }
 
     UINT err;

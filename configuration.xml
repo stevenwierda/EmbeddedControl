@@ -684,6 +684,11 @@
         <property id="rtos.threadx.object.semaphore.symbol" value="g_main_semaphore_lcdc"/>
         <property id="rtos.threadx.object.semaphore.count" value="0"/>
       </object>
+      <object id="rtos.threadx.object.semaphore.731816606">
+        <property id="rtos.threadx.object.semaphore.name" value="Timer_semaphore"/>
+        <property id="rtos.threadx.object.semaphore.symbol" value="g_Timer_semaphore0"/>
+        <property id="rtos.threadx.object.semaphore.count" value="0"/>
+      </object>
     </context>
     <config id="config.driver.jpeg_decode">
       <property id="config.driver.jpeg_decode.param_checking_enable" value="config.driver.jpeg_decode.param_checking_enable.enabled"/>

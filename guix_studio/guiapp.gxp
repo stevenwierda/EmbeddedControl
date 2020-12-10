@@ -1580,7 +1580,7 @@
 <selected_fill_color>SELECTED_FILL</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
 <id_name>TIME</id_name>
-<user_data>TImeValue</user_data>
+<user_data>InteruptTimer</user_data>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <font_id>PROMPT</font_id>

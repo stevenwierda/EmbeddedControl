@@ -20,8 +20,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-src/gui \
 src \
+src/gui \
 src/hardware \
 src/synergy_gen \
 synergy/board/s7g2_sk \

@@ -704,6 +704,11 @@ Synergy Configuration
       Symbol: g_main_semaphore_lcdc
       Initial count: 0
       
+    Object "g_Timer_semaphore0 Semaphore"
+      Name: Timer_semaphore
+      Symbol: g_Timer_semaphore0
+      Initial count: 0
+      
   Messaging
     Subscriber "Main Thread" 0 0
       Event Class "Touch"

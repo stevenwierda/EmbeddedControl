@@ -98,7 +98,7 @@ src/main_thread_entry.o: ../src/main_thread_entry.c \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h \
  ../src/gui/guiapp_specifications.h ../src/gui/guiapp_resources.h \
- ../src/hardware/lcd.h
+ ../src/dataShare.h ../src/hardware/lcd.h
 
 C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/main_thread.h:
 
@@ -299,5 +299,7 @@ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
 ../src/gui/guiapp_specifications.h:
 
 ../src/gui/guiapp_resources.h:
+
+../src/dataShare.h:
 
 ../src/hardware/lcd.h:

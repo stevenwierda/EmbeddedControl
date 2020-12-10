@@ -98,7 +98,8 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h \
- C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h \
+ ../src/dataShare.h
 
 ../src/gui/guiapp_resources.h:
 
@@ -299,3 +300,5 @@ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch
 C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
 
 C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
+
+../src/dataShare.h:

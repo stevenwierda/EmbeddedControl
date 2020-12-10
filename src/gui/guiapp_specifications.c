@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 12:31                        */
+/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 14:23                        */
 /*******************************************************************************/
 
 
@@ -428,7 +428,7 @@ GX_CONST GX_STUDIO_WIDGET Settings_Time_define =
     GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
     TIME,                                    /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
-    TImeValue,                               /* user data                      */
+    InteruptTimer,                           /* user data                      */
     #endif
     GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
