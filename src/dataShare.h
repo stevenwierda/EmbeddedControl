@@ -9,7 +9,7 @@
 #ifndef DATASHARE_H_
 #define DATASHARE_H_
 extern long unsigned int timerInteruptTime;
-void setInteruptTime();
-long unsigned int getInteruptTime(value);
+void setInteruptTime(long unsigned int value);
+long unsigned int getInteruptTime();
 
 #endif /* DATASHARE_H_ */

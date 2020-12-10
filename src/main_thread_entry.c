@@ -25,6 +25,8 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args);
  ***********************************************************************************************************************/
 static GX_EVENT g_gx_event;
 bool onOff = true;
+bool onOff2 = true;
+long unsigned int interuptTime;
 
 GX_WINDOW_ROOT * p_window_root;
 extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
@@ -35,9 +37,8 @@ extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
 void main_thread_entry(void) {
 
     /* the interrupt configuration*/
+    interuptTime = getInteruptTime();
     led_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
-    led_timer0.p_api->periodSet(led_timer0.p_ctrl, getInteruptTime(), TIMER_UNIT_PERIOD_MSEC);
-
 
 
 

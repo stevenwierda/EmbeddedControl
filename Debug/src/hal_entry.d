@@ -78,7 +78,27 @@ src/hal_entry.o: ../src/hal_entry.c \
  C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h \
- C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h
+ C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
+ ../src/dataShare.h \
+ C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/main_thread.h \
+ C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/hal_data.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\api/sf_external_irq_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h \
+ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h
 
 C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/hal_data.h:
 
@@ -239,3 +259,43 @@ C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h:
 C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h:
 
 C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h:
+
+../src/dataShare.h:
+
+C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/main_thread.h:
+
+C:\Users\Steven\git\EmbeddedControl\src\synergy_gen/hal_data.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\api/sf_external_irq_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
+
+C:\Users\Steven\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:

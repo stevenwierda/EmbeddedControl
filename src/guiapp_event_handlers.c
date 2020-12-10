@@ -63,14 +63,16 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
             if(InteruptTimer >> 0){
                 InteruptTimer = InteruptTimer - 50;
                 setInteruptTime(InteruptTimer);
-                gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
+                led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+                //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
             }
         break;
         case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
             InteruptTimer = getInteruptTime();
             InteruptTimer = InteruptTimer + 50;
             setInteruptTime(InteruptTimer);
-            gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
+            led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+            //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
         break;
         default:
             result = gx_window_event_process(widget, event_ptr);
@@ -139,16 +141,5 @@ static void update_prompt_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT 
     if (TX_SUCCESS == err)
     {
         gx_prompt_text_id_set(p_prompt, string_id);
-    }
-}
-
-static void update_button_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id)
-{
-    GX_TEXT_BUTTON * p_button = NULL;
-
-    ssp_err_t err = (ssp_err_t)gx_widget_find(p_widget, (USHORT)id, GX_SEARCH_DEPTH_INFINITE, (GX_WIDGET**)&p_button);
-    if (TX_SUCCESS == err)
-    {
-        gx_text_button_text_id_set(p_button, string_id);
     }
 }
