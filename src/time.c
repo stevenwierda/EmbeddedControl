@@ -78,7 +78,7 @@ void changeMonthUp(){
 
 void changeMonthDown(){
     month = month - 1;
-    if (month == -1){
+    if (month == 0){
         month = 12;
     }
 }
@@ -151,7 +151,7 @@ int getDay(){
     return day;
 }
 
-int gethour(){
+int getHour(){
     return hour;
 }
 

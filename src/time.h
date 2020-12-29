@@ -37,7 +37,7 @@ void changeMsecDown();
 int getYear();
 int getMonth();
 int getDay();
-int gethour();
+int getHour();
 int getMin();
 int getSec();
 int getMsec();
