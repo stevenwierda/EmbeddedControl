@@ -33,6 +33,7 @@ void changeSecUp();
 void changeSecDown();
 void changeMsecUp();
 void changeMsecDown();
+
 int getYear();
 int getMonth();
 int getDay();

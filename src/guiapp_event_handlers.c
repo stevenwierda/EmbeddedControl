@@ -4,13 +4,14 @@
 #include "time.h"
 
 static bool button_enabled = false;
+int daynr;
 unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
 
 extern GX_WINDOW_ROOT * p_window_root;
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old);
-static void update_prompt_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id);
+static void update_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id);
 static void update_button_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id);
 
 UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
@@ -81,12 +82,12 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
             break;
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_ON):
                 button_enabled = true;
-                update_prompt_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_ON);
+                update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_ON);
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_LOW);
                 break;
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_OFF):
                 button_enabled = false;
-                update_prompt_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
+                update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_HIGH);
                 break;
         default:
@@ -99,14 +100,83 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
+    daynr = getDaynr();
+    if(daynr == 1){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
+    }
+    else if(daynr == 2){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
+    }
+    else if(daynr == 3){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
+    }
+    else if(daynr == 4){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
+    }
+    else if(daynr == 5){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
+    }
+    else if(daynr == 6){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
+    }
+    else if(daynr == 7){
+        update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
+    }
 
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTTERUGTIMESET, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
         break;
-
-
-
+        case GX_SIGNAL(BUTNAMEDAYPLUS, GX_EVENT_CLICKED):
+            changeDaynrUp();
+            daynr = getDaynr();
+            if(daynr == 1){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
+            }
+            else if(daynr == 2){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
+            }
+            else if(daynr == 3){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
+            }
+            else if(daynr == 4){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
+            }
+            else if(daynr == 5){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
+            }
+            else if(daynr == 6){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
+            }
+            else if(daynr == 7){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
+            }
+            break;
+        case GX_SIGNAL(BUTNAMEDAYMIN, GX_EVENT_CLICKED):
+            changeDaynrDown();
+            daynr = getDaynr();
+            if(daynr == 1){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
+            }
+            else if(daynr == 2){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
+            }
+            else if(daynr == 3){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
+            }
+            else if(daynr == 4){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
+            }
+            else if(daynr == 5){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
+            }
+            else if(daynr == 6){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
+            }
+            else if(daynr == 7){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
+            }
+            break;
         default:
             result = gx_window_event_process(widget, event_ptr);
         break;
@@ -168,7 +238,7 @@ static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old
     return err;
 }
 
-static void update_prompt_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id)
+static void update_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id)
 {
     GX_PROMPT * p_prompt = NULL;
 

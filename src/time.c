@@ -13,7 +13,7 @@ int hour = 0;
 int day = 1;
 int month = 1;
 int year = 2020;
-int daynr = 1;
+int daynr = 2;
 
 void addHunderdms(){
     msec = msec + 100;
