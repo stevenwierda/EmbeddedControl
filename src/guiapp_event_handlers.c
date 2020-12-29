@@ -1,6 +1,7 @@
 #include "gui/guiapp_resources.h"
 #include "gui/guiapp_specifications.h"
 #include "main_thread.h"
+#include "time.h"
 
 static bool button_enabled = false;
 unsigned long int InteruptTimer = 250;
@@ -102,7 +103,10 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTTERUGTIMESET, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
-            break;
+        break;
+
+
+
         default:
             result = gx_window_event_process(widget, event_ptr);
         break;

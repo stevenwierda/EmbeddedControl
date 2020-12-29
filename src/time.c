@@ -4,6 +4,7 @@
  *  Created on: 29 Dec 2020
  *      Author: steve
  */
+#include "time.h"
 
 int msec = 0;
 int sec = 0;
@@ -59,3 +60,114 @@ void addHunderdms(){
         }
     }
 }
+void changeYearUp(){
+    year = year + 1;
+
+}
+
+void changeYearDown(){
+    year = year - 1;
+}
+
+void changeMonthUp(){
+    month = month + 1;
+    if (month == 13){
+        month = 0;
+    }
+}
+
+void changeMonthDown(){
+    month = month - 1;
+    if (month == -1){
+        month = 12;
+    }
+}
+
+void changeDaynrUp(){
+    daynr = daynr + 1;
+    if (daynr == 8){
+        daynr = 1;
+    }
+}
+
+void changeDaynrDown(){
+    daynr = daynr - 1;
+    if (daynr == 0){
+        daynr = 7;
+    }
+}
+
+void changeDayUp(){
+    day = day + 1;
+    if (day == 8){
+        day = 1;
+    }
+}
+
+void changeDayDown(){
+    day = day - 1;
+    if (day == 0){
+        day = 7;
+    }
+}
+
+void changeMinUp(){
+    min = min + 1;
+    if (min == 60){
+        min = 0;
+    }
+}
+
+void changeMinDown(){
+    min = min - 1;
+    if (min == -1){
+        min = 59;
+    }
+}
+
+void changeHourUp(){
+    hour = hour + 1;
+    if (hour == 24){
+        hour = 0;
+    }
+}
+
+void changeHourDown(){
+    hour = hour - 1;
+    if (hour == -1){
+        hour = 23;
+    }
+}
+
+int getYear(){
+    return year;
+}
+
+int getMonth(){
+    return month;
+}
+
+int getDay(){
+    return day;
+}
+
+int gethour(){
+    return hour;
+}
+
+int getMin(){
+    return min;
+}
+
+int getSec(){
+    return sec;
+}
+
+int getMsec(){
+    return msec;
+}
+
+int getDaynr(){
+    return daynr;
+}
+
