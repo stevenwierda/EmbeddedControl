@@ -8,26 +8,41 @@ static uint8_t main_thread_stack[2048] BSP_PLACE_IN_SECTION_V2(".stack.main_thre
 void tx_startup_err_callback(void *p_instance, void *p_data);
 void tx_startup_common_init(void);
 #if (9) != BSP_IRQ_DISABLED
-#if !defined(SSP_SUPPRESS_ISR_led_timer0) && !defined(SSP_SUPPRESS_ISR_GPT0)
+#if !defined(SSP_SUPPRESS_ISR_led_timer0) && !defined(SSP_SUPPRESS_ISR_AGT0)
+SSP_VECTOR_DEFINE_CHAN(agt_int_isr, AGT, INT, 0);
+#endif
+#endif
+static agt_instance_ctrl_t led_timer0_ctrl;
+static const timer_on_agt_cfg_t led_timer0_extend =
+{ .count_source = AGT_CLOCK_PCLKB, .agto_output_enabled = false, .agtio_output_enabled = false,
+  .output_inverted = false, .agtoa_output_enable = false, .agtob_output_enable = false, };
+static const timer_cfg_t led_timer0_cfg =
+{ .mode = TIMER_MODE_PERIODIC, .period = 10, .unit = TIMER_UNIT_PERIOD_USEC, .channel = 0, .autostart = true,
+  .p_callback = led_timer0_callback, .p_context = &led_timer0, .p_extend = &led_timer0_extend, .irq_ipl = (9), };
+/* Instance structure to use this module. */
+const timer_instance_t led_timer0 =
+{ .p_ctrl = &led_timer0_ctrl, .p_cfg = &led_timer0_cfg, .p_api = &g_timer_on_agt };
+#if (9) != BSP_IRQ_DISABLED
+#if !defined(SSP_SUPPRESS_ISR_TimeAdd_timer0) && !defined(SSP_SUPPRESS_ISR_GPT0)
 SSP_VECTOR_DEFINE_CHAN(gpt_counter_overflow_isr, GPT, COUNTER_OVERFLOW, 0);
 #endif
 #endif
-static gpt_instance_ctrl_t led_timer0_ctrl;
-static const timer_on_gpt_cfg_t led_timer0_extend =
+static gpt_instance_ctrl_t TimeAdd_timer0_ctrl;
+static const timer_on_gpt_cfg_t TimeAdd_timer0_extend =
 { .gtioca =
 { .output_enabled = false, .stop_level = GPT_PIN_LEVEL_LOW },
   .gtiocb =
   { .output_enabled = false, .stop_level = GPT_PIN_LEVEL_LOW },
   .shortest_pwm_signal = GPT_SHORTEST_LEVEL_OFF, };
-static const timer_cfg_t led_timer0_cfg =
-{ .mode = TIMER_MODE_PERIODIC, .period = 250, .unit = TIMER_UNIT_PERIOD_MSEC, .duty_cycle = 50, .duty_cycle_unit =
+static const timer_cfg_t TimeAdd_timer0_cfg =
+{ .mode = TIMER_MODE_PERIODIC, .period = 100, .unit = TIMER_UNIT_PERIOD_MSEC, .duty_cycle = 50, .duty_cycle_unit =
           TIMER_PWM_UNIT_RAW_COUNTS,
-  .channel = 0, .autostart = true, .p_callback = led_timer0_callback, .p_context = &led_timer0, .p_extend =
-          &led_timer0_extend,
+  .channel = 0, .autostart = true, .p_callback = TimeAdd_timer0_callback, .p_context = &TimeAdd_timer0, .p_extend =
+          &TimeAdd_timer0_extend,
   .irq_ipl = (9), };
 /* Instance structure to use this module. */
-const timer_instance_t led_timer0 =
-{ .p_ctrl = &led_timer0_ctrl, .p_cfg = &led_timer0_cfg, .p_api = &g_timer_on_gpt };
+const timer_instance_t TimeAdd_timer0 =
+{ .p_ctrl = &TimeAdd_timer0_ctrl, .p_cfg = &TimeAdd_timer0_cfg, .p_api = &g_timer_on_gpt };
 #if (3) != BSP_IRQ_DISABLED
 #if !defined(SSP_SUPPRESS_ISR_g_touch_irq) && !defined(SSP_SUPPRESS_ISR_ICU9)
 SSP_VECTOR_DEFINE( icu_irq_isr, ICU, IRQ9);

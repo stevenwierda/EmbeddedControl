@@ -9,6 +9,8 @@ extern "C" void main_thread_entry(void);
 #else
 extern void main_thread_entry(void);
 #endif
+#include "r_agt.h"
+#include "r_timer_api.h"
 #include "r_gpt.h"
 #include "r_timer_api.h"
 #include "r_icu.h"
@@ -26,10 +28,15 @@ extern void main_thread_entry(void);
 extern "C"
 {
 #endif
-/** Timer on GPT Instance. */
+/** AGT Timer Instance */
 extern const timer_instance_t led_timer0;
 #ifndef led_timer0_callback
 void led_timer0_callback(timer_callback_args_t *p_args);
+#endif
+/** Timer on GPT Instance. */
+extern const timer_instance_t TimeAdd_timer0;
+#ifndef TimeAdd_timer0_callback
+void TimeAdd_timer0_callback(timer_callback_args_t *p_args);
 #endif
 /* External IRQ on ICU Instance. */
 extern const external_irq_instance_t g_touch_irq;
