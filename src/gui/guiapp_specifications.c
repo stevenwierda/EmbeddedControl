@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 14:23                        */
+/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 14:48                        */
 /*******************************************************************************/
 
 
@@ -16,6 +16,8 @@
 #include "guiapp_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
+SETTIME_CONTROL_BLOCK setTime;
+SETLEDONEINTERUPT_CONTROL_BLOCK setLedOneInterupt;
 LEDCONTROLE_CONTROL_BLOCK LEDControle;
 TIME_CONTROL_BLOCK Time;
 SETTINGS_CONTROL_BLOCK Settings;
@@ -155,6 +157,640 @@ UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control
     }
     return status;
 }
+GX_WINDOW_PROPERTIES setTime_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonTerugTimeSet_properties =
+{
+    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonYearPlus_properties =
+{
+    GX_STRING_ID_YEARPLUS,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonHourMin_properties =
+{
+    GX_STRING_ID_HOURMIN,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonHourPlus_properties =
+{
+    GX_STRING_ID_HOURPLUS,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonMinuteMin_properties =
+{
+    GX_STRING_ID_MINUTEMIN,                  /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonMinutePlus_properties =
+{
+    GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonDayMin_properties =
+{
+    GX_STRING_ID_DAYMIN,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonDayPlus_properties =
+{
+    GX_STRING_ID_DAYPLUS,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonMonthMin_properties =
+{
+    GX_STRING_ID_MONTHMIN,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonMonthPlus_properties =
+{
+    GX_STRING_ID_MONTHPLUS,                  /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonYearMin_properties =
+{
+    GX_STRING_ID_YEARMIN,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonDayNamePlus_properties =
+{
+    GX_STRING_ID_DAYPLUS,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonDayNameMin_properties =
+{
+    GX_STRING_ID_DAYMIN,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES setTime_DayPrompt_properties =
+{
+    GX_STRING_ID_MONDAY,                     /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_DayPrompt_define =
+{
+    "DayPrompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    PRMPTDAYNAME,                            /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {11, 206, 90, 229},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_DayPrompt), /* control block       */
+    (void *) &setTime_DayPrompt_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonDayNameMin_define =
+{
+    "buttonDayNameMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTNAMEDAYMIN,                           /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {10, 230, 89, 254},                      /* widget size                    */
+    &setTime_DayPrompt_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayNameMin), /* control block */
+    (void *) &setTime_buttonDayNameMin_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonDayNamePlus_define =
+{
+    "buttonDayNamePlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTNAMEDAYPLUS,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {10, 182, 89, 205},                      /* widget size                    */
+    &setTime_buttonDayNameMin_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayNamePlus), /* control block */
+    (void *) &setTime_buttonDayNamePlus_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonYearMin_define =
+{
+    "buttonYearMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTYEARMIN,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 150, 91, 174},                      /* widget size                    */
+    &setTime_buttonDayNamePlus_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonYearMin), /* control block   */
+    (void *) &setTime_buttonYearMin_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonMonthPlus_define =
+{
+    "buttonMonthPlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTMONTHPLUS,                            /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 100, 169, 124},                     /* widget size                    */
+    &setTime_buttonYearMin_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMonthPlus), /* control block */
+    (void *) &setTime_buttonMonthPlus_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonMonthMin_define =
+{
+    "buttonMonthMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTMONTHMIN,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 150, 169, 174},                     /* widget size                    */
+    &setTime_buttonMonthPlus_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMonthMin), /* control block  */
+    (void *) &setTime_buttonMonthMin_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonDayPlus_define =
+{
+    "buttonDayPlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTDAYPLUS,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 181, 169, 205},                     /* widget size                    */
+    &setTime_buttonMonthMin_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayPlus), /* control block   */
+    (void *) &setTime_buttonDayPlus_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonDayMin_define =
+{
+    "buttonDayMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTDAYMIN,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {91, 229, 170, 253},                     /* widget size                    */
+    &setTime_buttonDayPlus_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayMin), /* control block    */
+    (void *) &setTime_buttonDayMin_properties /* extended properties           */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonMinutePlus_define =
+{
+    "buttonMinutePlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTMINUTEPLUS,                           /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 16, 169, 40},                       /* widget size                    */
+    &setTime_buttonDayMin_define,            /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMinutePlus), /* control block */
+    (void *) &setTime_buttonMinutePlus_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonMinuteMin_define =
+{
+    "buttonMinuteMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTMINUTEMIN,                            /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 72, 169, 96},                       /* widget size                    */
+    &setTime_buttonMinutePlus_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMinuteMin), /* control block */
+    (void *) &setTime_buttonMinuteMin_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonHourPlus_define =
+{
+    "buttonHourPlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTHOURADD,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 16, 91, 39},                        /* widget size                    */
+    &setTime_buttonMinuteMin_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonHourPlus), /* control block  */
+    (void *) &setTime_buttonHourPlus_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonHourMin_define =
+{
+    "buttonHourMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTHOURMIN,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 72, 91, 95},                        /* widget size                    */
+    &setTime_buttonHourPlus_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonHourMin), /* control block   */
+    (void *) &setTime_buttonHourMin_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonYearPlus_define =
+{
+    "buttonYearPlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTYEARPLUS,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 100, 91, 123},                      /* widget size                    */
+    &setTime_buttonHourMin_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonYearPlus), /* control block  */
+    (void *) &setTime_buttonYearPlus_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonTerugTimeSet_define =
+{
+    "buttonTerugTimeSet",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTTERUGTIMESET,                         /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 268, 91, 292},                      /* widget size                    */
+    &setTime_buttonYearPlus_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonTerugTimeSet), /* control block */
+    (void *) &setTime_buttonTerugTimeSet_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_define =
+{
+    "setTime",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(SETTIME_CONTROL_BLOCK),           /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) timeSetHandler, /* event function override */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &setTime_buttonTerugTimeSet_define,      /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &setTime_properties             /* extended properties            */
+};
+GX_WINDOW_PROPERTIES setLedOneInterupt_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonDecrease_properties =
+{
+    GX_STRING_ID_DOWN_COUNTER,               /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonIncrease_properties =
+{
+    GX_STRING_ID_UP_COUNTER,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_NUMERIC_PROMPT_PROPERTIES setLedOneInterupt_Time_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonTerugSettings_properties =
+{
+    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonTerugSettings_define =
+{
+    "buttonTerugSettings",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTTERUGINTERUPTSET,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 241, 161, 290},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonTerugSettings), /* control block */
+    (void *) &setLedOneInterupt_buttonTerugSettings_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_Time_define =
+{
+    "Time",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    TIME,                                    /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    InteruptTimer,                           /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {88, 116, 167, 139},                     /* widget size                    */
+    &setLedOneInterupt_buttonTerugSettings_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_Time), /* control block */
+    (void *) &setLedOneInterupt_Time_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonIncrease_define =
+{
+    "buttonIncrease",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTINCREASE,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {89, 86, 168, 109},                      /* widget size                    */
+    &setLedOneInterupt_Time_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonIncrease), /* control block */
+    (void *) &setLedOneInterupt_buttonIncrease_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonDecrease_define =
+{
+    "buttonDecrease",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTDECREASE,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {88, 148, 167, 171},                     /* widget size                    */
+    &setLedOneInterupt_buttonIncrease_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonDecrease), /* control block */
+    (void *) &setLedOneInterupt_buttonDecrease_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_define =
+{
+    "setLedOneInterupt",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    WINDOW_LED1,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(SETLEDONEINTERUPT_CONTROL_BLOCK), /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) setLedOneInteruptHandler, /* event function override */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &setLedOneInterupt_buttonDecrease_define, /* child widget                  */
+    0,                                       /* control block                  */
+    (void *) &setLedOneInterupt_properties   /* extended properties            */
+};
 GX_WINDOW_PROPERTIES LEDControle_properties =
 {
     0                                        /* wallpaper pixelmap id          */
@@ -395,62 +1031,52 @@ GX_PROMPT_PROPERTIES Settings_prompt_properties =
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES Settings_buttonIncrease_properties =
+GX_TEXT_BUTTON_PROPERTIES Settings_buttonSetTime_properties =
 {
-    GX_STRING_ID_UP_COUNTER,                 /* string id                      */
+    GX_STRING_ID_TIMESET,                    /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES Settings_buttonDecrease_properties =
+GX_TEXT_BUTTON_PROPERTIES Settings_buttonInteruptLed_properties =
 {
-    GX_STRING_ID_DOWN_COUNTER,               /* string id                      */
+    GX_STRING_ID_INTERUPT_LED,               /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_NUMERIC_PROMPT_PROPERTIES Settings_Time_properties =
-{
-    0,                                       /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_TEXT,                        /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    GX_NULL,                                 /* format function                */
-    0                                        /* numeric prompt value           */
 };
 
-GX_CONST GX_STUDIO_WIDGET Settings_Time_define =
+GX_CONST GX_STUDIO_WIDGET Settings_buttonInteruptLed_define =
 {
-    "Time",
-    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
-    TIME,                                    /* widget id                      */
+    "buttonInteruptLed",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTLEDINTERUPT,                          /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
-    InteruptTimer,                           /* user data                      */
+    0,                                       /* user data                      */
     #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_numeric_prompt_create,         /* create function                */
+    gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {70, 111, 149, 134},                     /* widget size                    */
+    {12, 141, 111, 190},                     /* widget size                    */
     GX_NULL,                                 /* no next widget                 */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETTINGS_CONTROL_BLOCK, Settings_Time), /* control block          */
-    (void *) &Settings_Time_properties       /* extended properties            */
+    offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonInteruptLed), /* control block */
+    (void *) &Settings_buttonInteruptLed_properties /* extended properties     */
 };
 
-GX_CONST GX_STUDIO_WIDGET Settings_buttonDecrease_define =
+GX_CONST GX_STUDIO_WIDGET Settings_buttonSetTime_define =
 {
-    "buttonDecrease",
+    "buttonSetTime",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTDECREASE,                             /* widget id                      */
+    BUTSETTIME,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -463,35 +1089,11 @@ GX_CONST GX_STUDIO_WIDGET Settings_buttonDecrease_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {71, 145, 150, 168},                     /* widget size                    */
-    &Settings_Time_define,                   /* next widget definition         */
+    {12, 190, 111, 239},                     /* widget size                    */
+    &Settings_buttonInteruptLed_define,      /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonDecrease), /* control block */
-    (void *) &Settings_buttonDecrease_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET Settings_buttonIncrease_define =
-{
-    "buttonIncrease",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTINCREASE,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {70, 79, 149, 102},                      /* widget size                    */
-    &Settings_buttonDecrease_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonIncrease), /* control block */
-    (void *) &Settings_buttonIncrease_properties /* extended properties        */
+    offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonSetTime), /* control block */
+    (void *) &Settings_buttonSetTime_properties /* extended properties         */
 };
 
 GX_CONST GX_STUDIO_WIDGET Settings_prompt_define =
@@ -511,8 +1113,8 @@ GX_CONST GX_STUDIO_WIDGET Settings_prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {80, 10, 159, 33},                       /* widget size                    */
-    &Settings_buttonIncrease_define,         /* next widget definition         */
+    {78, 9, 157, 32},                        /* widget size                    */
+    &Settings_buttonSetTime_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTINGS_CONTROL_BLOCK, Settings_prompt), /* control block        */
     (void *) &Settings_prompt_properties     /* extended properties            */
@@ -535,7 +1137,7 @@ GX_CONST GX_STUDIO_WIDGET Settings_buttonTerugSettings_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {14, 242, 163, 291},                     /* widget size                    */
+    {12, 241, 111, 290},                     /* widget size                    */
     &Settings_prompt_define,                 /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonTerugSettings), /* control block */
@@ -559,7 +1161,7 @@ GX_CONST GX_STUDIO_WIDGET Settings_define =
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     (UINT (*)(GX_WIDGET *, GX_EVENT *)) settingsWindowHandler, /* event function override */
-    {0, 0, 239, 319},                        /* widget size                    */
+    {-2, -1, 237, 318},                      /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &Settings_buttonTerugSettings_define,    /* child widget                   */
     0,                                       /* control block                  */
@@ -723,6 +1325,8 @@ GX_CONST GX_STUDIO_WIDGET Main_define =
 };
 GX_CONST GX_STUDIO_WIDGET_ENTRY guiapp_widget_table[] =
 {
+    { &setTime_define, (GX_WIDGET *) &setTime },
+    { &setLedOneInterupt_define, (GX_WIDGET *) &setLedOneInterupt },
     { &LEDControle_define, (GX_WIDGET *) &LEDControle },
     { &Time_define, (GX_WIDGET *) &Time },
     { &Settings_define, (GX_WIDGET *) &Settings },

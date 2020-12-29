@@ -1,0 +1,61 @@
+/*
+ * time.c
+ *
+ *  Created on: 29 Dec 2020
+ *      Author: steve
+ */
+
+int msec = 0;
+int sec = 0;
+int min = 0;
+int hour = 0;
+int day = 1;
+int month = 1;
+int year = 2020;
+int daynr = 1;
+
+void addHunderdms(){
+    msec = msec + 100;
+    if(msec >= 1000){
+        msec = msec - 1000;
+        sec = sec + 1;
+        if(sec >= 60){
+            sec = sec - 60;
+            min = min + 1;
+            if(min >= 60){
+                min = min - 60;
+                hour = hour + 1;
+                if(hour >= 24){
+                    hour = hour - 24;
+                    day = day + 1;
+                    daynr = daynr + 1;
+                    if(daynr == 8){
+                        daynr = 1;
+                    }
+                    if(month == 2){
+                        if((year % 4) == 0 && day == 29){
+                            day = 0;
+                            month = 3;
+                        }
+                        else if(day == 28){
+                            day = 0;
+                            month = 3;
+                        }
+                    }
+                    else if((month == 7 || (month % 2 == 1)) && day == 31){
+                        day = 1;
+                        month = month + 1;
+                    }
+                    else if(month % 2 == 0 && day == 30){
+                        day = 1;
+                        month = month + 1;
+                    }
+                    if(month == 13){
+                        month = 1;
+                        year = year + 1;
+                    }
+                }
+            }
+        }
+    }
+}

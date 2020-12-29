@@ -4,7 +4,6 @@
 #include "gx_api.h"
 #include "gui/guiapp_specifications.h"
 #include "gui/guiapp_resources.h"
-#include "dataShare.h"
 
 #if defined(BSP_BOARD_S7G2_SK)
 #include "hardware/lcd.h"
@@ -37,7 +36,6 @@ extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
 void main_thread_entry(void) {
 
     /* the interrupt configuration*/
-    interuptTime = getInteruptTime();
     led_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
 
 

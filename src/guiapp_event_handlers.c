@@ -1,10 +1,9 @@
 #include "gui/guiapp_resources.h"
 #include "gui/guiapp_specifications.h"
 #include "main_thread.h"
-#include "dataShare.h"
 
 static bool button_enabled = false;
-unsigned long int InteruptTimer;
+unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
 
 extern GX_WINDOW_ROOT * p_window_root;
@@ -58,22 +57,12 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(BUTTERUGSETTINGS, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
         break;
-        case GX_SIGNAL(BUTDECREASE, GX_EVENT_CLICKED):
-            InteruptTimer = getInteruptTime();
-            if(InteruptTimer >> 0){
-                InteruptTimer = InteruptTimer - 50;
-                setInteruptTime(InteruptTimer);
-                led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
-                //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
-            }
-        break;
-        case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
-            InteruptTimer = getInteruptTime();
-            InteruptTimer = InteruptTimer + 50;
-            setInteruptTime(InteruptTimer);
-            led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
-            //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
-        break;
+        case GX_SIGNAL(BUTLEDINTERUPT, GX_EVENT_CLICKED):
+                show_window((GX_WINDOW*)&setLedOneInterupt, (GX_WIDGET*)widget, true);
+                break;
+        case GX_SIGNAL(BUTSETTIME, GX_EVENT_CLICKED):
+                show_window((GX_WINDOW*)&setTime, (GX_WIDGET*)widget, true);
+                break;
         default:
             result = gx_window_event_process(widget, event_ptr);
             break;
@@ -99,6 +88,48 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
                 update_prompt_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_HIGH);
                 break;
+        default:
+            result = gx_window_event_process(widget, event_ptr);
+            break;
+    }
+    return result;
+}
+
+UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
+{
+    UINT result = gx_window_event_process(widget, event_ptr);
+
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTTERUGTIMESET, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
+            break;
+        default:
+            result = gx_window_event_process(widget, event_ptr);
+        break;
+    }
+    return result;
+}
+
+UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
+{
+    UINT result = gx_window_event_process(widget, event_ptr);
+
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(BUTDECREASE, GX_EVENT_CLICKED):
+            if(InteruptTimer >> 0){
+                InteruptTimer = InteruptTimer - 50;
+                led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+                //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
+            }
+        break;
+        case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
+            InteruptTimer = InteruptTimer + 50;
+            led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+            //gx_numeric_prompt_value_set(&Time, (int)InteruptTimer);
+        break;
         default:
             result = gx_window_event_process(widget, event_ptr);
             break;

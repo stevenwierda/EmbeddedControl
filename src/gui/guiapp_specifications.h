@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 14:23                        */
+/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 14:48                        */
 /*******************************************************************************/
 
 
@@ -22,21 +22,39 @@ extern   "C" {
 
 /* Define widget ids                                                           */
 
-#define windowLED 1
-#define butterugLED 2
-#define LEDSTATUS 3
-#define LEDSWITCH 4
-#define WINDOWTIME 5
-#define BUTTERUGTIME 6
-#define WINDOW_SETTINGS 7
-#define BUTTERUGSETTINGS 8
-#define BUTINCREASE 9
-#define BUTDECREASE 10
-#define TIME 11
-#define WINDOW_MAIN 12
-#define BUTSETTINGS 13
-#define BUTTIME 14
-#define BUTLED 15
+#define BUTTERUGTIMESET 1
+#define BUTYEARPLUS 2
+#define BUTHOURMIN 3
+#define BUTHOURADD 4
+#define BUTMINUTEMIN 5
+#define BUTMINUTEPLUS 6
+#define BUTDAYMIN 7
+#define BUTDAYPLUS 8
+#define BUTMONTHMIN 9
+#define BUTMONTHPLUS 10
+#define BUTYEARMIN 11
+#define BUTNAMEDAYPLUS 12
+#define BUTNAMEDAYMIN 13
+#define PRMPTDAYNAME 14
+#define WINDOW_LED1 15
+#define BUTDECREASE 16
+#define BUTINCREASE 17
+#define TIME 18
+#define BUTTERUGINTERUPTSET 19
+#define windowLED 20
+#define butterugLED 21
+#define LEDSTATUS 22
+#define LEDSWITCH 23
+#define WINDOWTIME 24
+#define BUTTERUGTIME 25
+#define WINDOW_SETTINGS 26
+#define BUTTERUGSETTINGS 27
+#define BUTSETTIME 28
+#define BUTLEDINTERUPT 29
+#define WINDOW_MAIN 30
+#define BUTSETTINGS 31
+#define BUTTIME 32
+#define BUTLED 33
 
 
 /* Define animation ids                                                        */
@@ -131,6 +149,34 @@ typedef struct
 
 /* Declare top-level control blocks                                            */
 
+typedef struct SETTIME_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_TEXT_BUTTON setTime_buttonTerugTimeSet;
+    GX_TEXT_BUTTON setTime_buttonYearPlus;
+    GX_TEXT_BUTTON setTime_buttonHourMin;
+    GX_TEXT_BUTTON setTime_buttonHourPlus;
+    GX_TEXT_BUTTON setTime_buttonMinuteMin;
+    GX_TEXT_BUTTON setTime_buttonMinutePlus;
+    GX_TEXT_BUTTON setTime_buttonDayMin;
+    GX_TEXT_BUTTON setTime_buttonDayPlus;
+    GX_TEXT_BUTTON setTime_buttonMonthMin;
+    GX_TEXT_BUTTON setTime_buttonMonthPlus;
+    GX_TEXT_BUTTON setTime_buttonYearMin;
+    GX_TEXT_BUTTON setTime_buttonDayNamePlus;
+    GX_TEXT_BUTTON setTime_buttonDayNameMin;
+    GX_PROMPT setTime_DayPrompt;
+} SETTIME_CONTROL_BLOCK;
+
+typedef struct SETLEDONEINTERUPT_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_TEXT_BUTTON setLedOneInterupt_buttonDecrease;
+    GX_TEXT_BUTTON setLedOneInterupt_buttonIncrease;
+    GX_NUMERIC_PROMPT setLedOneInterupt_Time;
+    GX_TEXT_BUTTON setLedOneInterupt_buttonTerugSettings;
+} SETLEDONEINTERUPT_CONTROL_BLOCK;
+
 typedef struct LEDCONTROLE_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
@@ -151,9 +197,8 @@ typedef struct SETTINGS_CONTROL_BLOCK_STRUCT
     GX_WINDOW_MEMBERS_DECLARE
     GX_TEXT_BUTTON Settings_buttonTerugSettings;
     GX_PROMPT Settings_prompt;
-    GX_TEXT_BUTTON Settings_buttonIncrease;
-    GX_TEXT_BUTTON Settings_buttonDecrease;
-    GX_NUMERIC_PROMPT Settings_Time;
+    GX_TEXT_BUTTON Settings_buttonSetTime;
+    GX_TEXT_BUTTON Settings_buttonInteruptLed;
 } SETTINGS_CONTROL_BLOCK;
 
 typedef struct MAIN_CONTROL_BLOCK_STRUCT
@@ -169,6 +214,8 @@ typedef struct MAIN_CONTROL_BLOCK_STRUCT
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
+extern SETTIME_CONTROL_BLOCK setTime;
+extern SETLEDONEINTERUPT_CONTROL_BLOCK setLedOneInterupt;
 extern LEDCONTROLE_CONTROL_BLOCK LEDControle;
 extern TIME_CONTROL_BLOCK Time;
 extern SETTINGS_CONTROL_BLOCK Settings;
@@ -237,6 +284,8 @@ VOID _gx_synergy_jpeg_draw (GX_DRAW_CONTEXT *p_context, INT x, INT y, GX_PIXELMA
 
 /* Declare event process functions, draw functions, and callback functions     */
 
+UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
+UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);

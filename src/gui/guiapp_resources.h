@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 14:23                        */
+/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 14:48                        */
 /*******************************************************************************/
 
 
@@ -91,6 +91,25 @@
 #define GX_STRING_ID_LEDCONTROL 9
 #define GX_STRING_ID_UP_COUNTER 10
 #define GX_STRING_ID_DOWN_COUNTER 11
-#define DISPLAY_1_STRING_TABLE_SIZE 12
+#define GX_STRING_ID_TIMESET 12
+#define GX_STRING_ID_INTERUPT_LED 13
+#define GX_STRING_ID_DAYPLUS 14
+#define GX_STRING_ID_MINUTEPLUS 15
+#define GX_STRING_ID_MINUTEMIN 16
+#define GX_STRING_ID_HOURPLUS 17
+#define GX_STRING_ID_HOURMIN 18
+#define GX_STRING_ID_YEARPLUS 19
+#define GX_STRING_ID_YEARMIN 20
+#define GX_STRING_ID_MONTHPLUS 21
+#define GX_STRING_ID_MONTHMIN 22
+#define GX_STRING_ID_DAYMIN 23
+#define GX_STRING_ID_MONDAY 24
+#define GX_STRING_ID_THUSEDAY 25
+#define GX_STRING_ID_WEDNESDAY 26
+#define GX_STRING_ID_THURSTDAY 27
+#define GX_STRING_ID_FRIDAY 28
+#define GX_STRING_ID_SATERDAY 29
+#define GX_STRING_ID_SUNDAY 30
+#define DISPLAY_1_STRING_TABLE_SIZE 31
 
 #endif                                       /* sentry                         */

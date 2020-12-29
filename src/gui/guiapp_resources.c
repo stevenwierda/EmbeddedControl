@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 10.12.2020   Time (hh:mm): 14:23                        */
+/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 14:48                        */
 /*******************************************************************************/
 
 
@@ -338,10 +338,29 @@ GX_CONST GX_UBYTE display_1_LED_OFF_English[] = "LED off";
 GX_CONST GX_UBYTE display_1_LEDCONTROL_English[] = "LED switch";
 GX_CONST GX_UBYTE display_1_UP_COUNTER_English[] = "increase";
 GX_CONST GX_UBYTE display_1_DOWN_COUNTER_English[] = "decrease";
+GX_CONST GX_UBYTE display_1_TIMESET_English[] = "tijd instellen";
+GX_CONST GX_UBYTE display_1_INTERUPT_LED_English[] = "interupt led";
+GX_CONST GX_UBYTE display_1_DAYPLUS_English[] = "day+";
+GX_CONST GX_UBYTE display_1_MINUTEPLUS_English[] = "minute+";
+GX_CONST GX_UBYTE display_1_MINUTEMIN_English[] = "minute-";
+GX_CONST GX_UBYTE display_1_HOURPLUS_English[] = "hour+";
+GX_CONST GX_UBYTE display_1_HOURMIN_English[] = "hour-";
+GX_CONST GX_UBYTE display_1_YEARPLUS_English[] = "year+";
+GX_CONST GX_UBYTE display_1_YEARMIN_English[] = "year-";
+GX_CONST GX_UBYTE display_1_MONTHPLUS_English[] = "month+";
+GX_CONST GX_UBYTE display_1_MONTHMIN_English[] = "month-";
+GX_CONST GX_UBYTE display_1_DAYMIN_English[] = "day-";
+GX_CONST GX_UBYTE display_1_MONDAY_English[] = "maandag";
+GX_CONST GX_UBYTE display_1_THUSEDAY_English[] = "dinsdag";
+GX_CONST GX_UBYTE display_1_WEDNESDAY_English[] = "woensdag";
+GX_CONST GX_UBYTE display_1_THURSTDAY_English[] = "donderdag";
+GX_CONST GX_UBYTE display_1_FRIDAY_English[] = "vrijdag";
+GX_CONST GX_UBYTE display_1_SATERDAY_English[] = "zaterdag";
+GX_CONST GX_UBYTE display_1_SUNDAY_English[] = "zondag";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[12] =
+GX_CONST GX_STRING display_1_English_string_table[31] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -354,7 +373,26 @@ GX_CONST GX_STRING display_1_English_string_table[12] =
     {(GX_CONST GX_CHAR *)display_1_LED_OFF_English, sizeof(display_1_LED_OFF_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_LEDCONTROL_English, sizeof(display_1_LEDCONTROL_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_UP_COUNTER_English, sizeof(display_1_UP_COUNTER_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_DOWN_COUNTER_English, sizeof(display_1_DOWN_COUNTER_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_DOWN_COUNTER_English, sizeof(display_1_DOWN_COUNTER_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_TIMESET_English, sizeof(display_1_TIMESET_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_INTERUPT_LED_English, sizeof(display_1_INTERUPT_LED_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_DAYPLUS_English, sizeof(display_1_DAYPLUS_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MINUTEPLUS_English, sizeof(display_1_MINUTEPLUS_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MINUTEMIN_English, sizeof(display_1_MINUTEMIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_HOURPLUS_English, sizeof(display_1_HOURPLUS_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_HOURMIN_English, sizeof(display_1_HOURMIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_YEARPLUS_English, sizeof(display_1_YEARPLUS_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_YEARMIN_English, sizeof(display_1_YEARMIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MONTHPLUS_English, sizeof(display_1_MONTHPLUS_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MONTHMIN_English, sizeof(display_1_MONTHMIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_DAYMIN_English, sizeof(display_1_DAYMIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MONDAY_English, sizeof(display_1_MONDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_THUSEDAY_English, sizeof(display_1_THUSEDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_WEDNESDAY_English, sizeof(display_1_WEDNESDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_THURSTDAY_English, sizeof(display_1_THURSTDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_FRIDAY_English, sizeof(display_1_FRIDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_SATERDAY_English, sizeof(display_1_SATERDAY_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_SUNDAY_English, sizeof(display_1_SUNDAY_English) - 1}
 };
 
 /*  Language Table                                                             */
