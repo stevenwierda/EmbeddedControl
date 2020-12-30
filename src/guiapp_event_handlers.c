@@ -42,6 +42,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
     update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
@@ -72,6 +73,8 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
     }
 
+=======
+>>>>>>> parent of 6d2831f... time optellen werkt
 =======
 >>>>>>> parent of 6d2831f... time optellen werkt
 
