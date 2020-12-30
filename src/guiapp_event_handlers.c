@@ -4,7 +4,6 @@
 #include "time.h"
 
 static bool button_enabled = false;
-bool onOff = false;
 int daynr;
 unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
@@ -42,6 +41,7 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
+<<<<<<< HEAD
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
     update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
@@ -72,6 +72,8 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
     }
 
+=======
+>>>>>>> parent of 6d2831f... time optellen werkt
 
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTTERUGTIME, GX_EVENT_CLICKED):
@@ -303,13 +305,13 @@ UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(BUTDECREASE, GX_EVENT_CLICKED):
             if(InteruptTimer >> 0){
                 InteruptTimer = InteruptTimer - 50;
-                //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+                led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
                 update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
             }
         break;
         case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
             InteruptTimer = InteruptTimer + 50;
-            //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+            led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
             update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
         break;
         default:
@@ -366,10 +368,4 @@ static void update_number_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, INT value)
     {
         gx_numeric_prompt_value_set(p_prompt, value);
     }
-}
-
-void TimeAdd_timer0_callback(timer_callback_args_t * p_args){
-    addHunderdms();
-    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, onOff);
-    onOff = !onOff;
 }

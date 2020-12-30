@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 30.12.2020   Time (hh:mm): 12:31                        */
+/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 19:19                        */
 /*******************************************************************************/
 
 
@@ -357,14 +357,10 @@ GX_CONST GX_UBYTE display_1_THURSTDAY_English[] = "donderdag";
 GX_CONST GX_UBYTE display_1_FRIDAY_English[] = "vrijdag";
 GX_CONST GX_UBYTE display_1_SATERDAY_English[] = "zaterdag";
 GX_CONST GX_UBYTE display_1_SUNDAY_English[] = "zondag";
-GX_CONST GX_UBYTE display_1_STRING_1_English[] = "prompt";
-GX_CONST GX_UBYTE display_1_STRING_2_English[] = ":";
-GX_CONST GX_UBYTE display_1_STRING_3_English[] = ".";
-GX_CONST GX_UBYTE display_1_STRING_4_English[] = "/";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[35] =
+GX_CONST GX_STRING display_1_English_string_table[31] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -396,11 +392,7 @@ GX_CONST GX_STRING display_1_English_string_table[35] =
     {(GX_CONST GX_CHAR *)display_1_THURSTDAY_English, sizeof(display_1_THURSTDAY_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_FRIDAY_English, sizeof(display_1_FRIDAY_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_SATERDAY_English, sizeof(display_1_SATERDAY_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_SUNDAY_English, sizeof(display_1_SUNDAY_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_1_English, sizeof(display_1_STRING_1_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_2_English, sizeof(display_1_STRING_2_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_3_English, sizeof(display_1_STRING_3_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_4_English, sizeof(display_1_STRING_4_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_SUNDAY_English, sizeof(display_1_SUNDAY_English) - 1}
 };
 
 /*  Language Table                                                             */

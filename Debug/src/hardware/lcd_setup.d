@@ -80,8 +80,10 @@ src/hardware/lcd_setup.o: ../src/hardware/lcd_setup.c \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h \
  C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
- C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_agt.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_agt_cfg.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h \
@@ -261,9 +263,13 @@ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h:
 
 C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h:
 
-C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_agt.h:
+
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_agt_cfg.h:
 
 C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
+
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
 
 C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h:
 
