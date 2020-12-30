@@ -311,9 +311,6 @@ Synergy Configuration
   Module "Timer Driver on r_gpt"
     Parameter Checking: Default (BSP)
     
-  Module "Timer Driver on r_agt"
-    Parameter Checking: Default (BSP)
-    
   HAL
     Instance "g_ioport I/O Port Driver on r_ioport"
       Name [Fixed]: g_ioport
@@ -692,7 +689,7 @@ Synergy Configuration
       Duty Cycle Range (only applicable in PWM mode): Shortest: 2 PCLK, Longest: (Period - 1) PCLK
       Period Value: 100
       Period Unit: Milliseconds
-      Duty Cycle Value: 50
+      Duty Cycle Value: 1
       Duty Cycle Unit: Unit Raw Counts
       Auto Start: True
       GTIOCA Output Enabled: False
@@ -701,22 +698,6 @@ Synergy Configuration
       GTIOCB Stop Level: Pin Level Low
       Callback: TimeAdd_timer0_callback
       Overflow Interrupt Priority: Priority 9
-      
-    Instance "led_timer0 Timer Driver on r_agt"
-      Name: led_timer0
-      Channel: 0
-      Mode: Periodic
-      Period Value: 10
-      Period Unit: Microseconds
-      Auto Start: True
-      Count Source: PCLKB
-      AGTO Output Enabled: False
-      AGTIO Output Enabled: False
-      Output Inverted: False
-      Enable comparator A output pin: False
-      Enable comparator B output pin: False
-      Callback: led_timer0_callback
-      Underflow Interrupt Priority: Priority 9
       
     Object "g_main_semaphore_lcdc Semaphore"
       Name: Main Semaphore

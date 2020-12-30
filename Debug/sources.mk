@@ -28,7 +28,6 @@ synergy/board/s7g2_sk \
 synergy/ssp/src/bsp/cmsis/Device/RENESAS/S7G2/Source \
 synergy/ssp/src/bsp/mcu/all \
 synergy/ssp/src/bsp/mcu/s7g2 \
-synergy/ssp/src/driver/r_agt \
 synergy/ssp/src/driver/r_cgc \
 synergy/ssp/src/driver/r_dtc \
 synergy/ssp/src/driver/r_elc \
