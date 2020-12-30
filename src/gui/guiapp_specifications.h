@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 29.12.2020   Time (hh:mm): 19:19                        */
+/*  Date (dd.mm.yyyy): 30.12.2020   Time (hh:mm): 15:11                        */
 /*******************************************************************************/
 
 
@@ -52,14 +52,16 @@ extern   "C" {
 #define LEDSWITCH 28
 #define WINDOWTIME 29
 #define BUTTERUGTIME 30
-#define WINDOW_SETTINGS 31
-#define BUTTERUGSETTINGS 32
-#define BUTSETTIME 33
-#define BUTLEDINTERUPT 34
-#define WINDOW_MAIN 35
-#define BUTSETTINGS 36
-#define BUTTIME 37
-#define BUTLED 38
+#define PROMPTSEC 31
+#define PROMPTMSEC 32
+#define WINDOW_SETTINGS 33
+#define BUTTERUGSETTINGS 34
+#define BUTSETTIME 35
+#define BUTLEDINTERUPT 36
+#define WINDOW_MAIN 37
+#define BUTSETTINGS 38
+#define BUTTIME 39
+#define BUTLED 40
 
 
 /* Define animation ids                                                        */
@@ -200,6 +202,14 @@ typedef struct TIME_CONTROL_BLOCK_STRUCT
     GX_WINDOW_MEMBERS_DECLARE
     GX_TEXT_BUTTON Time_buttonTerugTime;
     GX_PROMPT Time_prompt_1;
+    GX_NUMERIC_PROMPT Time_promptDay;
+    GX_NUMERIC_PROMPT Time_promptHour;
+    GX_NUMERIC_PROMPT Time_promptMinute;
+    GX_NUMERIC_PROMPT Time_promptMonth;
+    GX_NUMERIC_PROMPT Time_promptYear;
+    GX_NUMERIC_PROMPT Time_promptSec;
+    GX_NUMERIC_PROMPT Time_promptMsec;
+    GX_PROMPT Time_promptDay2;
 } TIME_CONTROL_BLOCK;
 
 typedef struct SETTINGS_CONTROL_BLOCK_STRUCT

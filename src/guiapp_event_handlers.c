@@ -4,6 +4,7 @@
 #include "time.h"
 
 static bool button_enabled = false;
+bool onOff;
 int daynr;
 unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
@@ -41,15 +42,13 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
-<<<<<<< HEAD
-<<<<<<< HEAD
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
     update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
     update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
     update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
-    update_number_id(widget->gx_widget_parent, PROMPTSEC, getHour());
-    update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMin());
+    update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
+    update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
     daynr = getDaynr();
     if(daynr == 1){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
@@ -73,16 +72,19 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
     }
 
-=======
->>>>>>> parent of 6d2831f... time optellen werkt
-=======
->>>>>>> parent of 6d2831f... time optellen werkt
-
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTTERUGTIME, GX_EVENT_CLICKED):
-                    show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
+            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
             break;
-        case TimeAdd_timer0_callback(timer_callback_args_t * p_args):
+
+        case GX_SIGNAL(BUTTERUGTIME, !GX_EVENT_CLICKED):
+            update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
+            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
+            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
+            update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+            update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
+            update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
             daynr = getDaynr();
             if(daynr == 1){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
@@ -105,14 +107,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
             else if(daynr == 7){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
-            update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
-            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
-            update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
-            update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
-            update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
-            update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
-            break;
+        break;
         default:
             result = gx_window_event_process(widget, event_ptr);
             break;
@@ -308,13 +303,13 @@ UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(BUTDECREASE, GX_EVENT_CLICKED):
             if(InteruptTimer >> 0){
                 InteruptTimer = InteruptTimer - 50;
-                led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+                //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
                 update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
             }
         break;
         case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
             InteruptTimer = InteruptTimer + 50;
-            led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+            //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
             update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
         break;
         default:

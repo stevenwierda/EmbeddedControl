@@ -685,8 +685,8 @@ Synergy Configuration
       Instance "Touch Panel Driver on touch_panel_sx8654"
         Name: g_sf_touch_panel_i2c_chip_sx8654
         
-    Instance "TimeAdd_timer0 Timer Driver on r_gpt"
-      Name: TimeAdd_timer0
+    Instance "led_timer0 Timer Driver on r_gpt"
+      Name: led_timer0
       Channel: 0
       Mode: Periodic
       Duty Cycle Range (only applicable in PWM mode): Shortest: 2 PCLK, Longest: (Period - 1) PCLK
@@ -699,11 +699,11 @@ Synergy Configuration
       GTIOCA Stop Level: Pin Level Low
       GTIOCB Output Enabled: False
       GTIOCB Stop Level: Pin Level Low
-      Callback: TimeAdd_timer0_callback
+      Callback: led_timer0_callback
       Overflow Interrupt Priority: Priority 9
       
-    Instance "led_timer0 Timer Driver on r_agt"
-      Name: led_timer0
+    Instance "TimeAdd_timer0 Timer Driver on r_agt"
+      Name: TimeAdd_timer0
       Channel: 0
       Mode: Periodic
       Period Value: 10
@@ -715,7 +715,7 @@ Synergy Configuration
       Output Inverted: False
       Enable comparator A output pin: False
       Enable comparator B output pin: False
-      Callback: led_timer0_callback
+      Callback: TimeAdd_timer0_callback
       Underflow Interrupt Priority: Priority 9
       
     Object "g_main_semaphore_lcdc Semaphore"

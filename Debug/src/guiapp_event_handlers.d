@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-src/guiapp_event_handlers.o: 
-=======
 src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  ../src/gui/guiapp_resources.h \
  C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/gx_api.h \
@@ -311,4 +308,3 @@ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
 C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
 
 ../src/time.h:
->>>>>>> parent of 6d2831f... time optellen werkt
