@@ -183,10 +183,20 @@ int getDaynr(){
 }
 
 void checkAlarm(){
-   if(
-   hour == alarmHour
-   ){
-
+   if(hour == alarmHour && min == alarmMin && sec == 1 && alarmActive == true){
+       if((alarmMon == true && daynr == 1)||
+           (alarmTue == true && daynr == 2)||
+           (alarmWed == true && daynr == 3)||
+           (alarmThu == true && daynr == 4)||
+           (alarmFri == true && daynr == 5)||
+           (alarmSat == true && daynr == 6)||
+           (alarmSun == true && daynr == 7)){
+           //todo:add action
+       }
    }
+}
+
+void resetAlarm(){
+
 }
 
