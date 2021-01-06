@@ -14,6 +14,17 @@ int day = 1;
 int month = 1;
 int year = 2020;
 int daynr = 2;
+int alarmHour = 0;
+int alarmMin = 0;
+bool alarmMon = false;
+bool alarmTue = false;
+bool alarmWed = false;
+bool alarmThu = false;
+bool alarmFri = false;
+bool alarmSat = false;
+bool alarmSun = false;
+bool alarmActive = false;
+
 
 void addHunderdms(){
     msec = msec + 100;
@@ -169,5 +180,13 @@ int getMsec(){
 
 int getDaynr(){
     return daynr;
+}
+
+void checkAlarm(){
+   if(
+   hour == alarmHour
+   ){
+
+   }
 }
 

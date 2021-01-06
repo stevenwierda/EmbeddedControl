@@ -7,6 +7,7 @@
 
 #ifndef TIME_H_
 #define TIME_H_
+#include <stdbool.h>
 extern int msec;
 extern int sec;
 extern int min;
@@ -15,6 +16,16 @@ extern int day;
 extern int month;
 extern int year;
 extern int daynr;
+extern int alarmHour;
+extern int alarmMin;
+extern bool alarmMon;
+extern bool alarmTue;
+extern bool alarmWed;
+extern bool alarmThu;
+extern bool alarmFri;
+extern bool alarmSat;
+extern bool alarmSun;
+extern bool alarmActive;
 
 void addHunderdms();
 void changeYearUp();

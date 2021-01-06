@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 30.12.2020   Time (hh:mm): 15:11                        */
+/*  Date (dd.mm.yyyy):  6. 1.2021   Time (hh:mm): 21:56                        */
 /*******************************************************************************/
 
 
@@ -22,46 +22,60 @@ extern   "C" {
 
 /* Define widget ids                                                           */
 
-#define BUTTERUGTIMESET 1
-#define BUTYEARPLUS 2
-#define BUTHOURMIN 3
-#define BUTHOURPLUS 4
-#define BUTMINUTEMIN 5
-#define BUTMINUTEPLUS 6
-#define BUTDAYMIN 7
-#define BUTDAYPLUS 8
-#define BUTMONTHMIN 9
-#define BUTMONTHPLUS 10
-#define BUTYEARMIN 11
-#define BUTNAMEDAYPLUS 12
-#define BUTNAMEDAYMIN 13
-#define PRMPTDAYNAME 14
-#define PROMPTHOUR 15
-#define PROMPTMINUTE 16
-#define PROMPTYEAR 17
-#define PROMPTMONTH 18
-#define PROMPTDAY 19
-#define WINDOW_LED1 20
-#define BUTDECREASE 21
-#define BUTINCREASE 22
-#define TIME 23
-#define BUTTERUGINTERUPTSET 24
-#define windowLED 25
-#define butterugLED 26
-#define LEDSTATUS 27
-#define LEDSWITCH 28
-#define WINDOWTIME 29
-#define BUTTERUGTIME 30
-#define PROMPTSEC 31
-#define PROMPTMSEC 32
-#define WINDOW_SETTINGS 33
-#define BUTTERUGSETTINGS 34
-#define BUTSETTIME 35
-#define BUTLEDINTERUPT 36
-#define WINDOW_MAIN 37
-#define BUTSETTINGS 38
-#define BUTTIME 39
-#define BUTLED 40
+#define chkMonday 1
+#define chkthuesday 2
+#define CHWEDNESDAY 3
+#define CHTHURSDAY 4
+#define CHFRIDAY 5
+#define CHSUNDAY 6
+#define CHSATERDAY 7
+#define BUTAHOURPLUS 8
+#define BUTAHOURMIN 9
+#define BUTAMINPLUS 10
+#define BUTAMINMIN 11
+#define PRMPTHOUR 12
+#define PRMPTMIN 13
+#define BUTTERUGINTERUPTSET 14
+#define BUTTERUGTIMESET 15
+#define BUTYEARPLUS 16
+#define BUTHOURMIN 17
+#define BUTHOURPLUS 18
+#define BUTMINUTEMIN 19
+#define BUTMINUTEPLUS 20
+#define BUTDAYMIN 21
+#define BUTDAYPLUS 22
+#define BUTMONTHMIN 23
+#define BUTMONTHPLUS 24
+#define BUTYEARMIN 25
+#define BUTNAMEDAYPLUS 26
+#define BUTNAMEDAYMIN 27
+#define PRMPTDAYNAME 28
+#define PROMPTHOUR 29
+#define PROMPTMINUTE 30
+#define PROMPTYEAR 31
+#define PROMPTMONTH 32
+#define PROMPTDAY 33
+#define WINDOW_LED1 34
+#define BUTDECREASE 35
+#define BUTINCREASE 36
+#define TIME 37
+#define windowLED 38
+#define butterugLED 39
+#define LEDSTATUS 40
+#define LEDSWITCH 41
+#define WINDOWTIME 42
+#define BUTTERUGTIME 43
+#define PROMPTSEC 44
+#define PROMPTMSEC 45
+#define WINDOW_SETTINGS 46
+#define BUTTERUGSETTINGS 47
+#define BUTSETTIME 48
+#define BUTLEDINTERUPT 49
+#define WINDOW_MAIN 50
+#define BUTSETTINGS 51
+#define BUTTIME 52
+#define BUTLED 53
+#define BUTSETALARM 54
 
 
 /* Define animation ids                                                        */
@@ -156,6 +170,26 @@ typedef struct
 
 /* Declare top-level control blocks                                            */
 
+typedef struct SETALARM_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_CHECKBOX setAlarm_enableAlarm;
+    GX_CHECKBOX setAlarm_alarmMonday;
+    GX_CHECKBOX setAlarm_alarmThueseday;
+    GX_CHECKBOX setAlarm_alarmWednesday;
+    GX_CHECKBOX setAlarm_alarmThursday;
+    GX_CHECKBOX setAlarm_alarmFriday;
+    GX_CHECKBOX setAlarm_alarmSunday;
+    GX_CHECKBOX setAlarm_alarmSaterday;
+    GX_TEXT_BUTTON setAlarm_AHourPlus;
+    GX_TEXT_BUTTON setAlarm_AHourMin;
+    GX_TEXT_BUTTON setAlarm_AMinPlus;
+    GX_TEXT_BUTTON setAlarm_AMinMin;
+    GX_NUMERIC_PROMPT setAlarm_promptHour;
+    GX_NUMERIC_PROMPT setAlarm_promptMin;
+    GX_TEXT_BUTTON setAlarm_buttonTerugSettings;
+} SETALARM_CONTROL_BLOCK;
+
 typedef struct SETTIME_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
@@ -228,12 +262,14 @@ typedef struct MAIN_CONTROL_BLOCK_STRUCT
     GX_PROMPT Main_WelkomNotiification;
     GX_TEXT_BUTTON Main_ButtonViewTime;
     GX_TEXT_BUTTON Main_ButtonLEDControl;
+    GX_TEXT_BUTTON Main_buttonSetAlarm;
 } MAIN_CONTROL_BLOCK;
 
 
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
+extern SETALARM_CONTROL_BLOCK setAlarm;
 extern SETTIME_CONTROL_BLOCK setTime;
 extern SETLEDONEINTERUPT_CONTROL_BLOCK setLedOneInterupt;
 extern LEDCONTROLE_CONTROL_BLOCK LEDControle;
