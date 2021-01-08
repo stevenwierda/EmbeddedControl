@@ -8,26 +8,9 @@
 #ifndef TIME_H_
 #define TIME_H_
 #include <stdbool.h>
-extern int msec;
-extern int sec;
-extern int min;
-extern int hour;
-extern int day;
-extern int month;
-extern int year;
-extern int daynr;
-extern int alarmHour;
-extern int alarmMin;
-extern bool alarmMon;
-extern bool alarmTue;
-extern bool alarmWed;
-extern bool alarmThu;
-extern bool alarmFri;
-extern bool alarmSat;
-extern bool alarmSun;
-extern bool alarmActive;
+#include <bsp_api.h>
 
-void addHunderdms();
+void addMs();
 void changeYearUp();
 void changeYearDown();
 void changeMonthUp();
@@ -53,5 +36,6 @@ int getMin();
 int getSec();
 int getMsec();
 int getDaynr();
+int checkAlarm();
 
 #endif /* TIME_H_ */
