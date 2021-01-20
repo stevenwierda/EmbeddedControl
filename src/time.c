@@ -17,7 +17,7 @@ int year = 2020;
 int daynr = 2;
 int alarmHour = 0;
 int alarmMin = 0;
-int alarmSec = 0;
+int alarmSec = 10;
 int alarmMsec = 0;
 int alarmDay = 1;
 int alarmMode = 2;
@@ -220,6 +220,7 @@ int checkAlarm(){
            }
        }
    }
+   return 3;
 }
 
 void intervalAlarm(){
