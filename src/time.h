@@ -27,7 +27,6 @@ void changeSecUp();
 void changeSecDown();
 void changeMsecUp();
 void changeMsecDown();
-void intervalAlarm();
 
 int getYear();
 int getMonth();
@@ -37,7 +36,8 @@ int getMin();
 int getSec();
 int getMsec();
 int getDaynr();
-int checkAlarm();
 
+int checkAlarm();
+void intervalAlarm();
 
 #endif /* TIME_H_ */

@@ -13,6 +13,8 @@
     Private function prototypes
  ***********************************************************************************************************************/
 static bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * g_gx_event);
+int checkAlarm();
+void addMs();
 void main_thread_entry(void);
 
 #if defined(BSP_BOARD_S7G2_SK)
@@ -39,8 +41,6 @@ void main_thread_entry(void) {
     /* the interrupt configuration*/
     led_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
     TimeAdd_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
-
-
 
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
@@ -196,7 +196,6 @@ void main_thread_entry(void) {
 static bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * gx_event)
 {
 	bool send_event = true;
-
 	switch (p_touch_payload->event_type)
 	{
 	case SF_TOUCH_PANEL_EVENT_DOWN:

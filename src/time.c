@@ -15,6 +15,7 @@ int day = 1;
 int month = 1;
 int year = 2020;
 int daynr = 2;
+
 int alarmHour = 0;
 int alarmMin = 0;
 int alarmSec = 10;
@@ -26,15 +27,15 @@ int addIntervalSec = 0;
 int addIntervalMin  = 0;
 int addIntervalHour = 0;
 int addIntervalDay = 0;
-bool alarmMon = true;
-bool alarmTue = false;
-bool alarmWed = false;
-bool alarmThu = false;
-bool alarmFri = false;
-bool alarmSat = false;
-bool alarmSun = false;
-bool alarmActive = false;
-bool action = false;
+int alarmMon = 0;
+int alarmTue = 0;
+int alarmWed = 0;
+int alarmThu = 0;
+int alarmFri = 0;
+int alarmSat = 0;
+int alarmSun = 0;
+int alarmActive = 0;
+int action = 0;
 
 
 void addMs(){
@@ -194,15 +195,15 @@ int getDaynr(){
 }
 
 int checkAlarm(){
-   if(hour == alarmHour && min == alarmMin && sec == alarmSec && alarmMsec == msec && alarmActive == true){
+   if(hour == alarmHour && min == alarmMin && sec == alarmSec && alarmMsec == msec && alarmActive == 1){
        if(alarmMode == 1){
-           if((alarmMon == true && daynr == 1)||
-               (alarmTue == true && daynr == 2)||
-               (alarmWed == true && daynr == 3)||
-               (alarmThu == true && daynr == 4)||
-               (alarmFri == true && daynr == 5)||
-               (alarmSat == true && daynr == 6)||
-               (alarmSun == true && daynr == 7)){
+           if((alarmMon == 1 && daynr == 1)||
+               (alarmTue == 1 && daynr == 2)||
+               (alarmWed == 1 && daynr == 3)||
+               (alarmThu == 1 && daynr == 4)||
+               (alarmFri == 1 && daynr == 5)||
+               (alarmSat == 1 && daynr == 6)||
+               (alarmSun == 1 && daynr == 7)){
                action = 1;
                return action;
            }
@@ -224,10 +225,29 @@ int checkAlarm(){
 }
 
 void intervalAlarm(){
-    alarmSec = sec + addIntervalSec;
-    alarmMsec = msec + addIntervalMsec;
-    alarmMin = min + addIntervalMin;
-    alarmHour = hour + addIntervalHour;
-    alarmDay = day + addIntervalDay;
+    alarmMsec = alarmMsec + addIntervalMsec;
+    if (alarmMsec >= 1000){
+        alarmMsec = alarmMsec - 1000;
+        alarmSec = alarmSec + 1;
+    }
+    alarmSec = alarmSec + addIntervalSec;
+    if (alarmSec >= 60){
+        alarmSec = alarmSec - 60;
+        alarmMin = alarmMin + 1;
+    }
+    alarmMin = alarmMin + addIntervalMin;
+    if (alarmMin >= 60){
+        alarmMin = alarmMin - 60;
+        alarmHour = alarmHour + 1;
+    }
+    alarmHour = alarmHour + addIntervalHour;
+    if (alarmHour >= 24){
+        alarmHour = alarmHour - 24;
+        alarmDay = alarmDay + 1;
+    }
+    alarmDay = alarmDay + addIntervalDay;
+    if (alarmDay == 8){
+        alarmDay = 1;
+    }
 }
 
