@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 20. 1.2021   Time (hh:mm): 12:09                        */
+/*  Date (dd.mm.yyyy): 21. 3.2021   Time (hh:mm): 15:32                        */
 /*******************************************************************************/
 
 
@@ -359,14 +359,20 @@ GX_CONST GX_UBYTE display_1_SATERDAY_English[] = "zaterdag";
 GX_CONST GX_UBYTE display_1_SUNDAY_English[] = "zondag";
 GX_CONST GX_UBYTE display_1_STRING_1_English[] = "prompt";
 GX_CONST GX_UBYTE display_1_STRING_2_English[] = "checkbox";
-GX_CONST GX_UBYTE display_1_STRING_3_English[] = "alarm actief";
+GX_CONST GX_UBYTE display_1_ALARMACTIVE_English[] = "alarm actief";
 GX_CONST GX_UBYTE display_1_STRING_4_English[] = "monday";
 GX_CONST GX_UBYTE display_1_STRING_5_English[] = "button";
 GX_CONST GX_UBYTE display_1_STRING_6_English[] = "alarm instellen";
+GX_CONST GX_UBYTE display_1_MSEC_UP_English[] = "msec+";
+GX_CONST GX_UBYTE display_1_MSEC_MIN_English[] = "msec-";
+GX_CONST GX_UBYTE display_1_SEC_UP_English[] = "sec+";
+GX_CONST GX_UBYTE display_1_SEC_MIN_English[] = "sec-";
+GX_CONST GX_UBYTE display_1_STRING_3_English[] = "PWM";
+GX_CONST GX_UBYTE display_1_STRING_7_English[] = "Alarm";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[37] =
+GX_CONST GX_STRING display_1_English_string_table[43] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -401,10 +407,16 @@ GX_CONST GX_STRING display_1_English_string_table[37] =
     {(GX_CONST GX_CHAR *)display_1_SUNDAY_English, sizeof(display_1_SUNDAY_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_1_English, sizeof(display_1_STRING_1_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_2_English, sizeof(display_1_STRING_2_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_3_English, sizeof(display_1_STRING_3_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARMACTIVE_English, sizeof(display_1_ALARMACTIVE_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_4_English, sizeof(display_1_STRING_4_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_5_English, sizeof(display_1_STRING_5_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_6_English, sizeof(display_1_STRING_6_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_STRING_6_English, sizeof(display_1_STRING_6_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MSEC_UP_English, sizeof(display_1_MSEC_UP_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_MSEC_MIN_English, sizeof(display_1_MSEC_MIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_SEC_UP_English, sizeof(display_1_SEC_UP_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_SEC_MIN_English, sizeof(display_1_SEC_MIN_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_3_English, sizeof(display_1_STRING_3_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_7_English, sizeof(display_1_STRING_7_English) - 1}
 };
 
 /*  Language Table                                                             */

@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 20. 1.2021   Time (hh:mm): 12:09                        */
+/*  Date (dd.mm.yyyy): 21. 3.2021   Time (hh:mm): 15:32                        */
 /*******************************************************************************/
 
 
@@ -16,6 +16,8 @@
 #include "guiapp_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
+ALARMSWITCH_CONTROL_BLOCK AlarmSwitch;
+SETPWM_CONTROL_BLOCK SetPWM;
 SETALARM_CONTROL_BLOCK setAlarm;
 SETTIME_CONTROL_BLOCK setTime;
 SETLEDONEINTERUPT_CONTROL_BLOCK setLedOneInterupt;
@@ -158,13 +160,625 @@ UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control
     }
     return status;
 }
+GX_WINDOW_PROPERTIES AlarmSwitch_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonBack_properties =
+{
+    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonAlarm_properties =
+{
+    GX_STRING_ID_STRING_7,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonPWM_properties =
+{
+    GX_STRING_ID_STRING_3,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET AlarmSwitch_buttonPWM_define =
+{
+    "buttonPWM",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTPWM,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 30, 169, 59},                       /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ALARMSWITCH_CONTROL_BLOCK, AlarmSwitch_buttonPWM), /* control block */
+    (void *) &AlarmSwitch_buttonPWM_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET AlarmSwitch_buttonAlarm_define =
+{
+    "buttonAlarm",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTALARM,                                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 60, 169, 89},                       /* widget size                    */
+    &AlarmSwitch_buttonPWM_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ALARMSWITCH_CONTROL_BLOCK, AlarmSwitch_buttonAlarm), /* control block */
+    (void *) &AlarmSwitch_buttonAlarm_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET AlarmSwitch_buttonBack_define =
+{
+    "buttonBack",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTBACKALARMSEL,                         /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {8, 231, 87, 310},                       /* widget size                    */
+    &AlarmSwitch_buttonAlarm_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ALARMSWITCH_CONTROL_BLOCK, AlarmSwitch_buttonBack), /* control block */
+    (void *) &AlarmSwitch_buttonBack_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET AlarmSwitch_define =
+{
+    "AlarmSwitch",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(ALARMSWITCH_CONTROL_BLOCK),       /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SELALARM, /* event function override   */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &AlarmSwitch_buttonBack_define,          /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &AlarmSwitch_properties         /* extended properties            */
+};
+GX_WINDOW_PROPERTIES SetPWM_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_CHECKBOX_PROPERTIES SetPWM_checkbox_properties =
+{
+    GX_STRING_ID_ALARMACTIVE,                /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    0,                                       /* unchecked pixelmap id          */
+    0,                                       /* checked pixelmap id            */
+    0,                                       /* unchecked disabled pixelmap id */
+    0                                        /* checked disabled pixelmap id   */
+};
+GX_NUMERIC_PROMPT_PROPERTIES SetPWM_promptHour_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_NUMERIC_PROMPT_PROPERTIES SetPWM_promptMin_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_NUMERIC_PROMPT_PROPERTIES SetPWM_promptSec_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_NUMERIC_PROMPT_PROPERTIES SetPWM_promptMsec_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourUp_properties =
+{
+    GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourDown_properties =
+{
+    GX_STRING_ID_MINUTEMIN,                  /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMinDown_properties =
+{
+    GX_STRING_ID_HOURMIN,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMinUp_properties =
+{
+    GX_STRING_ID_HOURPLUS,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonSecPlus_properties =
+{
+    GX_STRING_ID_SEC_UP,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonSecMin_properties =
+{
+    GX_STRING_ID_SEC_MIN,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMsecUp_properties =
+{
+    GX_STRING_ID_MSEC_UP,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMsecDown_properties =
+{
+    GX_STRING_ID_MSEC_MIN,                   /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonTerugSettings_properties =
+{
+    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonTerugSettings_define =
+{
+    "buttonTerugSettings",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTTERUGINTERUPTSET,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 261, 113, 310},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonTerugSettings), /* control block */
+    (void *) &SetPWM_buttonTerugSettings_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMsecDown_define =
+{
+    "buttonMsecDown",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {89, 193, 168, 216},                     /* widget size                    */
+    &SetPWM_buttonTerugSettings_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMsecDown), /* control block    */
+    (void *) &SetPWM_buttonMsecDown_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMsecUp_define =
+{
+    "buttonMsecUp",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {90, 147, 169, 170},                     /* widget size                    */
+    &SetPWM_buttonMsecDown_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMsecUp), /* control block      */
+    (void *) &SetPWM_buttonMsecUp_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonSecMin_define =
+{
+    "buttonSecMin",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {9, 193, 88, 216},                       /* widget size                    */
+    &SetPWM_buttonMsecUp_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonSecMin), /* control block      */
+    (void *) &SetPWM_buttonSecMin_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonSecPlus_define =
+{
+    "buttonSecPlus",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {11, 147, 90, 170},                      /* widget size                    */
+    &SetPWM_buttonSecMin_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonSecPlus), /* control block     */
+    (void *) &SetPWM_buttonSecPlus_properties /* extended properties           */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMinUp_define =
+{
+    "buttonMinUp",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 65, 91, 88},                        /* widget size                    */
+    &SetPWM_buttonSecPlus_define,            /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMinUp), /* control block       */
+    (void *) &SetPWM_buttonMinUp_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMinDown_define =
+{
+    "buttonMinDown",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {12, 110, 91, 133},                      /* widget size                    */
+    &SetPWM_buttonMinUp_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMinDown), /* control block     */
+    (void *) &SetPWM_buttonMinDown_properties /* extended properties           */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonHourDown_define =
+{
+    "buttonHourDown",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {93, 111, 172, 134},                     /* widget size                    */
+    &SetPWM_buttonMinDown_define,            /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonHourDown), /* control block    */
+    (void *) &SetPWM_buttonHourDown_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_buttonHourUp_define =
+{
+    "buttonHourUp",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {91, 65, 170, 88},                       /* widget size                    */
+    &SetPWM_buttonHourDown_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonHourUp), /* control block      */
+    (void *) &SetPWM_buttonHourUp_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_promptMsec_define =
+{
+    "promptMsec",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {89, 169, 168, 192},                     /* widget size                    */
+    &SetPWM_buttonHourUp_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptMsec), /* control block        */
+    (void *) &SetPWM_promptMsec_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_promptSec_define =
+{
+    "promptSec",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {10, 169, 89, 192},                      /* widget size                    */
+    &SetPWM_promptMsec_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptSec), /* control block         */
+    (void *) &SetPWM_promptSec_properties    /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_promptMin_define =
+{
+    "promptMin",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    PRMPTMIN,                                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {11, 87, 90, 110},                       /* widget size                    */
+    &SetPWM_promptSec_define,                /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptMin), /* control block         */
+    (void *) &SetPWM_promptMin_properties    /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_promptHour_define =
+{
+    "promptHour",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    PRMPTHOUR,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {91, 87, 170, 110},                      /* widget size                    */
+    &SetPWM_promptMin_define,                /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptHour), /* control block        */
+    (void *) &SetPWM_promptHour_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_checkbox_define =
+{
+    "checkbox",
+    GX_TYPE_CHECKBOX,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_CHECKBOX),                     /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_checkbox_create,               /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {15, 13, 134, 36},                       /* widget size                    */
+    &SetPWM_promptHour_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETPWM_CONTROL_BLOCK, SetPWM_checkbox), /* control block          */
+    (void *) &SetPWM_checkbox_properties     /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET SetPWM_define =
+{
+    "SetPWM",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    SETPWM,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(SETPWM_CONTROL_BLOCK),            /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &SetPWM_checkbox_define,                 /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &SetPWM_properties              /* extended properties            */
+};
 GX_WINDOW_PROPERTIES setAlarm_properties =
 {
     0                                        /* wallpaper pixelmap id          */
 };
 GX_CHECKBOX_PROPERTIES setAlarm_enableAlarm_properties =
 {
-    GX_STRING_ID_STRING_3,                   /* string id                      */
+    GX_STRING_ID_ALARMACTIVE,                /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -683,7 +1297,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarm_define =
 {
     "setAlarm",
     GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
+    SETPWM,                                  /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -696,7 +1310,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarm_define =
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {-1, -1, 254, 318},                      /* widget size                    */
+    {-1, -1, 238, 318},                      /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &setAlarm_enableAlarm_define,            /* child widget                   */
     0,                                       /* control block                  */
@@ -2342,6 +2956,8 @@ GX_CONST GX_STUDIO_WIDGET Main_define =
 };
 GX_CONST GX_STUDIO_WIDGET_ENTRY guiapp_widget_table[] =
 {
+    { &AlarmSwitch_define, (GX_WIDGET *) &AlarmSwitch },
+    { &SetPWM_define, (GX_WIDGET *) &SetPWM },
     { &setAlarm_define, (GX_WIDGET *) &setAlarm },
     { &setTime_define, (GX_WIDGET *) &setTime },
     { &setLedOneInterupt_define, (GX_WIDGET *) &setLedOneInterupt },

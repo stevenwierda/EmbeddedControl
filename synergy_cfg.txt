@@ -692,7 +692,7 @@ Synergy Configuration
       Duty Cycle Range (only applicable in PWM mode): Shortest: 2 PCLK, Longest: (Period - 1) PCLK
       Period Value: 1
       Period Unit: Milliseconds
-      Duty Cycle Value: 50
+      Duty Cycle Value: 1
       Duty Cycle Unit: Unit Raw Counts
       Auto Start: True
       GTIOCA Output Enabled: False

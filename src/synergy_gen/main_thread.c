@@ -36,7 +36,7 @@ static const timer_on_gpt_cfg_t led_timer0_extend =
   { .output_enabled = false, .stop_level = GPT_PIN_LEVEL_LOW },
   .shortest_pwm_signal = GPT_SHORTEST_LEVEL_OFF, };
 static const timer_cfg_t led_timer0_cfg =
-{ .mode = TIMER_MODE_PERIODIC, .period = 1, .unit = TIMER_UNIT_PERIOD_MSEC, .duty_cycle = 50, .duty_cycle_unit =
+{ .mode = TIMER_MODE_PERIODIC, .period = 1, .unit = TIMER_UNIT_PERIOD_MSEC, .duty_cycle = 1, .duty_cycle_unit =
           TIMER_PWM_UNIT_RAW_COUNTS,
   .channel = 0, .autostart = true, .p_callback = led_timer0_callback, .p_context = &led_timer0, .p_extend =
           &led_timer0_extend,
