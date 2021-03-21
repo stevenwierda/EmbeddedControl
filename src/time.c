@@ -13,7 +13,7 @@ int min = 0;
 int hour = 0;
 int day = 1;
 int month = 1;
-int year = 2020;
+int year = 2021;
 int daynr = 2;
 
 int alarmHour = 0;
