@@ -40,7 +40,7 @@ void main_thread_entry(void) {
 
     /* the interrupt configuration*/
     led_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
-    TimeAdd_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
+    TimeAdd_timer0.p_api->open(TimeAdd_timer0.p_ctrl,TimeAdd_timer0.p_cfg);
 
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
@@ -243,11 +243,12 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 #endif
 
 void led_timer0_callback(timer_callback_args_t * p_args){
-    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
+    //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
     addMs();
     value = checkAlarm();
     if (value == 1){
         onOff2 = true;
+        gx_system_event_send(&g_gx_event);
     }
     else if (value == 0){
         onOff2 = false;
@@ -259,3 +260,5 @@ void led_timer0_callback(timer_callback_args_t * p_args){
 void TimeAdd_timer0_callback(timer_callback_args_t * p_args){
 
 }
+
+

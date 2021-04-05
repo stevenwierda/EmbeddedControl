@@ -251,3 +251,105 @@ void intervalAlarm(){
     }
 }
 
+void activatePWM(){
+    alarmActive = 1;
+    alarmMode = 2;
+    alarmMsec = msec + addIntervalMsec;
+    if (alarmMsec >= 1000){
+        alarmMsec = alarmMsec - 1000;
+        alarmSec = alarmSec + 1;
+    }
+    alarmSec = sec + addIntervalSec;
+    if (alarmSec >= 60){
+        alarmSec = alarmSec - 60;
+        alarmMin = alarmMin + 1;
+    }
+    alarmMin = min + addIntervalMin;
+    if (alarmMin >= 60){
+        alarmMin = alarmMin - 60;
+        alarmHour = alarmHour + 1;
+    }
+    alarmHour = hour + addIntervalHour;
+    if (alarmHour >= 24){
+        alarmHour = alarmHour - 24;
+        alarmDay = alarmDay + 1;
+    }
+    alarmDay = day + addIntervalDay;
+    if (alarmDay == 8){
+        alarmDay = 1;
+    }
+}
+
+void deactivatePWM(){
+    alarmActive = 0;
+}
+
+void setIntervalHourPlus(){
+    addIntervalHour=addIntervalHour+1;
+    if (addIntervalHour <= 24){
+        addIntervalHour = 0;
+    }
+}
+
+void setIntervalHourMin(){
+    if (addIntervalHour >= 0){
+        addIntervalHour=addIntervalHour-1;
+    }
+}
+
+void setIntervalMinPlus(){
+    addIntervalMin=addIntervalMin+1;
+    if (addIntervalMin <= 60){
+        addIntervalMin = 0;
+    }
+}
+
+void setIntervalMinMin(){
+    addIntervalMin=addIntervalMin-1;
+    if (addIntervalMin >= 10){
+        addIntervalMin=59;
+    }
+}
+
+void setIntervalSecPlus(){
+    addIntervalSec=addIntervalSec+1;
+    if (addIntervalSec <= 60){
+        addIntervalSec = 0;
+    }
+}
+
+void setIntervalSecMin(){
+    if (addIntervalSec >= 10){
+        addIntervalSec=addIntervalSec-1;
+    }
+}
+
+void setIntervalMsecPlus(){
+    addIntervalMsec=addIntervalMsec+10;
+    if (addIntervalMsec <= 1000){
+        addIntervalMsec=0;
+    }
+}
+
+void setIntervalMsecMin(){
+    if (addIntervalMsec >= 10){
+        addIntervalMsec=addIntervalMsec-10;
+    }
+}
+
+int intervalMsec(){
+    return addIntervalMsec;
+}
+
+int intervalSec(){
+    return addIntervalSec;
+}
+
+int intervalMin(){
+    return addIntervalMin;
+}
+
+int intervalHour(){
+    return addIntervalHour;
+}
+

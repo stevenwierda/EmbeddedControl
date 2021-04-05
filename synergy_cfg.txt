@@ -26,7 +26,7 @@ Synergy Configuration
          WDT Window End Position:  0% (no window end position)
          WDT Window Start Position: 100% (no window start position)
          WDT Reset Interrupt Request: Reset
-         WDT Stop Control: Stop counting when entering Sleep mode
+         WDT Stop Control: Counting continues
     OFS1 register settings: Select fields below
          Voltage Detection 0 Circuit Start: Voltage monitor 0 reset is disabled after reset
          Voltage Detection 0 Level: 2.80 V
@@ -729,6 +729,10 @@ Synergy Configuration
       Initial count: 0
       
   Messaging
+    Event "refresh"
+      Symbol: SF_MESSAGE_EVENT_REFRESH
+      Name: refresh
+      
     Subscriber "Main Thread" 0 0
       Event Class "Touch"
       

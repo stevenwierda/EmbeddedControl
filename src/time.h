@@ -39,5 +39,23 @@ int getDaynr();
 
 int checkAlarm();
 void intervalAlarm();
+void activatePWM();
+void deactivatePWM();
+//void setIntervalMsecMin();
+
+void setIntervalHourPlus();
+void setIntervalHourMin();
+void setIntervalMinPlus();
+void setIntervalMinMin();
+void setIntervalSecPlus();
+void setIntervalSecMin();
+void setIntervalMsecPlus();
+void setIntervalMsecMin();
+
+int intervalMsec();
+int intervalSec();
+int intervalMin();
+int intervalHour();
+
 
 #endif /* TIME_H_ */

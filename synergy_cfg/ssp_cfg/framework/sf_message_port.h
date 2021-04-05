@@ -9,6 +9,7 @@ typedef enum e_sf_message_event
 {
     SF_MESSAGE_EVENT_UNUSED, /* Unused */
     SF_MESSAGE_EVENT_NEW_DATA, /* New Data */
+    SF_MESSAGE_EVENT_REFRESH, /* refresh */
 } sf_message_event_t;
 extern TX_QUEUE main_thread_message_queue;
 #endif /* SF_MESSAGE_PORT_H_ */

@@ -45,13 +45,14 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
+    gx_system_timer_start(widget, 100, 10, 50);
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
     update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
     update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
     update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
     update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
-    update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
+    //update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
     daynr = getDaynr();
     if(daynr == 1){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
@@ -79,8 +80,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(BUTTERUGTIME, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
             break;
-
-        case GX_SIGNAL(BUTTERUGTIME, !GX_EVENT_CLICKED):
+        case GX_EVENT_TIMER:
             update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
             update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
             update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
@@ -88,29 +88,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
             update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
             update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
             update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
-            daynr = getDaynr();
-            if(daynr == 1){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
-            }
-            else if(daynr == 2){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
-            }
-            else if(daynr == 3){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
-            }
-            else if(daynr == 4){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
-            }
-            else if(daynr == 5){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
-            }
-            else if(daynr == 6){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
-            }
-            else if(daynr == 7){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
-            }
-        break;
+            break;
         default:
             result = gx_window_event_process(widget, event_ptr);
             break;
@@ -288,6 +266,34 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
             break;
+        case GX_EVENT_TIMER:
+            daynr = getDaynr();
+            if(daynr == 1){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
+            }
+            else if(daynr == 2){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
+            }
+            else if(daynr == 3){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
+            }
+            else if(daynr == 4){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
+            }
+            else if(daynr == 5){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
+            }
+            else if(daynr == 6){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
+            }
+            else if(daynr == 7){
+                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
+            }
+            update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
+            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
+            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
+            update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
         default:
             result = gx_window_event_process(widget, event_ptr);
         break;
@@ -341,6 +347,61 @@ UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr)
     }
 
     return result;
+}
+
+UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
+    UINT result = gx_window_event_process(widget, event_ptr);
+    gx_system_timer_start(widget, 100, 10, 50);
+    update_number_id(widget->gx_widget_parent, PRMPTHOUR, intervalHour());
+    update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());
+    update_number_id(widget->gx_widget_parent, PRMPTSEC, intervalSec());
+    update_number_id(widget->gx_widget_parent, PRMPTMSEC, intervalMsec());
+
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(BUTHOURUP, GX_EVENT_CLICKED):
+            setIntervalHourPlus();
+            break;
+        case GX_SIGNAL(BUTHOURMIN, GX_EVENT_CLICKED):
+            setIntervalHourMin();
+            break;
+        case GX_SIGNAL(BUTMINUP, GX_EVENT_CLICKED):
+            setIntervalMinPlus();
+            break;
+        case GX_SIGNAL(BUTMINMIN, GX_EVENT_CLICKED):
+            setIntervalMinMin();
+            break;
+        case GX_SIGNAL(BUTSECUP, GX_EVENT_CLICKED):
+            setIntervalSecPlus();
+            break;
+        case GX_SIGNAL(BUTSECMIN, GX_EVENT_CLICKED):
+            setIntervalSecMin();
+            break;
+        case GX_SIGNAL(BUTMSECUP, GX_EVENT_CLICKED):
+            setIntervalMsecPlus();
+            break;
+        case GX_SIGNAL(BUTMSECMIN, GX_EVENT_CLICKED):
+            setIntervalMsecMin();
+            break;
+        case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_ON):
+            activatePWM();
+            break;
+        case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_OFF):
+            deactivatePWM();
+            break;
+        case GX_EVENT_TIMER:
+            update_number_id(widget->gx_widget_parent, PRMPTHOUR, intervalHour());
+            update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());
+            update_number_id(widget->gx_widget_parent, PRMPTSEC, intervalSec());
+            update_number_id(widget->gx_widget_parent, PRMPTMSEC, intervalMsec());
+        default:
+            result = gx_window_event_process(widget, event_ptr);
+            break;
+    }
+    return result;
+
 }
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old)
