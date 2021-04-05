@@ -9,6 +9,7 @@
 #define TIME_H_
 #include <stdbool.h>
 #include <bsp_api.h>
+#include "main_thread.h"
 
 void addMs();
 void changeYearUp();
@@ -57,5 +58,8 @@ int intervalSec();
 int intervalMin();
 int intervalHour();
 
+//I2C stuff
+void sync_time();
+void set_time(int,int,int,int,int,int,int);
 
 #endif /* TIME_H_ */

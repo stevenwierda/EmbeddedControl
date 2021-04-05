@@ -2,6 +2,7 @@
 #include "main_thread.h"
 #include "bsp_api.h"
 #include "gx_api.h"
+#include "r_i2c_api.h"
 #include "gui/guiapp_specifications.h"
 #include "gui/guiapp_resources.h"
 
@@ -45,6 +46,10 @@ void main_thread_entry(void) {
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
 	UINT      status = TX_SUCCESS;
+
+    //I2C stuff
+    initialise_monitor_handles();
+    g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
 
     /* Initializes GUIX. */
     status = gx_system_initialize();
@@ -245,6 +250,7 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 void led_timer0_callback(timer_callback_args_t * p_args){
     //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
     addMs();
+    //sync_time();
     value = checkAlarm();
     if (value == 1){
         onOff2 = true;
@@ -252,6 +258,7 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     }
     else if (value == 0){
         onOff2 = false;
+
     }
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff);
     onOff = !onOff;

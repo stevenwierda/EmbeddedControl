@@ -27,6 +27,7 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         break;
     case GX_SIGNAL(BUTTIME, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&Time, (GX_WIDGET*)widget, true);
+
         break;
     case GX_SIGNAL(BUTLED, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);

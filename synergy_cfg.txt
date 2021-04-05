@@ -718,6 +718,54 @@ Synergy Configuration
       Callback: TimeAdd_timer0_callback
       Underflow Interrupt Priority: Priority 9
       
+    Instance "g_i2c0 I2C Master Driver on r_riic"
+      Name: g_i2c0
+      Channel: 0
+      Rate: Standard
+      Slave Address: 0x00
+      Address Mode: 7-Bit
+      SDA Output Delay (nano seconds): 300
+      Timeout Mode: Short Mode
+      Callback: NULL
+      Receive Interrupt Priority: Priority 12
+      Transmit Interrupt Priority: Priority 12
+      Transmit End Interrupt Priority: Priority 12
+      Error Interrupt Priority: Priority 12
+      
+      Instance "g_transfer4 Transfer Driver on r_dtc IIC0 TXI"
+        Name: g_transfer4
+        Mode: Normal
+        Transfer Size: 1 Byte
+        Destination Address Mode: Fixed
+        Source Address Mode: Incremented
+        Repeat Area (Unused in Normal Mode): Source
+        Interrupt Frequency: After all transfers have completed
+        Destination Pointer: NULL
+        Source Pointer: NULL
+        Number of Transfers: 0
+        Number of Blocks (Valid only in Block Mode): 0
+        Activation Source (Must enable IRQ): IIC0 TXI
+        Auto Enable: False
+        Callback (Only valid with Software start): NULL
+        ELC Software Event Interrupt Priority: Disabled
+        
+      Instance "g_transfer5 Transfer Driver on r_dtc IIC0 RXI"
+        Name: g_transfer5
+        Mode: Normal
+        Transfer Size: 1 Byte
+        Destination Address Mode: Incremented
+        Source Address Mode: Fixed
+        Repeat Area (Unused in Normal Mode): Destination
+        Interrupt Frequency: After all transfers have completed
+        Destination Pointer: NULL
+        Source Pointer: NULL
+        Number of Transfers: 0
+        Number of Blocks (Valid only in Block Mode): 0
+        Activation Source (Must enable IRQ): IIC0 RXI
+        Auto Enable: False
+        Callback (Only valid with Software start): NULL
+        ELC Software Event Interrupt Priority: Disabled
+        
     Object "g_main_semaphore_lcdc Semaphore"
       Name: Main Semaphore
       Symbol: g_main_semaphore_lcdc
