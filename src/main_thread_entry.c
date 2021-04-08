@@ -250,7 +250,6 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 void led_timer0_callback(timer_callback_args_t * p_args){
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
     addMs();
-    //sync_time();
     value = checkAlarm();
     if (value == 1){
         onOff2 = true;
