@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  5. 4.2021   Time (hh:mm): 14:34                        */
+/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
 /*******************************************************************************/
 
 
@@ -742,7 +742,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_activateAlarm_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {15, 13, 134, 36},                       /* widget size                    */
+    {18, 229, 137, 252},                     /* widget size                    */
     &SetPWM_promptMin_define,                /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_activateAlarm), /* control block     */

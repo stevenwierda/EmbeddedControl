@@ -1,13 +1,13 @@
 synergy/ssp/src/framework/tes/dave2d/dave_driver.o: ../synergy/ssp/src/framework/tes/dave2d/dave_driver.c \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h \
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h \
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_registermap.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h \
@@ -26,23 +26,23 @@ C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framewo
 ../synergy/ssp/src/framework/tes/dave2d/dave_memory.h \
 ../synergy/ssp/src/framework/tes/dave2d/dave_render.h
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_types.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_errorcodes.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_base.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes/dave_math.h:
 
-C:\\Users\\basha\\Documents\\GitHub\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
+C:\\Users\\steve\\git\\EmbeddedControl\\synergy\\ssp\\inc\\framework\\tes\\dave_driver.h:
 
 ../synergy/ssp/src/framework/tes/dave2d/dave_intern.h:
 

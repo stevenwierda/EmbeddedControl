@@ -22,8 +22,8 @@ int alarmSec = 10;
 int alarmMsec = 0;
 int alarmDay = 1;
 int alarmMode = 2;
-int addIntervalMsec = 100;
-int addIntervalSec = 0;
+int addIntervalMsec = 200;
+int addIntervalSec = 1;
 int addIntervalMin  = 0;
 int addIntervalHour = 0;
 int addIntervalDay = 0;
@@ -36,51 +36,6 @@ int alarmSat = 0;
 int alarmSun = 0;
 int alarmActive = 0;
 int action = 0;
-
-
-//I2C variabbles
-#define I2C_ADDRESS   0x68
-
-//variables for the I2C stuff
-uint8_t time_secs       = 0;
-uint8_t time_mins       = 0;
-uint8_t time_hours      = 0;
-uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
-
-uint8_t time_days       = 0;
-uint8_t time_date       = 0;
-uint8_t time_month      = 0;
-uint8_t time_year       = 0;
-
-
-//get the time from the RTC
-void sync_time()
-{
-    //variable
-    uint8_t buffer[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
-    //change i2c slave address
-    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
-    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
-
-    //set rtc register address
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
-
-    //for loop to read hours, minutes, seconds from RTC
-    for(uint8_t i = 0; i<7;i++)
-    {
-        g_i2c0.p_api->read(g_i2c0.p_ctrl, &buffer[i], 1, false);
-        buffer[i] = (uint8_t)(((buffer[i] & 0xF0) >> 4) * 10 + (buffer[i] & 0x0F));
-    }
-    //set current time
-    time_secs   = buffer[0];
-    time_mins   = buffer[1];
-    time_hours  = buffer[2];
-    time_days   = buffer[3];
-    time_date   = buffer[4];
-    time_month  = buffer[5];
-    time_year   = buffer[6];
-}
 
 
 void addMs(){
@@ -398,30 +353,7 @@ int intervalHour(){
     return addIntervalHour;
 }
 
-//function to set the current time and save it to RTC
-void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year)
-{
-    uint8_t  rtc_set_time[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
-    //change i2c slave adress
-    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
-    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
-
-
-    //set rtc register address
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
-
-    rtc_set_time[0] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
-    rtc_set_time[1] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
-    rtc_set_time[2] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
-
-    rtc_set_time[3] = (uint8_t)((s_time_days % 10));
-    rtc_set_time[4] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
-    rtc_set_time[5] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
-    rtc_set_time[6] = (uint8_t)(((s_time_year/10) << 4) | (s_time_year % 10));
-
-
-    //for loop to write hours, minutes, seconds to RTC
-
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 7, false);
+void startAlarm(){
+    alarmActive = 1;
+    alarmMode = 1;
 }

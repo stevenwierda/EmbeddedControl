@@ -52,6 +52,7 @@ void setIntervalSecPlus();
 void setIntervalSecMin();
 void setIntervalMsecPlus();
 void setIntervalMsecMin();
+void resetAlarm();
 
 int intervalMsec();
 int intervalSec();
@@ -61,5 +62,6 @@ int intervalHour();
 //I2C stuff
 void sync_time();
 void set_time(int,int,int,int,int,int,int);
+
 
 #endif /* TIME_H_ */
