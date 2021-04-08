@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
+/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 20:25                        */
 /*******************************************************************************/
 
 
@@ -742,7 +742,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_activateAlarm_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {18, 229, 137, 252},                     /* widget size                    */
+    {15, 13, 134, 36},                       /* widget size                    */
     &SetPWM_promptMin_define,                /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_activateAlarm), /* control block     */
@@ -1482,6 +1482,104 @@ GX_NUMERIC_PROMPT_PROPERTIES setTime_promptDay_properties =
     GX_NULL,                                 /* format function                */
     0                                        /* numeric prompt value           */
 };
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonSecPlus_1_properties =
+{
+    GX_STRING_ID_SEC_UP,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_NUMERIC_PROMPT_PROPERTIES setTime_promptSec_1_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+GX_TEXT_BUTTON_PROPERTIES setTime_buttonYearMin_1_properties =
+{
+    GX_STRING_ID_SEC_MIN,                    /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonYearMin_1_define =
+{
+    "buttonYearMin_1",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTSECMIN,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {27, 67, 106, 91},                       /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonYearMin_1), /* control block */
+    (void *) &setTime_buttonYearMin_1_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_promptSec_1_define =
+{
+    "promptSec_1",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    PROMPTSEC,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {27, 42, 106, 65},                       /* widget size                    */
+    &setTime_buttonYearMin_1_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_promptSec_1), /* control block     */
+    (void *) &setTime_promptSec_1_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_buttonSecPlus_1_define =
+{
+    "buttonSecPlus_1",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTSECPLUS,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {27, 18, 106, 41},                       /* widget size                    */
+    &setTime_promptSec_1_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonSecPlus_1), /* control block */
+    (void *) &setTime_buttonSecPlus_1_properties /* extended properties        */
+};
 
 GX_CONST GX_STUDIO_WIDGET setTime_promptDay_define =
 {
@@ -1500,8 +1598,8 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptDay_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {88, 206, 167, 229},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {135, 192, 214, 215},                    /* widget size                    */
+    &setTime_buttonSecPlus_1_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptDay), /* control block       */
     (void *) &setTime_promptDay_properties   /* extended properties            */
@@ -1524,7 +1622,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptMonth_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 125, 169, 148},                     /* widget size                    */
+    {137, 117, 216, 140},                    /* widget size                    */
     &setTime_promptDay_define,               /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptMonth), /* control block     */
@@ -1548,7 +1646,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptYear_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 125, 91, 148},                      /* widget size                    */
+    {136, 271, 215, 294},                    /* widget size                    */
     &setTime_promptMonth_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptYear), /* control block      */
@@ -1572,7 +1670,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptMinute_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 43, 169, 66},                       /* widget size                    */
+    {139, 45, 218, 68},                      /* widget size                    */
     &setTime_promptYear_define,              /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptMinute), /* control block    */
@@ -1596,7 +1694,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptHour_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 43, 91, 66},                        /* widget size                    */
+    {26, 115, 105, 138},                     /* widget size                    */
     &setTime_promptMinute_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptHour), /* control block      */
@@ -1620,7 +1718,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_DayPrompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {11, 206, 90, 229},                      /* widget size                    */
+    {21, 191, 100, 214},                     /* widget size                    */
     &setTime_promptHour_define,              /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_DayPrompt), /* control block       */
@@ -1644,7 +1742,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonDayNameMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {10, 229, 89, 253},                      /* widget size                    */
+    {21, 217, 100, 241},                     /* widget size                    */
     &setTime_DayPrompt_define,               /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayNameMin), /* control block */
@@ -1668,7 +1766,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonDayNamePlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {10, 183, 89, 206},                      /* widget size                    */
+    {22, 166, 101, 189},                     /* widget size                    */
     &setTime_buttonDayNameMin_define,        /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayNamePlus), /* control block */
@@ -1692,7 +1790,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonYearMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 148, 91, 172},                      /* widget size                    */
+    {134, 294, 213, 318},                    /* widget size                    */
     &setTime_buttonDayNamePlus_define,       /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonYearMin), /* control block   */
@@ -1716,7 +1814,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonMonthPlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 101, 169, 125},                     /* widget size                    */
+    {138, 95, 217, 119},                     /* widget size                    */
     &setTime_buttonYearMin_define,           /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMonthPlus), /* control block */
@@ -1740,7 +1838,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonMonthMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 148, 169, 172},                     /* widget size                    */
+    {135, 140, 214, 164},                    /* widget size                    */
     &setTime_buttonMonthPlus_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMonthMin), /* control block  */
@@ -1764,7 +1862,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonDayPlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {88, 183, 167, 207},                     /* widget size                    */
+    {135, 167, 214, 191},                    /* widget size                    */
     &setTime_buttonMonthMin_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayPlus), /* control block   */
@@ -1788,7 +1886,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonDayMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {88, 229, 167, 253},                     /* widget size                    */
+    {135, 216, 214, 240},                    /* widget size                    */
     &setTime_buttonDayPlus_define,           /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDayMin), /* control block    */
@@ -1812,7 +1910,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonMinutePlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 20, 169, 44},                       /* widget size                    */
+    {138, 21, 217, 45},                      /* widget size                    */
     &setTime_buttonDayMin_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMinutePlus), /* control block */
@@ -1836,7 +1934,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonMinuteMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 66, 169, 90},                       /* widget size                    */
+    {138, 67, 217, 91},                      /* widget size                    */
     &setTime_buttonMinutePlus_define,        /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonMinuteMin), /* control block */
@@ -1860,7 +1958,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonHourPlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 20, 91, 43},                        /* widget size                    */
+    {26, 92, 105, 115},                      /* widget size                    */
     &setTime_buttonMinuteMin_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonHourPlus), /* control block  */
@@ -1884,7 +1982,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonHourMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 67, 91, 90},                        /* widget size                    */
+    {26, 139, 105, 162},                     /* widget size                    */
     &setTime_buttonHourPlus_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonHourMin), /* control block   */
@@ -1908,7 +2006,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonYearPlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 102, 91, 125},                      /* widget size                    */
+    {135, 248, 214, 271},                    /* widget size                    */
     &setTime_buttonHourMin_define,           /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonYearPlus), /* control block  */
@@ -1932,7 +2030,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonTerugTimeSet_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 263, 91, 312},                      /* widget size                    */
+    {25, 263, 104, 312},                     /* widget size                    */
     &setTime_buttonYearPlus_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonTerugTimeSet), /* control block */
@@ -1956,7 +2054,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_define =
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     (UINT (*)(GX_WIDGET *, GX_EVENT *)) timeSetHandler, /* event function override */
-    {0, 0, 239, 319},                        /* widget size                    */
+    {13, 0, 252, 319},                       /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &setTime_buttonTerugTimeSet_define,      /* child widget                   */
     0,                                       /* control block                  */

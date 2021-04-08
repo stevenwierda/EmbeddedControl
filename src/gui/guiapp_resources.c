@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
+/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 20:25                        */
 /*******************************************************************************/
 
 
@@ -369,10 +369,11 @@ GX_CONST GX_UBYTE display_1_SEC_UP_English[] = "sec+";
 GX_CONST GX_UBYTE display_1_SEC_MIN_English[] = "sec-";
 GX_CONST GX_UBYTE display_1_STRING_3_English[] = "PWM";
 GX_CONST GX_UBYTE display_1_STRING_7_English[] = "Alarm";
+GX_CONST GX_UBYTE display_1_STRING_8_English[] = "SEC+";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[43] =
+GX_CONST GX_STRING display_1_English_string_table[44] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -416,7 +417,8 @@ GX_CONST GX_STRING display_1_English_string_table[43] =
     {(GX_CONST GX_CHAR *)display_1_SEC_UP_English, sizeof(display_1_SEC_UP_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_SEC_MIN_English, sizeof(display_1_SEC_MIN_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_3_English, sizeof(display_1_STRING_3_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_7_English, sizeof(display_1_STRING_7_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_STRING_7_English, sizeof(display_1_STRING_7_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_8_English, sizeof(display_1_STRING_8_English) - 1}
 };
 
 /*  Language Table                                                             */

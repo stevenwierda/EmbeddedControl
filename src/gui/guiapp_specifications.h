@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
+/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 20:25                        */
 /*******************************************************************************/
 
 
@@ -70,27 +70,28 @@ extern   "C" {
 #define PROMPTYEAR 46
 #define PROMPTMONTH 47
 #define PROMPTDAY 48
-#define WINDOW_LED1 49
-#define BUTDECREASE 50
-#define BUTINCREASE 51
-#define TIME 52
-#define windowLED 53
-#define butterugLED 54
-#define LEDSTATUS 55
-#define LEDSWITCH 56
-#define WINDOWTIME 57
-#define BUTTERUGTIME 58
-#define PROMPTSEC 59
-#define PROMPTMSEC 60
-#define WINDOW_SETTINGS 61
-#define BUTTERUGSETTINGS 62
-#define BUTSETTIME 63
-#define BUTLEDINTERUPT 64
-#define WINDOW_MAIN 65
-#define BUTSETTINGS 66
-#define BUTTIME 67
-#define BUTLED 68
-#define BUTSETALARM 69
+#define BUTSECPLUS 49
+#define PROMPTSEC 50
+#define WINDOW_LED1 51
+#define BUTDECREASE 52
+#define BUTINCREASE 53
+#define TIME 54
+#define windowLED 55
+#define butterugLED 56
+#define LEDSTATUS 57
+#define LEDSWITCH 58
+#define WINDOWTIME 59
+#define BUTTERUGTIME 60
+#define PROMPTMSEC 61
+#define WINDOW_SETTINGS 62
+#define BUTTERUGSETTINGS 63
+#define BUTSETTIME 64
+#define BUTLEDINTERUPT 65
+#define WINDOW_MAIN 66
+#define BUTSETTINGS 67
+#define BUTTIME 68
+#define BUTLED 69
+#define BUTSETALARM 70
 
 
 /* Define animation ids                                                        */
@@ -254,6 +255,9 @@ typedef struct SETTIME_CONTROL_BLOCK_STRUCT
     GX_NUMERIC_PROMPT setTime_promptYear;
     GX_NUMERIC_PROMPT setTime_promptMonth;
     GX_NUMERIC_PROMPT setTime_promptDay;
+    GX_TEXT_BUTTON setTime_buttonSecPlus_1;
+    GX_NUMERIC_PROMPT setTime_promptSec_1;
+    GX_TEXT_BUTTON setTime_buttonYearMin_1;
 } SETTIME_CONTROL_BLOCK;
 
 typedef struct SETLEDONEINTERUPT_CONTROL_BLOCK_STRUCT
