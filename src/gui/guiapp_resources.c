@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
+/*  Date (dd.mm.yyyy): 11. 4.2021   Time (hh:mm): 13:08                        */
 /*******************************************************************************/
 
 
@@ -367,12 +367,16 @@ GX_CONST GX_UBYTE display_1_MSEC_UP_English[] = "msec+";
 GX_CONST GX_UBYTE display_1_MSEC_MIN_English[] = "msec-";
 GX_CONST GX_UBYTE display_1_SEC_UP_English[] = "sec+";
 GX_CONST GX_UBYTE display_1_SEC_MIN_English[] = "sec-";
-GX_CONST GX_UBYTE display_1_STRING_3_English[] = "PWM";
-GX_CONST GX_UBYTE display_1_STRING_7_English[] = "Alarm";
+GX_CONST GX_UBYTE display_1_PWM_English[] = "PWM";
+GX_CONST GX_UBYTE display_1_ALARM_English[] = "Alarm";
+GX_CONST GX_UBYTE display_1_ALARM1_English[] = "alarm 1";
+GX_CONST GX_UBYTE display_1_ALARM2_English[] = "alarm 2";
+GX_CONST GX_UBYTE display_1_ALARM3_English[] = "alarm 3";
+GX_CONST GX_UBYTE display_1_ALARM4_English[] = "alarm 4";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[43] =
+GX_CONST GX_STRING display_1_English_string_table[47] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -415,8 +419,12 @@ GX_CONST GX_STRING display_1_English_string_table[43] =
     {(GX_CONST GX_CHAR *)display_1_MSEC_MIN_English, sizeof(display_1_MSEC_MIN_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_SEC_UP_English, sizeof(display_1_SEC_UP_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_SEC_MIN_English, sizeof(display_1_SEC_MIN_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_3_English, sizeof(display_1_STRING_3_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_7_English, sizeof(display_1_STRING_7_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_PWM_English, sizeof(display_1_PWM_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARM_English, sizeof(display_1_ALARM_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARM1_English, sizeof(display_1_ALARM1_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARM2_English, sizeof(display_1_ALARM2_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARM3_English, sizeof(display_1_ALARM3_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_ALARM4_English, sizeof(display_1_ALARM4_English) - 1}
 };
 
 /*  Language Table                                                             */

@@ -52,7 +52,10 @@ void setIntervalSecPlus();
 void setIntervalSecMin();
 void setIntervalMsecPlus();
 void setIntervalMsecMin();
-void resetAlarm();
+void startAlarm();
+
+struct alarm;
+
 
 int intervalMsec();
 int intervalSec();

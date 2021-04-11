@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  8. 4.2021   Time (hh:mm): 19:21                        */
+/*  Date (dd.mm.yyyy): 11. 4.2021   Time (hh:mm): 13:08                        */
 /*******************************************************************************/
 
 
@@ -16,6 +16,7 @@
 #include "guiapp_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
+SELECTALARM_CONTROL_BLOCK selectAlarm;
 ALARMSWITCH_CONTROL_BLOCK AlarmSwitch;
 SETPWM_CONTROL_BLOCK SetPWM;
 SETALARM_CONTROL_BLOCK setAlarm;
@@ -160,6 +161,194 @@ UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control
     }
     return status;
 }
+GX_WINDOW_PROPERTIES selectAlarm_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_TEXT_BUTTON_PROPERTIES selectAlarm_buttonBack_1_properties =
+{
+    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES selectAlarm_alarm4_properties =
+{
+    GX_STRING_ID_ALARM4,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES selectAlarm_alarm3_properties =
+{
+    GX_STRING_ID_ALARM3,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES selectAlarm_alarm2_properties =
+{
+    GX_STRING_ID_ALARM2,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_TEXT_BUTTON_PROPERTIES selectAlarm_alarm1_properties =
+{
+    GX_STRING_ID_ALARM1,                     /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_alarm1_define =
+{
+    "alarm1",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    ALARM1,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {24, 19, 143, 58},                       /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_alarm1), /* control block  */
+    (void *) &selectAlarm_alarm1_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_alarm2_define =
+{
+    "alarm2",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    ALARM2,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {24, 73, 143, 112},                      /* widget size                    */
+    &selectAlarm_alarm1_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_alarm2), /* control block  */
+    (void *) &selectAlarm_alarm2_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_alarm3_define =
+{
+    "alarm3",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    ALARM3,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {25, 126, 144, 165},                     /* widget size                    */
+    &selectAlarm_alarm2_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_alarm3), /* control block  */
+    (void *) &selectAlarm_alarm3_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_alarm4_define =
+{
+    "alarm4",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    ALARM4,                                  /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {25, 181, 144, 220},                     /* widget size                    */
+    &selectAlarm_alarm3_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_alarm4), /* control block  */
+    (void *) &selectAlarm_alarm4_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_buttonBack_1_define =
+{
+    "buttonBack_1",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    BUTBACKALSEL,                            /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {11, 228, 90, 307},                      /* widget size                    */
+    &selectAlarm_alarm4_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_buttonBack_1), /* control block */
+    (void *) &selectAlarm_buttonBack_1_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_define =
+{
+    "selectAlarm",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(SELECTALARM_CONTROL_BLOCK),       /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &selectAlarm_buttonBack_1_define,        /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &selectAlarm_properties         /* extended properties            */
+};
 GX_WINDOW_PROPERTIES AlarmSwitch_properties =
 {
     0                                        /* wallpaper pixelmap id          */
@@ -174,7 +363,7 @@ GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonBack_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonAlarm_properties =
 {
-    GX_STRING_ID_STRING_7,                   /* string id                      */
+    GX_STRING_ID_ALARM,                      /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -182,7 +371,7 @@ GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonAlarm_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES AlarmSwitch_buttonPWM_properties =
 {
-    GX_STRING_ID_STRING_3,                   /* string id                      */
+    GX_STRING_ID_PWM,                        /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -277,7 +466,7 @@ GX_CONST GX_STUDIO_WIDGET AlarmSwitch_define =
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SELALARM, /* event function override   */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SELALARMMODE, /* event function override */
     {0, 0, 239, 319},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &AlarmSwitch_buttonBack_define,          /* child widget                   */
@@ -2956,6 +3145,7 @@ GX_CONST GX_STUDIO_WIDGET Main_define =
 };
 GX_CONST GX_STUDIO_WIDGET_ENTRY guiapp_widget_table[] =
 {
+    { &selectAlarm_define, (GX_WIDGET *) &selectAlarm },
     { &AlarmSwitch_define, (GX_WIDGET *) &AlarmSwitch },
     { &SetPWM_define, (GX_WIDGET *) &SetPWM },
     { &setAlarm_define, (GX_WIDGET *) &setAlarm },
