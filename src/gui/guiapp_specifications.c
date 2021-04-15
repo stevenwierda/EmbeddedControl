@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 15. 4.2021   Time (hh:mm): 10:24                        */
+/*  Date (dd.mm.yyyy): 15. 4.2021   Time (hh:mm): 14:06                        */
 /*******************************************************************************/
 
 
@@ -1671,6 +1671,40 @@ GX_NUMERIC_PROMPT_PROPERTIES setTime_promptDate_properties =
     GX_NULL,                                 /* format function                */
     0                                        /* numeric prompt value           */
 };
+GX_NUMERIC_PROMPT_PROPERTIES setTime_promptSec_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+
+GX_CONST GX_STUDIO_WIDGET setTime_promptSec_define =
+{
+    "promptSec",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    PROMPTSEC,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {114, 269, 193, 292},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETTIME_CONTROL_BLOCK, setTime_promptSec), /* control block       */
+    (void *) &setTime_promptSec_properties   /* extended properties            */
+};
 
 GX_CONST GX_STUDIO_WIDGET setTime_promptDate_define =
 {
@@ -1689,8 +1723,8 @@ GX_CONST GX_STUDIO_WIDGET setTime_promptDate_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {88, 203, 167, 226},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {87, 205, 166, 228},                     /* widget size                    */
+    &setTime_promptSec_define,               /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_promptDate), /* control block      */
     (void *) &setTime_promptDate_properties  /* extended properties            */
@@ -1953,7 +1987,7 @@ GX_CONST GX_STUDIO_WIDGET setTime_buttonDatePlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {88, 183, 167, 207},                     /* widget size                    */
+    {88, 182, 167, 206},                     /* widget size                    */
     &setTime_buttonMonthMin_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTIME_CONTROL_BLOCK, setTime_buttonDatePlus), /* control block  */
@@ -2457,7 +2491,7 @@ GX_PROMPT_PROPERTIES Time_prompt_1_properties =
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_NUMERIC_PROMPT_PROPERTIES Time_promptDay_properties =
+GX_NUMERIC_PROMPT_PROPERTIES Time_promptDate_properties =
 {
     0,                                       /* string id                      */
     GX_FONT_ID_PROMPT,                       /* font id                        */
@@ -2649,7 +2683,7 @@ GX_CONST GX_STUDIO_WIDGET Time_promptMonth_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {77, 57, 156, 80},                       /* widget size                    */
+    {160, 57, 239, 80},                      /* widget size                    */
     &Time_promptYear_define,                 /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(TIME_CONTROL_BLOCK, Time_promptMonth), /* control block           */
@@ -2704,11 +2738,11 @@ GX_CONST GX_STUDIO_WIDGET Time_promptHour_define =
     (void *) &Time_promptHour_properties     /* extended properties            */
 };
 
-GX_CONST GX_STUDIO_WIDGET Time_promptDay_define =
+GX_CONST GX_STUDIO_WIDGET Time_promptDate_define =
 {
-    "promptDay",
+    "promptDate",
     GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
-    PROMPTDAY,                               /* widget id                      */
+    PROMPTDATE,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -2721,11 +2755,11 @@ GX_CONST GX_STUDIO_WIDGET Time_promptDay_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {152, 57, 231, 80},                      /* widget size                    */
+    {81, 57, 160, 80},                       /* widget size                    */
     &Time_promptHour_define,                 /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(TIME_CONTROL_BLOCK, Time_promptDay), /* control block             */
-    (void *) &Time_promptDay_properties      /* extended properties            */
+    offsetof(TIME_CONTROL_BLOCK, Time_promptDate), /* control block            */
+    (void *) &Time_promptDate_properties     /* extended properties            */
 };
 
 GX_CONST GX_STUDIO_WIDGET Time_prompt_1_define =
@@ -2746,7 +2780,7 @@ GX_CONST GX_STUDIO_WIDGET Time_prompt_1_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {77, 10, 156, 33},                       /* widget size                    */
-    &Time_promptDay_define,                  /* next widget definition         */
+    &Time_promptDate_define,                 /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(TIME_CONTROL_BLOCK, Time_prompt_1), /* control block              */
     (void *) &Time_prompt_1_properties       /* extended properties            */

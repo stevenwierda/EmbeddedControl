@@ -65,14 +65,15 @@ int alarmActive = 0;
 int action = 0;
 
 //I2C variabbles
-#define I2C_ADDRESS   0x68
+#define I2C_ADDRESS   0x684
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 
 //get the time from the RTC
 void sync_time()
 {
     //variable
-    uint8_t buffer[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    //uint8_t buffer[7] = {0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99};
+    uint8_t buffer[7];
 
     //change i2c slave address
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
@@ -87,14 +88,13 @@ void sync_time()
         g_i2c0.p_api->read(g_i2c0.p_ctrl, &buffer[i], 1, false);
         buffer[i] = (uint8_t)(((buffer[i] & 0xF0) >> 4) * 10 + (buffer[i] & 0x0F));
     }
-    //set current time
-    sec         = buffer[0];
-    min         = buffer[1];
-    hour        = buffer[2];
-    date         = buffer[3];
-    weekday     = buffer[4];
-    month       = buffer[5];
-    year        = buffer[6];
+        sec         = buffer[0];
+        min         = buffer[1];
+        hour        = buffer[2];
+        date        = buffer[3];
+        weekday     = buffer[4];
+        month       = buffer[5];
+        year        = buffer[6] +2000;
 }
 
 void addMs(){
@@ -144,11 +144,12 @@ void addMs(){
 }
 void changeYearUp(){
     year = year + 1;
-
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeYearDown(){
     year = year - 1;
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeMonthUp(){
@@ -156,6 +157,7 @@ void changeMonthUp(){
     if (month == 13){
         month = 0;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeMonthDown(){
@@ -163,6 +165,7 @@ void changeMonthDown(){
     if (month == 0){
         month = 12;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeWeekdayUp(){
@@ -170,6 +173,7 @@ void changeWeekdayUp(){
     if (weekday == 8){
         weekday = 1;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeWeekdayDown(){
@@ -177,20 +181,23 @@ void changeWeekdayDown(){
     if (weekday == 0){
         weekday = 7;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeDayUp(){
     date = date + 1;
-    if (date == 8){
+    if (date == 31){
         date = 1;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeDayDown(){
     date = date - 1;
     if (date == 0){
-        date = 7;
+        date = 31;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeMinUp(){
@@ -198,6 +205,7 @@ void changeMinUp(){
     if (min == 60){
         min = 0;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeMinDown(){
@@ -205,6 +213,7 @@ void changeMinDown(){
     if (min == -1){
         min = 59;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeHourUp(){
@@ -212,6 +221,7 @@ void changeHourUp(){
     if (hour == 24){
         hour = 0;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 void changeHourDown(){
@@ -219,6 +229,7 @@ void changeHourDown(){
     if (hour == -1){
         hour = 23;
     }
+    set_time(sec, min, hour, weekday, date, month, year);
 }
 
 int getYear(){
@@ -229,7 +240,7 @@ int getMonth(){
     return month;
 }
 
-int getDay(){
+int getDate(){
     return date;
 }
 
@@ -437,7 +448,7 @@ void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, 
     rtc_set_time[3] = (uint8_t)((s_time_days % 10));
     rtc_set_time[4] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
     rtc_set_time[5] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
-    rtc_set_time[6] = (uint8_t)(((s_time_year/10) << 4) | (s_time_year % 10));
+    rtc_set_time[6] = (uint8_t)((((s_time_year-2000)/10) << 4) | (s_time_year % 10));
 
 
     //for loop to write hours, minutes, seconds to RTC

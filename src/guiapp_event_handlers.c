@@ -26,9 +26,8 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
         break;
     case GX_SIGNAL(BUTTIME, GX_EVENT_CLICKED):
-        show_window((GX_WINDOW*)&Time, (GX_WIDGET*)widget, true);
         sync_time();
-
+        show_window((GX_WINDOW*)&Time, (GX_WIDGET*)widget, true);
         break;
     case GX_SIGNAL(BUTLED, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);
@@ -50,7 +49,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
     gx_system_timer_start(widget, 100, 10, 50);
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-    update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+    update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
     update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
     update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
     update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
@@ -85,7 +84,7 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_EVENT_TIMER:
             update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
             update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
             update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
             update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
             update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
@@ -110,7 +109,6 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
                 break;
         case GX_SIGNAL(BUTSETTIME, GX_EVENT_CLICKED):
                 show_window((GX_WINDOW*)&setTime, (GX_WIDGET*)widget, true);
-                sync_time();
                 break;
         default:
             result = gx_window_event_process(widget, event_ptr);
@@ -146,6 +144,7 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 
 UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     UINT result = gx_window_event_process(widget, event_ptr);
+    //gx_system_timer_start(widget, 100, 10, 50);
     weekday = getWeekday();
     if(weekday == 1){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
@@ -170,9 +169,10 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     }
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
     update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-    update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+    update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
     update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
     update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+    update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
 
 
     switch (event_ptr->gx_event_type){
@@ -197,11 +197,11 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             break;
         case GX_SIGNAL(BUTDATEPLUS, GX_EVENT_CLICKED):
             changeDayUp();
-            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
             break;
         case GX_SIGNAL(BUTDATEMIN, GX_EVENT_CLICKED):
             changeDayDown();
-            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
             break;
         case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
             changeHourUp();
@@ -221,7 +221,7 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             break;
         case GX_SIGNAL(BUTNAMEDAYPLUS, GX_EVENT_CLICKED):
             changeWeekdayUp();
-        weekday  = getWeekday();
+            weekday  = getWeekday();
             if(weekday  == 1){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
             }
@@ -294,9 +294,10 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             }
             update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
             update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-            update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
+            update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
             update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
             update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+            update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
         break;
         default:
             result = gx_window_event_process(widget, event_ptr);

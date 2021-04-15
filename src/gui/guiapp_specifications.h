@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 15. 4.2021   Time (hh:mm): 10:24                        */
+/*  Date (dd.mm.yyyy): 15. 4.2021   Time (hh:mm): 14:06                        */
 /*******************************************************************************/
 
 
@@ -75,28 +75,27 @@ extern   "C" {
 #define PROMPTYEAR 51
 #define PROMPTMONTH 52
 #define PROMPTDATE 53
-#define WINDOW_LED1 54
-#define BUTDECREASE 55
-#define BUTINCREASE 56
-#define TIME 57
-#define windowLED 58
-#define butterugLED 59
-#define LEDSTATUS 60
-#define LEDSWITCH 61
-#define WINDOWTIME 62
-#define BUTTERUGTIME 63
-#define PROMPTDAY 64
-#define PROMPTSEC 65
-#define PROMPTMSEC 66
-#define WINDOW_SETTINGS 67
-#define BUTTERUGSETTINGS 68
-#define BUTSETTIME 69
-#define BUTLEDINTERUPT 70
-#define WINDOW_MAIN 71
-#define BUTSETTINGS 72
-#define BUTTIME 73
-#define BUTLED 74
-#define BUTSETALARM 75
+#define PROMPTSEC 54
+#define WINDOW_LED1 55
+#define BUTDECREASE 56
+#define BUTINCREASE 57
+#define TIME 58
+#define windowLED 59
+#define butterugLED 60
+#define LEDSTATUS 61
+#define LEDSWITCH 62
+#define WINDOWTIME 63
+#define BUTTERUGTIME 64
+#define PROMPTMSEC 65
+#define WINDOW_SETTINGS 66
+#define BUTTERUGSETTINGS 67
+#define BUTSETTIME 68
+#define BUTLEDINTERUPT 69
+#define WINDOW_MAIN 70
+#define BUTSETTINGS 71
+#define BUTTIME 72
+#define BUTLED 73
+#define BUTSETALARM 74
 
 
 /* Define animation ids                                                        */
@@ -270,6 +269,7 @@ typedef struct SETTIME_CONTROL_BLOCK_STRUCT
     GX_NUMERIC_PROMPT setTime_promptYear;
     GX_NUMERIC_PROMPT setTime_promptMonth;
     GX_NUMERIC_PROMPT setTime_promptDate;
+    GX_NUMERIC_PROMPT setTime_promptSec;
 } SETTIME_CONTROL_BLOCK;
 
 typedef struct SETLEDONEINTERUPT_CONTROL_BLOCK_STRUCT
@@ -294,7 +294,7 @@ typedef struct TIME_CONTROL_BLOCK_STRUCT
     GX_WINDOW_MEMBERS_DECLARE
     GX_TEXT_BUTTON Time_buttonTerugTime;
     GX_PROMPT Time_prompt_1;
-    GX_NUMERIC_PROMPT Time_promptDay;
+    GX_NUMERIC_PROMPT Time_promptDate;
     GX_NUMERIC_PROMPT Time_promptHour;
     GX_NUMERIC_PROMPT Time_promptMinute;
     GX_NUMERIC_PROMPT Time_promptMonth;

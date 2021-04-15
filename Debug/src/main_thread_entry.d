@@ -100,7 +100,7 @@ src/main_thread_entry.o: ../src/main_thread_entry.c \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h \
  ../src/gui/guiapp_specifications.h ../src/gui/guiapp_resources.h \
- ../src/hardware/lcd.h
+ ../src/time.h ../src/hardware/lcd.h
 
 C:\Users\basha\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h:
 
@@ -305,5 +305,7 @@ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi
 ../src/gui/guiapp_specifications.h:
 
 ../src/gui/guiapp_resources.h:
+
+../src/time.h:
 
 ../src/hardware/lcd.h:
