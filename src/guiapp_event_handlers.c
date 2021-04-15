@@ -5,7 +5,7 @@
 
 static bool button_enabled = false;
 bool onOff;
-int daynr;
+int weekday;
 unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
 
@@ -27,6 +27,7 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         break;
     case GX_SIGNAL(BUTTIME, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&Time, (GX_WIDGET*)widget, true);
+        sync_time();
 
         break;
     case GX_SIGNAL(BUTLED, GX_EVENT_CLICKED):
@@ -54,26 +55,26 @@ UINT timeWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
     update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
     update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
     //update_number_id(widget->gx_widget_parent, PROMPTMSEC, getMsec());
-    daynr = getDaynr();
-    if(daynr == 1){
+    weekday = getWeekday();
+    if(weekday == 1){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
     }
-    else if(daynr == 2){
+    else if(weekday == 2){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
     }
-    else if(daynr == 3){
+    else if(weekday == 3){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
     }
-    else if(daynr == 4){
+    else if(weekday == 4){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
     }
-    else if(daynr == 5){
+    else if(weekday == 5){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
     }
-    else if(daynr == 6){
+    else if(weekday == 6){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
     }
-    else if(daynr == 7){
+    else if(weekday == 7){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
     }
 
@@ -109,6 +110,7 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
                 break;
         case GX_SIGNAL(BUTSETTIME, GX_EVENT_CLICKED):
                 show_window((GX_WINDOW*)&setTime, (GX_WIDGET*)widget, true);
+                sync_time();
                 break;
         default:
             result = gx_window_event_process(widget, event_ptr);
@@ -144,26 +146,26 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 
 UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     UINT result = gx_window_event_process(widget, event_ptr);
-    daynr = getDaynr();
-    if(daynr == 1){
+    weekday = getWeekday();
+    if(weekday == 1){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
     }
-    else if(daynr == 2){
+    else if(weekday == 2){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
     }
-    else if(daynr == 3){
+    else if(weekday == 3){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
     }
-    else if(daynr == 4){
+    else if(weekday == 4){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
     }
-    else if(daynr == 5){
+    else if(weekday == 5){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
     }
-    else if(daynr == 6){
+    else if(weekday == 6){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
     }
-    else if(daynr == 7){
+    else if(weekday == 7){
         update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
     }
     update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
@@ -193,11 +195,11 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             changeMonthDown();
             update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
             break;
-        case GX_SIGNAL(BUTDAYPLUS, GX_EVENT_CLICKED):
+        case GX_SIGNAL(BUTDATEPLUS, GX_EVENT_CLICKED):
             changeDayUp();
             update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
             break;
-        case GX_SIGNAL(BUTDAYMIN, GX_EVENT_CLICKED):
+        case GX_SIGNAL(BUTDATEMIN, GX_EVENT_CLICKED):
             changeDayDown();
             update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
             break;
@@ -218,76 +220,76 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
             break;
         case GX_SIGNAL(BUTNAMEDAYPLUS, GX_EVENT_CLICKED):
-            changeDaynrUp();
-            daynr = getDaynr();
-            if(daynr == 1){
+            changeWeekdayUp();
+        weekday  = getWeekday();
+            if(weekday  == 1){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
             }
-            else if(daynr == 2){
+            else if(weekday  == 2){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
             }
-            else if(daynr == 3){
+            else if(weekday  == 3){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
             }
-            else if(daynr == 4){
+            else if(weekday  == 4){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
             }
-            else if(daynr == 5){
+            else if(weekday  == 5){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
             }
-            else if(daynr == 6){
+            else if(weekday  == 6){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
             }
-            else if(daynr == 7){
+            else if(weekday  == 7){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
             break;
         case GX_SIGNAL(BUTNAMEDAYMIN, GX_EVENT_CLICKED):
-            changeDaynrDown();
-            daynr = getDaynr();
-            if(daynr == 1){
+            changeWeekdayDown();
+            weekday  = getWeekday();
+            if(weekday  == 1){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
             }
-            else if(daynr == 2){
+            else if(weekday  == 2){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
             }
-            else if(daynr == 3){
+            else if(weekday  == 3){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
             }
-            else if(daynr == 4){
+            else if(weekday  == 4){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
             }
-            else if(daynr == 5){
+            else if(weekday  == 5){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
             }
-            else if(daynr == 6){
+            else if(weekday  == 6){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
             }
-            else if(daynr == 7){
+            else if(weekday  == 7){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
             break;
         case GX_EVENT_TIMER:
-            daynr = getDaynr();
-            if(daynr == 1){
+            weekday  = getWeekday();
+            if(weekday  == 1){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
             }
-            else if(daynr == 2){
+            else if(weekday  == 2){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
             }
-            else if(daynr == 3){
+            else if(weekday  == 3){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
             }
-            else if(daynr == 4){
+            else if(weekday  == 4){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
             }
-            else if(daynr == 5){
+            else if(weekday  == 5){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
             }
-            else if(daynr == 6){
+            else if(weekday  == 6){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
             }
-            else if(daynr == 7){
+            else if(weekday  == 7){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
             update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
@@ -295,6 +297,7 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             update_number_id(widget->gx_widget_parent, PROMPTDAY, getDay());
             update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
             update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+        break;
         default:
             result = gx_window_event_process(widget, event_ptr);
         break;
@@ -397,6 +400,7 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());
             update_number_id(widget->gx_widget_parent, PRMPTSEC, intervalSec());
             update_number_id(widget->gx_widget_parent, PRMPTMSEC, intervalMsec());
+        break;
         default:
             result = gx_window_event_process(widget, event_ptr);
             break;

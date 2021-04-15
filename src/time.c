@@ -7,14 +7,14 @@
 #include "time.h"
 #include "common_data.h"
 
-int msec = 0;
-int sec = 0;
-int min = 0;
-int hour = 0;
-int day = 1;
-int month = 1;
-int year = 2021;
-int daynr = 2;
+int msec;
+int sec;
+int min;
+int hour;
+int date;        //date
+int month;
+int year;
+int weekday;      //day of the week
 
 struct alarm{
   int day;
@@ -64,6 +64,38 @@ int alarmSun = 0;
 int alarmActive = 0;
 int action = 0;
 
+//I2C variabbles
+#define I2C_ADDRESS   0x68
+uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+
+//get the time from the RTC
+void sync_time()
+{
+    //variable
+    uint8_t buffer[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    //change i2c slave address
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
+
+    //set rtc register address
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
+
+    //for loop to read hours, minutes, seconds from RTC
+    for(uint8_t i = 0; i<7;i++)
+    {
+        g_i2c0.p_api->read(g_i2c0.p_ctrl, &buffer[i], 1, false);
+        buffer[i] = (uint8_t)(((buffer[i] & 0xF0) >> 4) * 10 + (buffer[i] & 0x0F));
+    }
+    //set current time
+    sec         = buffer[0];
+    min         = buffer[1];
+    hour        = buffer[2];
+    date         = buffer[3];
+    weekday     = buffer[4];
+    month       = buffer[5];
+    year        = buffer[6];
+}
 
 void addMs(){
     msec = msec + 1;
@@ -78,27 +110,27 @@ void addMs(){
                 hour = hour + 1;
                 if(hour >= 24){
                     hour = hour - 24;
-                    day = day + 1;
-                    daynr = daynr + 1;
-                    if(daynr == 8){
-                        daynr = 1;
+                    date = date + 1;
+                    weekday = weekday + 1;
+                    if(weekday == 8){
+                        weekday = 1;
                     }
                     if(month == 2){
-                        if((year % 4) == 0 && day == 29){
-                            day = 0;
+                        if((year % 4) == 0 && date == 29){
+                            date = 0;
                             month = 3;
                         }
-                        else if(day == 28){
-                            day = 0;
+                        else if(date == 28){
+                            date = 0;
                             month = 3;
                         }
                     }
-                    else if((month == 7 || (month % 2 == 1)) && day == 31){
-                        day = 1;
+                    else if((month == 7 || (month % 2 == 1)) && date == 31){
+                        date = 1;
                         month = month + 1;
                     }
-                    else if(month % 2 == 0 && day == 30){
-                        day = 1;
+                    else if(month % 2 == 0 && date == 30){
+                        date = 1;
                         month = month + 1;
                     }
                     if(month == 13){
@@ -133,31 +165,31 @@ void changeMonthDown(){
     }
 }
 
-void changeDaynrUp(){
-    daynr = daynr + 1;
-    if (daynr == 8){
-        daynr = 1;
+void changeWeekdayUp(){
+    weekday = weekday + 1;
+    if (weekday == 8){
+        weekday = 1;
     }
 }
 
-void changeDaynrDown(){
-    daynr = daynr - 1;
-    if (daynr == 0){
-        daynr = 7;
+void changeWeekdayDown(){
+    weekday = weekday - 1;
+    if (weekday == 0){
+        weekday = 7;
     }
 }
 
 void changeDayUp(){
-    day = day + 1;
-    if (day == 8){
-        day = 1;
+    date = date + 1;
+    if (date == 8){
+        date = 1;
     }
 }
 
 void changeDayDown(){
-    day = day - 1;
-    if (day == 0){
-        day = 7;
+    date = date - 1;
+    if (date == 0){
+        date = 7;
     }
 }
 
@@ -198,7 +230,7 @@ int getMonth(){
 }
 
 int getDay(){
-    return day;
+    return date;
 }
 
 int getHour(){
@@ -217,26 +249,26 @@ int getMsec(){
     return msec;
 }
 
-int getDaynr(){
-    return daynr;
+int getWeekday(){
+    return weekday;
 }
 
 int checkAlarm(){
    if(hour == currentAlarm.day && min == alarmMin && sec == alarmSec && alarmMsec == msec && alarmActive == 1){
        if(alarmMode == 1){
-           if((alarmMon == 1 && daynr == 1)||
-               (alarmTue == 1 && daynr == 2)||
-               (alarmWed == 1 && daynr == 3)||
-               (alarmThu == 1 && daynr == 4)||
-               (alarmFri == 1 && daynr == 5)||
-               (alarmSat == 1 && daynr == 6)||
-               (alarmSun == 1 && daynr == 7)){
+           if((alarmMon == 1 && weekday == 1)||
+               (alarmTue == 1 && weekday == 2)||
+               (alarmWed == 1 && weekday == 3)||
+               (alarmThu == 1 && weekday == 4)||
+               (alarmFri == 1 && weekday == 5)||
+               (alarmSat == 1 && weekday == 6)||
+               (alarmSun == 1 && weekday == 7)){
                action = 1;
                return action;
            }
        }
        else if(alarmMode == 2){
-           if(day == alarmDay){
+           if(date == alarmDay){
                if (action == 0){
                    action = 1;
                }
@@ -301,7 +333,7 @@ void activatePWM(){
         alarmHour = alarmHour - 24;
         alarmDay = alarmDay + 1;
     }
-    alarmDay = day + addIntervalDay;
+    alarmDay = date + addIntervalDay;
     if (alarmDay == 8){
         alarmDay = 1;
     }
@@ -383,4 +415,32 @@ int intervalHour(){
 void startAlarm(){
     alarmActive = 1;
     alarmMode = 1;
+}
+
+//function to set the current time and save it to RTC
+void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year)
+{
+    uint8_t  rtc_set_time[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    //change i2c slave adress
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
+
+
+    //set rtc register address
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
+
+    rtc_set_time[0] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
+    rtc_set_time[1] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
+    rtc_set_time[2] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
+
+    rtc_set_time[3] = (uint8_t)((s_time_days % 10));
+    rtc_set_time[4] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
+    rtc_set_time[5] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
+    rtc_set_time[6] = (uint8_t)(((s_time_year/10) << 4) | (s_time_year % 10));
+
+
+    //for loop to write hours, minutes, seconds to RTC
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 7, false);
 }

@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 11. 4.2021   Time (hh:mm): 13:08                        */
+/*  Date (dd.mm.yyyy): 15. 4.2021   Time (hh:mm): 10:24                        */
 /*******************************************************************************/
 
 
@@ -62,8 +62,8 @@ extern   "C" {
 #define BUTHOURPLUS 38
 #define BUTMINUTEMIN 39
 #define BUTMINUTEPLUS 40
-#define BUTDAYMIN 41
-#define BUTDAYPLUS 42
+#define BUTDATEMIN 41
+#define BUTDATEPLUS 42
 #define BUTMONTHMIN 43
 #define BUTMONTHPLUS 44
 #define BUTYEARMIN 45
@@ -74,7 +74,7 @@ extern   "C" {
 #define PROMPTMINUTE 50
 #define PROMPTYEAR 51
 #define PROMPTMONTH 52
-#define PROMPTDAY 53
+#define PROMPTDATE 53
 #define WINDOW_LED1 54
 #define BUTDECREASE 55
 #define BUTINCREASE 56
@@ -85,17 +85,18 @@ extern   "C" {
 #define LEDSWITCH 61
 #define WINDOWTIME 62
 #define BUTTERUGTIME 63
-#define PROMPTSEC 64
-#define PROMPTMSEC 65
-#define WINDOW_SETTINGS 66
-#define BUTTERUGSETTINGS 67
-#define BUTSETTIME 68
-#define BUTLEDINTERUPT 69
-#define WINDOW_MAIN 70
-#define BUTSETTINGS 71
-#define BUTTIME 72
-#define BUTLED 73
-#define BUTSETALARM 74
+#define PROMPTDAY 64
+#define PROMPTSEC 65
+#define PROMPTMSEC 66
+#define WINDOW_SETTINGS 67
+#define BUTTERUGSETTINGS 68
+#define BUTSETTIME 69
+#define BUTLEDINTERUPT 70
+#define WINDOW_MAIN 71
+#define BUTSETTINGS 72
+#define BUTTIME 73
+#define BUTLED 74
+#define BUTSETALARM 75
 
 
 /* Define animation ids                                                        */
@@ -256,8 +257,8 @@ typedef struct SETTIME_CONTROL_BLOCK_STRUCT
     GX_TEXT_BUTTON setTime_buttonHourPlus;
     GX_TEXT_BUTTON setTime_buttonMinuteMin;
     GX_TEXT_BUTTON setTime_buttonMinutePlus;
-    GX_TEXT_BUTTON setTime_buttonDayMin;
-    GX_TEXT_BUTTON setTime_buttonDayPlus;
+    GX_TEXT_BUTTON setTime_buttonDateMin;
+    GX_TEXT_BUTTON setTime_buttonDatePlus;
     GX_TEXT_BUTTON setTime_buttonMonthMin;
     GX_TEXT_BUTTON setTime_buttonMonthPlus;
     GX_TEXT_BUTTON setTime_buttonYearMin;
@@ -268,7 +269,7 @@ typedef struct SETTIME_CONTROL_BLOCK_STRUCT
     GX_NUMERIC_PROMPT setTime_promptMinute;
     GX_NUMERIC_PROMPT setTime_promptYear;
     GX_NUMERIC_PROMPT setTime_promptMonth;
-    GX_NUMERIC_PROMPT setTime_promptDay;
+    GX_NUMERIC_PROMPT setTime_promptDate;
 } SETTIME_CONTROL_BLOCK;
 
 typedef struct SETLEDONEINTERUPT_CONTROL_BLOCK_STRUCT

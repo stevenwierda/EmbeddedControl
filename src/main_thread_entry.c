@@ -48,8 +48,8 @@ void main_thread_entry(void) {
 	UINT      status = TX_SUCCESS;
 
     //I2C stuff
-    initialise_monitor_handles();
     g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
+    sync_time();    //sync the time when the microcontroller starts.
 
     /* Initializes GUIX. */
     status = gx_system_initialize();
