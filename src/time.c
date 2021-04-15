@@ -16,6 +16,33 @@ int day;
 int month;
 int year;
 
+struct alarm{
+  int day;
+  int hour: 1;
+  int min;
+  int sec;
+  int msec;
+  int alarmMon;
+  int alarmTue;
+  int alarmWed;
+  int alarmThu;
+  int alarmFri;
+  int alarmSat;
+  int alarmSun;
+
+  int addIntervalMsec;
+  int addIntervalSec;
+  int addIntervalMin;
+  int addIntervalHour;
+  int addIntervalDay;
+
+} Alarm;
+struct alarm alarm1;
+struct alarm alarm2;
+struct alarm alarm3;
+struct alarm alarm4;
+struct alarm currentAlarm;
+
 int alarmHour = 0;
 int alarmMin = 0;
 int alarmSec = 10;
@@ -274,7 +301,7 @@ int getDaynr(){
 }
 
 int checkAlarm(){
-   if(hour == alarmHour && min == alarmMin && sec == alarmSec && alarmMsec == msec && alarmActive == 1){
+   if(hour == currentAlarm.day && min == alarmMin && sec == alarmSec && alarmMsec == msec && alarmActive == 1){
        if(alarmMode == 1){
            if((alarmMon == 1 && daynr == 1)||
                (alarmTue == 1 && daynr == 2)||
