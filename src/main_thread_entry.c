@@ -16,6 +16,7 @@
  ***********************************************************************************************************************/
 static bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * g_gx_event);
 int checkAlarm();
+void sync_time();
 void addMs();
 void main_thread_entry(void);
 
@@ -50,6 +51,7 @@ void main_thread_entry(void) {
     //I2C stuff
     g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
     sync_time();    //sync the time when the microcontroller starts.
+
 
     /* Initializes GUIX. */
     status = gx_system_initialize();

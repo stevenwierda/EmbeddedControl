@@ -89,7 +89,7 @@ const i2c_cfg_t g_i2c0_cfg =
 #endif
 #undef SYNERGY_NOT_DEFINED	
   .p_callback = NULL,
-  .p_context = (void *) &g_i2c0, .rxi_ipl = (12), .txi_ipl = (12), .tei_ipl = (12), .eri_ipl = (12), .p_extend =
+  .p_context = (void *) &g_i2c0, .rxi_ipl = (7), .txi_ipl = (7), .tei_ipl = (7), .eri_ipl = (6), .p_extend =
           &g_i2c0_extend, };
 /* Instance structure to use this module. */
 const i2c_master_instance_t g_i2c0 =

@@ -7,14 +7,14 @@
 #include "time.h"
 #include "common_data.h"
 
-int msec;
-int sec;
-int min;
-int hour;
-int date;        //date
-int month;
-int year;
-int weekday;      //day of the week
+int msec =9;
+int sec = 9;
+int min = 9;
+int hour =9;
+int date = 9;        //date
+int month = 9;
+int year = 99;
+int weekday =1;      //day of the week
 
 struct alarm{
   int day;
@@ -65,22 +65,21 @@ int alarmActive = 0;
 int action = 0;
 
 //I2C variabbles
-#define I2C_ADDRESS   0x684
+#define I2C_ADDRESS   0x68
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 
 //get the time from the RTC
 void sync_time()
 {
     //variable
-    //uint8_t buffer[7] = {0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99};
-    uint8_t buffer[7];
+    uint8_t buffer[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     //change i2c slave address
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
 
     //set rtc register address
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, true);
 
     //for loop to read hours, minutes, seconds from RTC
     for(uint8_t i = 0; i<7;i++)
@@ -88,6 +87,8 @@ void sync_time()
         g_i2c0.p_api->read(g_i2c0.p_ctrl, &buffer[i], 1, false);
         buffer[i] = (uint8_t)(((buffer[i] & 0xF0) >> 4) * 10 + (buffer[i] & 0x0F));
     }
+
+    if(buffer[1] != 0 && buffer[6] != 0){//zorgen dat er niets gescreven wordt bij een communicatiefout
         sec         = buffer[0];
         min         = buffer[1];
         hour        = buffer[2];
@@ -95,6 +96,7 @@ void sync_time()
         weekday     = buffer[4];
         month       = buffer[5];
         year        = buffer[6] +2000;
+    }
 }
 
 void addMs(){
@@ -189,6 +191,7 @@ void changeDayUp(){
     if (date == 31){
         date = 1;
     }
+    //hier moet ook de uitzondering van schrikkeljaar en 31,30 komen
     set_time(sec, min, hour, weekday, date, month, year);
 }
 
@@ -197,6 +200,7 @@ void changeDayDown(){
     if (date == 0){
         date = 31;
     }
+  //hier moet ook de uitzondering van schrikkeljaar en 31,30 komen
     set_time(sec, min, hour, weekday, date, month, year);
 }
 
@@ -431,7 +435,10 @@ void startAlarm(){
 //function to set the current time and save it to RTC
 void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year)
 {
-    uint8_t  rtc_set_time[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    //het moet mogelijk zijn om de tijd vanaf het scherm te veranderen.
+    //Om dat voor elkaar te krijgen moet deze functie aangeroepen worden met de correcte parameters.
+
+    uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     //change i2c slave adress
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
@@ -439,19 +446,16 @@ void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, 
 
 
     //set rtc register address
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
+    //g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_reg[0], 1, false);
 
-    rtc_set_time[0] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
-    rtc_set_time[1] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
-    rtc_set_time[2] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
+    rtc_set_time[1] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
+    rtc_set_time[2] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
+    rtc_set_time[3] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
 
-    rtc_set_time[3] = (uint8_t)((s_time_days % 10));
-    rtc_set_time[4] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
-    rtc_set_time[5] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
-    rtc_set_time[6] = (uint8_t)((((s_time_year-2000)/10) << 4) | (s_time_year % 10));
+    rtc_set_time[4] = (uint8_t)((s_time_days % 10));
+    rtc_set_time[5] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
+    rtc_set_time[6] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
+    rtc_set_time[7] = (uint8_t)((((s_time_year-2000)/10) << 4) | ((s_time_year-2000) % 10));
 
-
-    //for loop to write hours, minutes, seconds to RTC
-
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 7, false);
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 8, false);
 }

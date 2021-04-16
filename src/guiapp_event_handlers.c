@@ -108,6 +108,7 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
                 show_window((GX_WINDOW*)&setLedOneInterupt, (GX_WIDGET*)widget, true);
                 break;
         case GX_SIGNAL(BUTSETTIME, GX_EVENT_CLICKED):
+                sync_time();
                 show_window((GX_WINDOW*)&setTime, (GX_WIDGET*)widget, true);
                 break;
         default:

@@ -667,10 +667,10 @@
       <property id="module.driver.i2c.sda_delay" value="300"/>
       <property id="module.driver.i2c.timeout_mode" value="module.driver.i2c.timeout_mode.short_mode"/>
       <property id="module.driver.i2c.p_callback" value="NULL"/>
-      <property id="module.driver.i2c.rxi_ipl" value="board.icu.common.irq.priority12"/>
-      <property id="module.driver.i2c.txi_ipl" value="board.icu.common.irq.priority12"/>
-      <property id="module.driver.i2c.tei_ipl" value="board.icu.common.irq.priority12"/>
-      <property id="module.driver.i2c.eri_ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.driver.i2c.rxi_ipl" value="board.icu.common.irq.priority7"/>
+      <property id="module.driver.i2c.txi_ipl" value="board.icu.common.irq.priority7"/>
+      <property id="module.driver.i2c.tei_ipl" value="board.icu.common.irq.priority7"/>
+      <property id="module.driver.i2c.eri_ipl" value="board.icu.common.irq.priority6"/>
     </module>
     <module id="module.driver.transfer_on_dtc.812679746">
       <property id="module.driver.transfer.name" value="g_transfer4"/>
