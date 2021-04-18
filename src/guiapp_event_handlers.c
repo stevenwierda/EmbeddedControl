@@ -270,36 +270,7 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
             }
             break;
-        case GX_EVENT_TIMER:
-            weekday  = getWeekday();
-            if(weekday  == 1){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_MONDAY);
-            }
-            else if(weekday  == 2){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THUSEDAY);
-            }
-            else if(weekday  == 3){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_WEDNESDAY);
-            }
-            else if(weekday  == 4){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_THURSTDAY);
-            }
-            else if(weekday  == 5){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_FRIDAY);
-            }
-            else if(weekday  == 6){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SATERDAY);
-            }
-            else if(weekday  == 7){
-                update_text_id(widget->gx_widget_parent, PRMPTDAYNAME, GX_STRING_ID_SUNDAY);
-            }
-            update_number_id(widget->gx_widget_parent, PROMPTYEAR, getYear());
-            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());
-            update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
-            update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
-            update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
-            update_number_id(widget->gx_widget_parent, PROMPTSEC, getSec());
-        break;
+
         default:
             result = gx_window_event_process(widget, event_ptr);
         break;
