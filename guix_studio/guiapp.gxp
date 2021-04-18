@@ -1489,6 +1489,7 @@
 <normal_fill_color>WINDOW_FILL</normal_fill_color>
 <selected_fill_color>WINDOW_FILL</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
+<event_handler>SELALARM</event_handler>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <widget>

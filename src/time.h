@@ -40,19 +40,19 @@ int getWeekday();
 
 int checkAlarm1();
 void intervalAlarm1();
-void activate1PWM();
+void activatePWM1();
 void deactivate1PWM();
 int checkAlarm2();
 void intervalAlarm2();
-void activate2PWM();
+void activatePWM2();
 void deactivate2PWM();
 int checkAlarm3();
 void intervalAlarm3();
-void activate3PWM();
+void activatePWM3();
 void deactivate3PWM();
 int checkAlarm4();
 void intervalAlarm4();
-void activate4PWM();
+void activatePWM4();
 void deactivate4PWM();
 //void setIntervalMsecMin();
 
@@ -66,8 +66,13 @@ void setIntervalMsecPlus();
 void setIntervalMsecMin();
 void startAlarm();
 
-struct alarm;
+void setAlarmsel(int);
+int getAlarm();
 
+void startAlarm1();
+void startAlarm2();
+void startAlarm3();
+void startAlarm4();
 
 int intervalMsec();
 int intervalSec();

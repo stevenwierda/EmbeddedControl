@@ -230,7 +230,7 @@ void changeDayUp(){
            date = 1;
            month = 3;
        }
-       else if(date == 29){
+       else if((year % 4) != 0 && date == 29){
            date = 1;
            month = 3;
        }
@@ -937,6 +937,14 @@ void startAlarm3(){
 void startAlarm4(){
     alarm4Active = 1;
     alarm4Mode = 1;
+}
+
+void setAlarmsel(Alarm){
+    CurrentAlarm = Alarm;
+}
+
+int getAlarm(){
+    return CurrentAlarm;
 }
 
 //function to set the current time and save it to RTC
