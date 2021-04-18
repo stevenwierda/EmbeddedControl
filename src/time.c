@@ -226,20 +226,20 @@ void changeDayUp(){
    date = date + 1;
    //all exceptions when changing the date
    if(month == 2){
-       if((year % 4) == 0 && date == 29){
+       if((year % 4) == 0 && date == 30){
            date = 1;
            month = 3;
        }
-       else if(date == 28){
+       else if(date == 29){
            date = 1;
            month = 3;
        }
    }
-   else if((month == 7 || (month % 2 == 1)) && date == 31){
+   else if((month == 7 || (month % 2 == 1)) && date == 32){
        date = 1;
        month = month + 1;
    }
-   else if(month % 2 == 0 && date == 30){
+   else if(month % 2 == 0 && date == 31){
        date = 1;
        month = month + 1;
    }
@@ -250,22 +250,20 @@ void changeDayDown(){
    date = date - 1;
    //all exceptions when changing the date
    if(month == 3){
-       if((year % 4) == 0 && date == 1){
+       if((year % 4) == 0 && date == 0){
            date = 29;
            month = 2;
        }
-       else if(date == 1){
+       else if(date == 0){
            date = 29;
            month = 2;
        }
    }
-
-
-   else if((month == 7 || (month % 2 == 1)) && date == 1){
+   else if((month == 7 || (month % 2 == 1)) && date == 0){
        date = 30;
        month = month - 1;
    }
-   else if(month % 2 == 0 && date == 1){
+   else if(month % 2 == 0 && date == 0){
        date = 31;
        month = month - 1;
    }

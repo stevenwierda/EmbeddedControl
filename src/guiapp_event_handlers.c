@@ -199,10 +199,12 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
         case GX_SIGNAL(BUTDATEPLUS, GX_EVENT_CLICKED):
             changeDayUp();
             update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
+            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());    //also get the month so it displays it when the date changes
             break;
         case GX_SIGNAL(BUTDATEMIN, GX_EVENT_CLICKED):
             changeDayDown();
             update_number_id(widget->gx_widget_parent, PROMPTDATE, getDate());
+            update_number_id(widget->gx_widget_parent, PROMPTMONTH, getMonth());    //also get the month so it displays it when the date changes
             break;
         case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
             changeHourUp();
