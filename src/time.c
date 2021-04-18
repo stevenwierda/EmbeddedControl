@@ -35,7 +35,7 @@ int alarm1Fri = 0;
 int alarm1Sat = 0;
 int alarm1Sun = 0;
 int alarm1Active = 0;
-int action1 = 0;
+int action = 0;
 
 int alarm2Hour = 0;
 int alarm2Min = 0;
@@ -56,7 +56,6 @@ int alarm2Fri = 0;
 int alarm2Sat = 0;
 int alarm2Sun = 0;
 int alarm2Active = 0;
-int action2 = 0;
 
 int alarm3Hour = 0;
 int alarm3Min = 0;
@@ -77,7 +76,6 @@ int alarm3Fri = 0;
 int alarm3Sat = 0;
 int alarm3Sun = 0;
 int alarm3Active = 0;
-int action3 = 0;
 
 int alarm4Hour = 0;
 int alarm4Min = 0;
@@ -98,7 +96,6 @@ int alarm4Fri = 0;
 int alarm4Sat = 0;
 int alarm4Sun = 0;
 int alarm4Active = 0;
-int action4 = 0;
 
 int CurrentAlarm = 1;
 
@@ -340,7 +337,7 @@ int getWeekday(){
 }
 
 int checkAlarm1(){
-   if(hour == alarm1Hour && min == alarm1Min && sec == alarm1Sec && alarm1Msec == msec && alarmActive == 1){
+   if(hour == alarm1Hour && min == alarm1Min && sec == alarm1Sec && alarm1Msec == msec && alarm1Active == 1){
        if(alarm1Mode == 1){
            if((alarm1Mon == 1 && weekday == 1)||
                (alarm1Tue == 1 && weekday == 2)||
@@ -349,7 +346,7 @@ int checkAlarm1(){
                (alarm1Fri == 1 && weekday == 5)||
                (alarm1Sat == 1 && weekday == 6)||
                (alarm1Sun == 1 && weekday == 7)){
-               action1 = 1;
+               action = 1;
                return action;
            }
        }
@@ -361,7 +358,7 @@ int checkAlarm1(){
                else{
                    action = 0;
                }
-               intervalAlarm();
+               intervalAlarm1();
                return action;
            }
        }
@@ -379,7 +376,7 @@ int checkAlarm2(){
                (alarm2Fri == 1 && weekday == 5)||
                (alarm2Sat == 1 && weekday == 6)||
                (alarm2Sun == 1 && weekday == 7)){
-               action2 = 1;
+               action = 1;
                return action;
            }
        }
@@ -391,7 +388,7 @@ int checkAlarm2(){
                else{
                    action = 0;
                }
-               intervalAlarm();
+               intervalAlarm2();
                return action;
            }
        }
@@ -409,7 +406,7 @@ int checkAlarm3(){
                (alarm3Fri == 1 && weekday == 5)||
                (alarm3Sat == 1 && weekday == 6)||
                (alarm3Sun == 1 && weekday == 7)){
-               action3 = 1;
+               action = 1;
                return action;
            }
        }
@@ -421,7 +418,7 @@ int checkAlarm3(){
                else{
                    action = 0;
                }
-               intervalAlarm();
+               intervalAlarm3();
                return action;
            }
        }
@@ -439,7 +436,7 @@ int checkAlarm4(){
                (alarm4Fri == 1 && weekday == 5)||
                (alarm4Sat == 1 && weekday == 6)||
                (alarm4Sun == 1 && weekday == 7)){
-               action4 = 1;
+               action = 1;
                return action;
            }
        }
@@ -451,7 +448,7 @@ int checkAlarm4(){
                else{
                    action = 0;
                }
-               intervalAlarm();
+               intervalAlarm4();
                return action;
            }
        }
@@ -459,7 +456,7 @@ int checkAlarm4(){
    return 3;
 }
 
-void interval1Alarm(){
+void intervalAlarm1(){
     alarm1Msec = alarm1Msec + addInterval1Msec;
     if (alarm1Msec >= 1000){
         alarm1Msec = alarm1Msec - 1000;
@@ -486,7 +483,7 @@ void interval1Alarm(){
     }
 }
 
-void interval2Alarm(){
+void intervalAlarm2(){
     alarm2Msec = alarm2Msec + addInterval2Msec;
     if (alarm2Msec >= 1000){
         alarm2Msec = alarm2Msec - 1000;
@@ -513,35 +510,8 @@ void interval2Alarm(){
     }
 }
 
-void interval2Alarm(){
-    alarm2Msec = alarm2Msec + addInterval2Msec;
-    if (alarm2Msec >= 1000){
-        alarm2Msec = alarm2Msec - 1000;
-        alarm2Sec = alarm2Sec + 1;
-    }
-    alarm2Sec = alarm2Sec + addInterval2Sec;
-    if (alarm2Sec >= 60){
-        alarm2Sec = alarm2Sec - 60;
-        alarm2Min = alarm2Min + 1;
-    }
-    alarm2Min = alarm2Min + addInterval2Min;
-    if (alarm2Min >= 60){
-        alarm2Min = alarm2Min - 60;
-        alarm2Hour = alarm2Hour + 1;
-    }
-    alarm2Hour = alarm2Hour + addInterval2Hour;
-    if (alarm2Hour >= 24){
-        alarm2Hour = alarm2Hour - 24;
-        alarm2Day = alarm2Day + 1;
-    }
-    alarm2Day = alarm2Day + addInterval2Day;
-    if (alarm2Day == 8){
-        alarm2Day = 1;
-    }
-}
-
-void interval3Alarm(){
-    alarm3Msec = alarm3Msec + addInterval3Msec;
+void intervalAlarm3(){
+    alarm3Msec = alarm2Msec + addInterval3Msec;
     if (alarm3Msec >= 1000){
         alarm3Msec = alarm3Msec - 1000;
         alarm3Sec = alarm3Sec + 1;
@@ -567,7 +537,7 @@ void interval3Alarm(){
     }
 }
 
-void interval4Alarm(){
+void intervalAlarm4(){
     alarm4Msec = alarm4Msec + addInterval4Msec;
     if (alarm4Msec >= 1000){
         alarm4Msec = alarm4Msec - 1000;
@@ -595,37 +565,132 @@ void interval4Alarm(){
 }
 
 
-void activatePWM(){
-    alarmActive = 1;
-    alarmMode = 2;
-    alarmMsec = msec + addIntervalMsec;
-    if (alarmMsec >= 1000){
-        alarmMsec = alarmMsec - 1000;
-        alarmSec = alarmSec + 1;
+void activatePWM1(){
+    alarm1Active = 1;
+    alarm1Mode = 2;
+    alarm1Msec = msec + addInterval1Msec;
+    if (alarm1Msec >= 1000){
+        alarm1Msec = alarm1Msec - 1000;
+        alarm1Sec = alarm1Sec + 1;
     }
-    alarmSec = sec + addIntervalSec;
-    if (alarmSec >= 60){
-        alarmSec = alarmSec - 60;
-        alarmMin = alarmMin + 1;
+    alarm1Sec = sec + addInterval1Sec;
+    if (alarm1Sec >= 60){
+        alarm1Sec = alarm1Sec - 60;
+        alarm1Min = alarm1Min + 1;
     }
-    alarmMin = min + addIntervalMin;
-    if (alarmMin >= 60){
-        alarmMin = alarmMin - 60;
-        alarmHour = alarmHour + 1;
+    alarm1Min = min + addInterval1Min;
+    if (alarm1Min >= 60){
+        alarm1Min = alarm1Min - 60;
+        alarm1Hour = alarm1Hour + 1;
     }
-    alarmHour = hour + addIntervalHour;
-    if (alarmHour >= 24){
-        alarmHour = alarmHour - 24;
-        alarmDay = alarmDay + 1;
+    alarm1Hour = hour + addInterval1Hour;
+    if (alarm1Hour >= 24){
+        alarm1Hour = alarm1Hour - 24;
+        alarm1Day = alarm1Day + 1;
     }
-    alarmDay = date + addIntervalDay;
-    if (alarmDay == 8){
-        alarmDay = 1;
+    alarm1Day = date + addInterval1Day;
+    if (alarm1Day == 8){
+        alarm1Day = 1;
+    }
+}
+
+void activatePWM2(){
+    alarm2Active = 1;
+    alarm2Mode = 2;
+    alarm2Msec = msec + addInterval2Msec;
+    if (alarm2Msec >= 1000){
+        alarm2Msec = alarm2Msec - 1000;
+        alarm2Sec = alarm2Sec + 1;
+    }
+    alarm2Sec = sec + addInterval2Sec;
+    if (alarm2Sec >= 60){
+        alarm2Sec = alarm2Sec - 60;
+        alarm2Min = alarm2Min + 1;
+    }
+    alarm1Min = min + addInterval2Min;
+    if (alarm2Min >= 60){
+        alarm2Min = alarm2Min - 60;
+        alarm2Hour = alarm2Hour + 1;
+    }
+    alarm2Hour = hour + addInterval2Hour;
+    if (alarm2Hour >= 24){
+        alarm2Hour = alarm2Hour - 24;
+        alarm2Day = alarm2Day + 1;
+    }
+    alarm2Day = date + addInterval2Day;
+    if (alarm2Day == 8){
+        alarm2Day = 1;
+    }
+}
+
+void activatePWM3(){
+    alarm3Active = 1;
+    alarm3Mode = 2;
+    alarm3Msec = msec + addInterval3Msec;
+    if (alarm3Msec >= 1000){
+        alarm3Msec = alarm3Msec - 1000;
+        alarm3Sec = alarm3Sec + 1;
+    }
+    alarm3Sec = sec + addInterval3Sec;
+    if (alarm3Sec >= 60){
+        alarm3Sec = alarm3Sec - 60;
+        alarm3Min = alarm3Min + 1;
+    }
+    alarm3Min = min + addInterval3Min;
+    if (alarm3Min >= 60){
+        alarm3Min = alarm3Min - 60;
+        alarm3Hour = alarm3Hour + 1;
+    }
+    alarm3Hour = hour + addInterval3Hour;
+    if (alarm3Hour >= 24){
+        alarm3Hour = alarm3Hour - 24;
+        alarm3Day = alarm1Day + 1;
+    }
+    alarm3Day = date + addInterval3Day;
+    if (alarm3Day == 8){
+        alarm3Day = 1;
+    }
+}
+
+void activatePWM4(){
+    alarm4Active = 1;
+    alarm4Mode = 2;
+    alarm4Msec = msec + addInterval4Msec;
+    if (alarm4Msec >= 1000){
+        alarm4Msec = alarm4Msec - 1000;
+        alarm4Sec = alarm4Sec + 1;
+    }
+    alarm4Sec = sec + addInterval4Sec;
+    if (alarm4Sec >= 60){
+        alarm4Sec = alarm4Sec - 60;
+        alarm4Min = alarm4Min + 1;
+    }
+    alarm4Min = min + addInterval4Min;
+    if (alarm4Min >= 60){
+        alarm4Min = alarm4Min - 60;
+        alarm4Hour = alarm4Hour + 1;
+    }
+    alarm4Hour = hour + addInterval4Hour;
+    if (alarm4Hour >= 24){
+        alarm4Hour = alarm4Hour - 24;
+        alarm4Day = alarm4Day + 1;
+    }
+    alarm4Day = date + addInterval4Day;
+    if (alarm4Day == 8){
+        alarm4Day = 1;
     }
 }
 
 void deactivatePWM(){
-    alarmActive = 0;
+    if (CurrentAlarm == 1){
+        alarm1Active = 0;
+    }else if(CurrentAlarm == 2){
+        alarm2Active = 0;
+    }else if(CurrentAlarm == 3){
+        alarm3Active = 0;
+    }else if(CurrentAlarm == 4){
+        alarm4Active = 0;
+    }
 }
 
 void setIntervalHourPlus(){

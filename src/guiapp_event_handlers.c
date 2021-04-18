@@ -363,7 +363,7 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             setIntervalMsecMin();
             break;
         case GX_SIGNAL(ACTIVEALARM, GX_EVENT_TOGGLE_ON):
-            activatePWM();
+            activatePWM1();
             break;
         case GX_SIGNAL(ACTIVEALARM, GX_EVENT_TOGGLE_OFF):
             deactivatePWM();

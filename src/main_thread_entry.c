@@ -253,7 +253,7 @@ void led_timer0_callback(timer_callback_args_t * p_args){
 
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
     addMs();
-    value = checkAlarm();
+    value = checkAlarm1();
     if (value == 1){
         onOff2 = true;
         gx_system_event_send(&g_gx_event);
