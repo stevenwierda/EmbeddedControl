@@ -6,7 +6,11 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
+<<<<<<< HEAD
 /*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 16:14                        */
+=======
+/*  Date (dd.mm.yyyy): 18. 4.2021   Time (hh:mm): 13:57                        */
+>>>>>>> parent of 8a1de28 (alarms elect)
 /*******************************************************************************/
 
 
@@ -547,12 +551,25 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_AHourPlus1_define =
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
+<<<<<<< HEAD
     GX_NULL,                                 /* event function override        */
     {33, 50, 112, 73},                       /* widget size                    */
     &setAlarmON_AHourMin1_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMON_CONTROL_BLOCK, setAlarmON_AHourPlus1), /* control block */
     (void *) &setAlarmON_AHourPlus1_properties /* extended properties          */
+=======
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SELALARM, /* event function override   */
+    {0, 0, 239, 319},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &selectAlarm_buttonBack_1_define,        /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &selectAlarm_properties         /* extended properties            */
+};
+GX_WINDOW_PROPERTIES AlarmSwitch_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+>>>>>>> parent of 8a1de28 (alarms elect)
 };
 
 GX_CONST GX_STUDIO_WIDGET setAlarmON_alarmSaterday1_define =
