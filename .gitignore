@@ -1,3 +1,4 @@
 
 .settings/e2studio_project.prefs
 src/guiapp_event_handlers.c
+*.o
