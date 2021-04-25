@@ -49,6 +49,23 @@ void main_thread_entry(void) {
 	UINT      status = TX_SUCCESS;
 
     //I2C stuff
+
+	/*
+	fancy functie die bijhoud of de bus kaputskie is
+	/
+	/
+	/
+	/
+	/
+	/
+	/
+	/
+
+	/
+	/
+	/
+
+	*/
     g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
     sync_time();    //sync the time when the microcontroller starts.
 

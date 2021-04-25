@@ -486,23 +486,12 @@ UINT AlarmOnSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 break;
 
 
-
-
-
-
-
     default:
         gx_window_event_process(widget, event_ptr);
         break;
     }
     return result;
 }
-
-
-
-
-
-
 
 UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     UINT result = gx_window_event_process(widget, event_ptr);
@@ -590,6 +579,7 @@ UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     return result;
 }
+
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old)
 {

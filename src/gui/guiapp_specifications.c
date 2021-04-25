@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 19:03                        */
+/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 19:10                        */
 /*******************************************************************************/
 
 
@@ -330,6 +330,38 @@ GX_TEXT_BUTTON_PROPERTIES setAlarmON_buttonPrevisous_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
 };
+GX_PROMPT_PROPERTIES setAlarmON_PAGENOTE_properties =
+{
+    GX_STRING_ID_STRING_13,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setAlarmON_PAGENOTE_define =
+{
+    "PAGENOTE",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {152, 8, 231, 31},                       /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETALARMON_CONTROL_BLOCK, setAlarmON_PAGENOTE), /* control block  */
+    (void *) &setAlarmON_PAGENOTE_properties /* extended properties            */
+};
 
 GX_CONST GX_STUDIO_WIDGET setAlarmON_buttonPrevisous_define =
 {
@@ -349,7 +381,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_buttonPrevisous_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {13, 256, 112, 305},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &setAlarmON_PAGENOTE_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMON_CONTROL_BLOCK, setAlarmON_buttonPrevisous), /* control block */
     (void *) &setAlarmON_buttonPrevisous_properties /* extended properties     */
@@ -695,7 +727,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_enableAlarm_define =
 {
     "enableAlarm",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
+    ENABLEALARM_1,                           /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -731,7 +763,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_define =
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) AlarmOnSwitch, /* event function override */
     {1, 0, 240, 319},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &setAlarmON_enableAlarm_define,          /* child widget                   */
@@ -1706,6 +1738,38 @@ GX_TEXT_BUTTON_PROPERTIES setAlarmOFF_buttonNext_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
 };
+GX_PROMPT_PROPERTIES setAlarmOFF_PAGENOTE_properties =
+{
+    GX_STRING_ID_STRING_12,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET setAlarmOFF_PAGENOTE_define =
+{
+    "PAGENOTE",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {154, 10, 233, 33},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_PAGENOTE), /* control block */
+    (void *) &setAlarmOFF_PAGENOTE_properties /* extended properties           */
+};
 
 GX_CONST GX_STUDIO_WIDGET setAlarmOFF_buttonNext_define =
 {
@@ -1725,7 +1789,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_buttonNext_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {127, 254, 226, 303},                    /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &setAlarmOFF_PAGENOTE_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_buttonNext), /* control block */
     (void *) &setAlarmOFF_buttonNext_properties /* extended properties         */
@@ -2071,7 +2135,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_enableAlarm_define =
 {
     "enableAlarm",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
+    ENABLEALARM,                             /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -2084,7 +2148,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_enableAlarm_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {22, 13, 159, 32},                       /* widget size                    */
+    {15, 11, 152, 30},                       /* widget size                    */
     &setAlarmOFF_alarmMonday_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_enableAlarm), /* control block */
@@ -2107,7 +2171,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_define =
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) AlarmOffSwitch, /* event function override */
     {1, 0, 240, 319},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &setAlarmOFF_enableAlarm_define,         /* child widget                   */

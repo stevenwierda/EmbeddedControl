@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 19:03                        */
+/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 19:10                        */
 /*******************************************************************************/
 
 
@@ -23,81 +23,83 @@ extern   "C" {
 /* Define widget ids                                                           */
 
 #define SETPWM 1
-#define chkMonday 2
-#define chkthuesday 3
-#define CHWEDNESDAY 4
-#define CHTHURSDAY 5
-#define CHFRIDAY 6
-#define CHSUNDAY 7
-#define CHSATERDAY 8
-#define BUTAHOURPLUS 9
-#define BUTAHOURMIN 10
-#define BUTAMINPLUS 11
-#define BUTAMINMIN 12
-#define PRMPTHOUR 13
-#define PRMPTMIN 14
-#define BUTTERUGINTERUPTSET 15
-#define BUTPREVIOUSINTERUPTSET 16
-#define BUTBACKALSEL 17
-#define ALARM4 18
-#define ALARM3 19
-#define ALARM2 20
-#define ALARM1 21
-#define BUTBACKALARMSEL 22
-#define BUTALARM 23
-#define BUTPWM 24
-#define ACTIVEALARM 25
-#define PRMPTSEC 26
-#define PRMPTMSEC 27
-#define BUTHOURUP 28
-#define BUTHOURDOWN 29
-#define BUTMINMIN 30
-#define BUTMINUP 31
-#define BUTSECUP 32
-#define BUTSECMIN 33
-#define BUTMSECUP 34
-#define BUTMSECMIN 35
-#define BUTNEXTINTERUPTSET 36
-#define BUTTERUGTIMESET 37
-#define BUTYEARPLUS 38
-#define BUTHOURMIN 39
-#define BUTHOURPLUS 40
-#define BUTMINUTEMIN 41
-#define BUTMINUTEPLUS 42
-#define BUTDATEMIN 43
-#define BUTDATEPLUS 44
-#define BUTMONTHMIN 45
-#define BUTMONTHPLUS 46
-#define BUTYEARMIN 47
-#define BUTNAMEDAYPLUS 48
-#define BUTNAMEDAYMIN 49
-#define PRMPTDAYNAME 50
-#define PROMPTHOUR 51
-#define PROMPTMINUTE 52
-#define PROMPTYEAR 53
-#define PROMPTMONTH 54
-#define PROMPTDATE 55
-#define PROMPTSEC 56
-#define WINDOW_LED1 57
-#define BUTDECREASE 58
-#define BUTINCREASE 59
-#define TIME 60
-#define windowLED 61
-#define butterugLED 62
-#define LEDSTATUS 63
-#define LEDSWITCH 64
-#define WINDOWTIME 65
-#define BUTTERUGTIME 66
-#define PROMPTMSEC 67
-#define WINDOW_SETTINGS 68
-#define BUTTERUGSETTINGS 69
-#define BUTSETTIME 70
-#define BUTLEDINTERUPT 71
-#define WINDOW_MAIN 72
-#define BUTSETTINGS 73
-#define BUTTIME 74
-#define BUTLED 75
-#define BUTSETALARM 76
+#define ENABLEALARM_1 2
+#define chkMonday 3
+#define chkthuesday 4
+#define CHWEDNESDAY 5
+#define CHTHURSDAY 6
+#define CHFRIDAY 7
+#define CHSUNDAY 8
+#define CHSATERDAY 9
+#define BUTAHOURPLUS 10
+#define BUTAHOURMIN 11
+#define BUTAMINPLUS 12
+#define BUTAMINMIN 13
+#define PRMPTHOUR 14
+#define PRMPTMIN 15
+#define BUTTERUGINTERUPTSET 16
+#define BUTPREVIOUSINTERUPTSET 17
+#define BUTBACKALSEL 18
+#define ALARM4 19
+#define ALARM3 20
+#define ALARM2 21
+#define ALARM1 22
+#define BUTBACKALARMSEL 23
+#define BUTALARM 24
+#define BUTPWM 25
+#define ACTIVEALARM 26
+#define PRMPTSEC 27
+#define PRMPTMSEC 28
+#define BUTHOURUP 29
+#define BUTHOURDOWN 30
+#define BUTMINMIN 31
+#define BUTMINUP 32
+#define BUTSECUP 33
+#define BUTSECMIN 34
+#define BUTMSECUP 35
+#define BUTMSECMIN 36
+#define ENABLEALARM 37
+#define BUTNEXTINTERUPTSET 38
+#define BUTTERUGTIMESET 39
+#define BUTYEARPLUS 40
+#define BUTHOURMIN 41
+#define BUTHOURPLUS 42
+#define BUTMINUTEMIN 43
+#define BUTMINUTEPLUS 44
+#define BUTDATEMIN 45
+#define BUTDATEPLUS 46
+#define BUTMONTHMIN 47
+#define BUTMONTHPLUS 48
+#define BUTYEARMIN 49
+#define BUTNAMEDAYPLUS 50
+#define BUTNAMEDAYMIN 51
+#define PRMPTDAYNAME 52
+#define PROMPTHOUR 53
+#define PROMPTMINUTE 54
+#define PROMPTYEAR 55
+#define PROMPTMONTH 56
+#define PROMPTDATE 57
+#define PROMPTSEC 58
+#define WINDOW_LED1 59
+#define BUTDECREASE 60
+#define BUTINCREASE 61
+#define TIME 62
+#define windowLED 63
+#define butterugLED 64
+#define LEDSTATUS 65
+#define LEDSWITCH 66
+#define WINDOWTIME 67
+#define BUTTERUGTIME 68
+#define PROMPTMSEC 69
+#define WINDOW_SETTINGS 70
+#define BUTTERUGSETTINGS 71
+#define BUTSETTIME 72
+#define BUTLEDINTERUPT 73
+#define WINDOW_MAIN 74
+#define BUTSETTINGS 75
+#define BUTTIME 76
+#define BUTLED 77
+#define BUTSETALARM 78
 
 
 /* Define animation ids                                                        */
@@ -211,6 +213,7 @@ typedef struct SETALARMON_CONTROL_BLOCK_STRUCT
     GX_NUMERIC_PROMPT setAlarmON_promptMin;
     GX_TEXT_BUTTON setAlarmON_buttonTerugSettings;
     GX_TEXT_BUTTON setAlarmON_buttonPrevisous;
+    GX_PROMPT setAlarmON_PAGENOTE;
 } SETALARMON_CONTROL_BLOCK;
 
 typedef struct SELECTALARM_CONTROL_BLOCK_STRUCT
@@ -269,6 +272,7 @@ typedef struct SETALARMOFF_CONTROL_BLOCK_STRUCT
     GX_NUMERIC_PROMPT setAlarmOFF_promptMin;
     GX_TEXT_BUTTON setAlarmOFF_buttonTerugSettings;
     GX_TEXT_BUTTON setAlarmOFF_buttonNext;
+    GX_PROMPT setAlarmOFF_PAGENOTE;
 } SETALARMOFF_CONTROL_BLOCK;
 
 typedef struct SETTIME_CONTROL_BLOCK_STRUCT
@@ -426,9 +430,11 @@ VOID _gx_synergy_jpeg_draw (GX_DRAW_CONTEXT *p_context, INT x, INT y, GX_PIXELMA
 
 /* Declare event process functions, draw functions, and callback functions     */
 
+UINT AlarmOnSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
+UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr);
