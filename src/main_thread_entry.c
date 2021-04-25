@@ -30,7 +30,6 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args);
 static GX_EVENT g_gx_event;
 bool onOff = true;
 bool onOff2 = true;
-int value = 0;
 long unsigned int interuptTime;
 
 GX_WINDOW_ROOT * p_window_root;
@@ -253,7 +252,10 @@ void led_timer0_callback(timer_callback_args_t * p_args){
 
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
     addMs();
-    value = checkAlarm1();
+    int value = checkAlarm1();
+    int value2 = checkAlarm2();
+    int value3 = checkAlarm3();
+    int value4 = checkAlarm4();
     if (value == 1){
         onOff2 = true;
         gx_system_event_send(&g_gx_event);

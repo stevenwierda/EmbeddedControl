@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 18:29                        */
+/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 14:40                        */
 /*******************************************************************************/
 
 
@@ -128,15 +128,6 @@
 #define GX_STRING_ID_ALARM4 46
 #define GX_STRING_ID_STRING_3 47
 #define GX_STRING_ID_STRING_7 48
-#define GX_STRING_ID_STRING_8 49
-#define GX_STRING_ID_STRING_9 50
-#define GX_STRING_ID_STRING_10 51
-#define GX_STRING_ID_STRING_11 52
-#define GX_STRING_ID_STRING_12 53
-#define GX_STRING_ID_STRING_13 54
-#define GX_STRING_ID_STRING_14 55
-#define GX_STRING_ID_STRING_15 56
-#define GX_STRING_ID_STRING_16 57
-#define DISPLAY_1_STRING_TABLE_SIZE 58
+#define DISPLAY_1_STRING_TABLE_SIZE 49
 
 #endif                                       /* sentry                         */
