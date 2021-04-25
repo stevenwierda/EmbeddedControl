@@ -348,7 +348,7 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
             show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
             break;
         case GX_SIGNAL(BUTALARM, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&setAlarm, (GX_WIDGET*)widget, true);
+            show_window((GX_WINDOW*)&setAlarmOFF, (GX_WIDGET*)widget, true);
             break;
         case GX_SIGNAL(BUTPWM, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&SetPWM, (GX_WIDGET*)widget, true);
