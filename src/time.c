@@ -562,7 +562,6 @@ void intervalAlarm4(){
     }
 }
 
-
 void activatePWM1(){
     alarm1Active = 1;
     alarm1Mode = 2;
@@ -690,6 +689,8 @@ void deactivatePWM(){
         alarm4Active = 0;
     }
 }
+
+
 
 void setIntervalHourPlus(){
     if (CurrentAlarm == 1){
@@ -939,7 +940,7 @@ void startAlarm4(){
     alarm4Mode = 1;
 }
 
-void setAlarmsel(Alarm){
+void setAlarmsel(int Alarm){
     CurrentAlarm = Alarm;
 }
 
@@ -948,7 +949,7 @@ int getAlarm(){
 }
 
 //function to set the current time and save it to RTC
-void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year)
+void set_time(int s_time_secs, int s_time_mins, int s_time_hours, int s_time_days, int s_time_date, int s_time_month, int s_time_year)
 {
     //to write the values to the RTC the pointer needs to be set at 0 thats why the writing of the values starts at [1]
     uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
