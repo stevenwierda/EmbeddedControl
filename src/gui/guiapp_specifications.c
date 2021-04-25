@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 18. 4.2021   Time (hh:mm): 13:57                        */
+/*  Date (dd.mm.yyyy): 25. 4.2021   Time (hh:mm): 14:40                        */
 /*******************************************************************************/
 
 
@@ -342,7 +342,7 @@ GX_CONST GX_STUDIO_WIDGET selectAlarm_define =
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SELALARM, /* event function override   */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) alarmSelect, /* event function override */
     {0, 0, 239, 319},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &selectAlarm_buttonBack_1_define,        /* child widget                   */

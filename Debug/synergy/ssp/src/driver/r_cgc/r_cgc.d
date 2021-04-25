@@ -1,165 +1,165 @@
 synergy/ssp/src/driver/r_cgc/r_cgc.o: \
  ../synergy/ssp/src/driver/r_cgc/r_cgc.c \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_cgc.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_version.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_family_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_pn_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_cfg.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_mcu_info.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\s7g2.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/core_cm4.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_version.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_compiler.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_gcc.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/mpu_armv7.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\system_S7G2.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_elc.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_cache.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_analog.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_analog.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_board_cfg.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_init.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_leds.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_qspi.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_ethernet_phy.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_register_protection.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_locking.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_irq.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_group_irq.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_clocks.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_ioport_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_features.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_fmi.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_fmi_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_leds.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_delay.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_feature.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_mcu_api.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_cgc.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_version.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_family_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_pn_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_cfg.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_mcu_info.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\s7g2.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/core_cm4.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_version.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_compiler.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_gcc.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/mpu_armv7.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\system_S7G2.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_elc.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_cache.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_analog.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_analog.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_board_cfg.h \
+ c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp.h \
+ c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_init.h \
+ c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_leds.h \
+ c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_qspi.h \
+ c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_ethernet_phy.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_register_protection.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_locking.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_irq.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_group_irq.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_clocks.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_ioport_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_features.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_fmi.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_fmi_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_leds.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_delay.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_feature.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_mcu_api.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  ../synergy/ssp/src/driver/r_cgc/r_cgc_private.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h \
  ../synergy/ssp/src/driver/r_cgc/r_cgc_private_api.h \
  ../synergy/ssp/src/driver/r_cgc/./hw/hw_cgc_private.h \
  ../synergy/ssp/src/driver/r_cgc/./hw/hw_cgc.h \
  ../synergy/ssp/src/driver/r_cgc/./hw/hw_cgc_private.h \
  ../synergy/ssp/src/driver/r_cgc/./hw/../r_cgc_private.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h \
- c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h \
+ c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h \
+ C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h \
+ C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_cgc.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_cgc.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_version.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_version.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_cfg.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_family_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_family_cfg.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_pn_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_pn_cfg.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_mcu_device_cfg.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_mcu_info.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_mcu_info.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\s7g2.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\s7g2.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/core_cm4.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/core_cm4.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_version.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_version.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_compiler.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_compiler.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_gcc.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/cmsis_gcc.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/mpu_armv7.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\bsp\cmsis\Include/mpu_armv7.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\system_S7G2.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\cmsis\device\renesas\s7g2\include\system_S7G2.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_elc.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_elc.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_cache.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_cache.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_analog.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\s7g2\bsp_analog.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_analog.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_analog.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_board_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_board_cfg.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp.h:
+c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_init.h:
+c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_init.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_leds.h:
+c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_leds.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_qspi.h:
+c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_qspi.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\board\s7g2_sk\bsp_ethernet_phy.h:
+c:\users\steve\git\embeddedcontrol\synergy\board\s7g2_sk\bsp_ethernet_phy.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_register_protection.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_register_protection.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_locking.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_locking.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_irq.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_irq.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_group_irq.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_group_irq.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_clocks.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_clocks.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_ioport_api.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_ioport_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_features.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_features.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_compiler_support.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_fmi.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\instances/r_fmi.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_fmi_api.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_fmi_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_leds.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_common_leds.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_delay.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_delay.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_feature.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_feature.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_mcu_api.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_mcu_api.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_cgc_cfg.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h:
 
 ../synergy/ssp/src/driver/r_cgc/r_cgc_private.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_clock_cfg.h:
 
 ../synergy/ssp/src/driver/r_cgc/r_cgc_private_api.h:
 
@@ -171,12 +171,12 @@ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\bsp/bsp_cloc
 
 ../synergy/ssp/src/driver/r_cgc/./hw/../r_cgc_private.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h:
 
-c:\users\basha\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h:
+c:\users\steve\git\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h:
+C:\Users\steve\git\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h:
 
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h:
+C:\Users\steve\git\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h:
