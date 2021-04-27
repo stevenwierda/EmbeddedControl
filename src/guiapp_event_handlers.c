@@ -342,7 +342,7 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
 
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTBACKALARMSEL, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
+            show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
             break;
         case GX_SIGNAL(BUTALARM, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&setAlarmOFF, (GX_WIDGET*)widget, true);
