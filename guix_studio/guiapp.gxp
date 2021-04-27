@@ -4185,10 +4185,10 @@
 <type>text_button</type>
 <app_name>buttonSetAlarm</app_name>
 <size>
-<left>27</left>
-<top>240</top>
-<right>205</right>
-<bottom>297</bottom>
+<left>28</left>
+<top>242</top>
+<right>206</right>
+<bottom>299</bottom>
 </size>
 <style>1073758209</style>
 <allocation>0</allocation>

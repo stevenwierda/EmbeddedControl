@@ -33,7 +33,7 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);
         break;
     case GX_SIGNAL(BUTSETALARM, GX_EVENT_CLICKED):
-        show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+        show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
         break;
     default:
         gx_window_event_process(widget, event_ptr);
