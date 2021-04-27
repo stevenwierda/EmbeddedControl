@@ -11145,21 +11145,21 @@ END GROUP
  .text.setLedOneInteruptHandler
                 0x00017738       0x7c ./src/guiapp_event_handlers.o
                 0x00017738                setLedOneInteruptHandler
- .text.SELALARMMODE
-                0x000177b4       0x5c ./src/guiapp_event_handlers.o
-                0x000177b4                SELALARMMODE
- .text.AlarmOffSwitch
-                0x00017810       0xe4 ./src/guiapp_event_handlers.o
-                0x00017810                AlarmOffSwitch
- .text.AlarmOnSwitch
-                0x000178f4       0xe4 ./src/guiapp_event_handlers.o
-                0x000178f4                AlarmOnSwitch
- .text.PWMHandler
-                0x000179d8      0x158 ./src/guiapp_event_handlers.o
-                0x000179d8                PWMHandler
  .text.SELALARM
-                0x00017b30       0x94 ./src/guiapp_event_handlers.o
-                0x00017b30                SELALARM
+                0x000177b4       0x94 ./src/guiapp_event_handlers.o
+                0x000177b4                SELALARM
+ .text.SELALARMMODE
+                0x00017848       0x5c ./src/guiapp_event_handlers.o
+                0x00017848                SELALARMMODE
+ .text.AlarmOffSwitch
+                0x000178a4       0xe4 ./src/guiapp_event_handlers.o
+                0x000178a4                AlarmOffSwitch
+ .text.AlarmOnSwitch
+                0x00017988       0xe4 ./src/guiapp_event_handlers.o
+                0x00017988                AlarmOnSwitch
+ .text.PWMHandler
+                0x00017a6c      0x158 ./src/guiapp_event_handlers.o
+                0x00017a6c                PWMHandler
  .text.main_thread_entry
                 0x00017bc4      0x18c ./src/main_thread_entry.o
                 0x00017bc4                main_thread_entry

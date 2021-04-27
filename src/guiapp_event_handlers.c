@@ -33,7 +33,7 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);
         break;
     case GX_SIGNAL(BUTSETALARM, GX_EVENT_CLICKED):
-        show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+        show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
         break;
     default:
         gx_window_event_process(widget, event_ptr);
@@ -307,6 +307,35 @@ UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
     return result;
 }
 
+UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
+    UINT result = gx_window_event_process(widget, event_ptr);
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTBACKALSEL, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM1, GX_EVENT_CLICKED):
+            setAlarmsel(1);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM2, GX_EVENT_CLICKED):
+            setAlarmsel(2);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM3, GX_EVENT_CLICKED):
+            setAlarmsel(3);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM4, GX_EVENT_CLICKED):
+            setAlarmsel(4);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        default:
+            break;
+    }
+
+    return result;
+}
+
 UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
@@ -550,35 +579,8 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
 }
 
 
-//hier doe ik nog niets mee omdat jij ook nog bezig gaat met de code en ik zal dit de volgende keer ook implementeren.
-UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
-    UINT result = gx_window_event_process(widget, event_ptr);
-    switch (event_ptr->gx_event_type){
-        case GX_SIGNAL(BUTBACKALSEL, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM1, GX_EVENT_CLICKED):
-            setAlarmsel(1);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM2, GX_EVENT_CLICKED):
-            setAlarmsel(2);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM3, GX_EVENT_CLICKED):
-            setAlarmsel(3);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM4, GX_EVENT_CLICKED):
-            setAlarmsel(4);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        default:
-            break;
-    }
 
-    return result;
-}
+
 
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old)
