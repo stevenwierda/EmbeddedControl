@@ -15,6 +15,7 @@ int date = 9;        //date
 int month = 9;
 int year = 99;
 int weekday =1;      //day of the week
+int test = 99;
 
 int alarm1Hour = 0;
 int alarm1Min = 0;
@@ -937,6 +938,26 @@ void startAlarm3(){
 void startAlarm4(){
     alarm4Active = 1;
     alarm4Mode = 1;
+}
+
+void stopAlarm1(){
+    alarm1Active = 0;
+    alarm1Mode = 0;
+}
+
+void stopAlarm2(){
+    alarm2Active = 0;
+    alarm2Mode = 0;
+}
+
+void stopAlarm3(){
+    alarm3Active = 0;
+    alarm3Mode = 0;
+}
+
+void stopAlarm4(){
+    alarm4Active = 0;
+    alarm4Mode = 0;
 }
 
 void setAlarmsel(Alarm){

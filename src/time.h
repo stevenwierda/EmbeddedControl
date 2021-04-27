@@ -74,6 +74,11 @@ void startAlarm2();
 void startAlarm3();
 void startAlarm4();
 
+void stopAlarm1();
+void stopAlarm2();
+void stopAlarm3();
+void stopAlarm4();
+
 int intervalMsec();
 int intervalSec();
 int intervalMin();

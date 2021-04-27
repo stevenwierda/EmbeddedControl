@@ -307,8 +307,41 @@ UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
     return result;
 }
 
+//Screen with the 4 different Alarms
+UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
+    UINT result = gx_window_event_process(widget, event_ptr);
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTBACKALSEL, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM1, GX_EVENT_CLICKED):
+            setAlarmsel(1);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM2, GX_EVENT_CLICKED):
+            setAlarmsel(2);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM3, GX_EVENT_CLICKED):
+            setAlarmsel(3);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(ALARM4, GX_EVENT_CLICKED):
+            setAlarmsel(4);
+            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            break;
+        default:
+            break;
+    }
+
+    return result;
+}
+
+//Screen with the PWM or Alarm options
 UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
+    int CurrentAlarm = getAlarm();
+
     UINT result = gx_window_event_process(widget, event_ptr);
 
     switch (event_ptr->gx_event_type){
@@ -316,7 +349,12 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
             show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
             break;
         case GX_SIGNAL(BUTALARM, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&setAlarmOFF, (GX_WIDGET*)widget, true);
+                if(CurrentAlarm == 1 || CurrentAlarm == 3){
+                    show_window((GX_WINDOW*)&setAlarmON, (GX_WIDGET*)widget, true);
+                }
+                else{
+                    show_window((GX_WINDOW*)&setAlarmOFF, (GX_WIDGET*)widget, true);
+                }
             break;
         case GX_SIGNAL(BUTPWM, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&SetPWM, (GX_WIDGET*)widget, true);
@@ -330,11 +368,12 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
 
 //Function for setting the time the alarm switches off.
 UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
-
-    //Variables that have to move to the top ONLY IF THESE ARE KEPT
-    int AlarmDay;
-    bool AlarmEnabled;
     //as i remember day 0 is Monday so that is how i make the code
+
+    int AlarmMin;
+    int AlarmHour;
+
+    int CurrentAlarm = getAlarm();
 
     UINT result = gx_window_event_process(widget, event_ptr);
     switch (event_ptr->gx_event_type)
@@ -342,62 +381,102 @@ UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
     case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
         break;
-    case GX_SIGNAL(BUTNEXTINTERUPTSET, GX_EVENT_CLICKED):
-        show_window((GX_WINDOW*)&setAlarmON, (GX_WIDGET*)widget, true);
-        break;
-    //Enable the Alarm and (if needed) execute a function.
+
+    //Enable the selected alarm
     case GX_SIGNAL(ENABLEALARM_1, GX_EVENT_TOGGLE_ON):
-        AlarmEnabled = true;
+            switch (CurrentAlarm)
+            {
+            case 1:
+                startAlarm1();
+                break;
+            case 2:
+                startAlarm2();
+                break;
+            case 3:
+                startAlarm3();
+                break;
+            case 4:
+                startAlarm4();
+                break;
+            default:
+                break;
+            }
         break;
+    //Disable the selected alarm
     case GX_SIGNAL(ENABLEALARM_1, GX_EVENT_TOGGLE_OFF):
-        AlarmEnabled = false;
+            switch (CurrentAlarm)
+            {
+            case 1:
+                stopAlarm1();
+                break;
+            case 2:
+                stopAlarm2();
+                break;
+            case 3:
+                stopAlarm3();
+                break;
+            case 4:
+                stopAlarm4();
+                break;
+            default:
+                break;
+            }
         break;
 
     //Every setting that has to do with time
     case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
         //change alarm hour up
-        update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
+        AlarmHour = AlarmHour +1;
+        if(AlarmHour == 24){
+            AlarmHour = 0;
+        }
+        update_number_id(widget->gx_widget_parent, PROMPTHOUR, AlarmHour);
         break;
     case GX_SIGNAL(BUTHOURMIN, GX_EVENT_CLICKED):
         //change alarm hour down
-        update_number_id(widget->gx_widget_parent, PROMPTHOUR, getHour());
+        AlarmHour = AlarmHour - 1;
+        if(AlarmHour == 0){
+            AlarmHour = 24;
+        }
+        update_number_id(widget->gx_widget_parent, PROMPTHOUR, AlarmHour);
         break;
     case GX_SIGNAL(BUTMINUTEPLUS, GX_EVENT_CLICKED):
         //change alarm minute up
-        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+            AlarmMin = AlarmMin + 1;
+            if (AlarmMin == 60){
+                AlarmMin = 0;
+            }
+        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, AlarmMin);
         break;
     case GX_SIGNAL(BUTMINUTEMIN, GX_EVENT_CLICKED):
         //change alarm minute down
-        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, getMin());
+        AlarmMin = AlarmMin - 1;
+        if (AlarmMin == 0){
+            AlarmMin = 60;
+        }
+        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, AlarmMin);
         break;
-
-
-
-    //I need to find a way that if you turn one on the rest automatically turns off
-
-
 
 
     case GX_SIGNAL(chkMonday, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 0;
         break;
     case GX_SIGNAL(chkthuesday, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 1;
+
         break;
     case GX_SIGNAL(CHWEDNESDAY, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 2;
+
         break;
     case GX_SIGNAL(CHTHURSDAY, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 3;
+
         break;
     case GX_SIGNAL(CHFRIDAY, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 4;
+
         break;
     case GX_SIGNAL(CHSATERDAY, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 5;
+
         break;
     case GX_SIGNAL(CHSUNDAY, GX_EVENT_TOGGLE_ON):
-        AlarmDay = 6;
+
         break;
 
 
@@ -425,9 +504,6 @@ UINT AlarmOnSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
     {
         case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(BUTPREVIOUSINTERUPTSET, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&setAlarmOFF, (GX_WIDGET*)widget, true);
             break;
 
             //Enable the Alarm and (if needed) execute a function.
@@ -457,14 +533,8 @@ UINT AlarmOnSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 break;
 
 
-
-            //I need to find a way that if you turn one on the rest automatically turns off
-
-
-
-
             case GX_SIGNAL(chkMonday, GX_EVENT_TOGGLE_ON):
-                AlarmDay = 0;
+
                 break;
             case GX_SIGNAL(chkthuesday, GX_EVENT_TOGGLE_ON):
                 AlarmDay = 1;
@@ -485,7 +555,27 @@ UINT AlarmOnSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 AlarmDay = 6;
                 break;
 
+            case GX_SIGNAL(chkMonday, GX_EVENT_TOGGLE_OFF):
+                AlarmDay = 0;
+                break;
+            case GX_SIGNAL(chkthuesday, GX_EVENT_TOGGLE_OFF):
 
+                break;
+            case GX_SIGNAL(CHWEDNESDAY, GX_EVENT_TOGGLE_OFF):
+
+                break;
+            case GX_SIGNAL(CHTHURSDAY, GX_EVENT_TOGGLE_OFF):
+
+                break;
+            case GX_SIGNAL(CHFRIDAY, GX_EVENT_TOGGLE_OFF):
+
+                break;
+            case GX_SIGNAL(CHSATERDAY, GX_EVENT_TOGGLE_OFF):
+
+                break;
+            case GX_SIGNAL(CHSUNDAY, GX_EVENT_TOGGLE_OFF):
+
+                break;
     default:
         gx_window_event_process(widget, event_ptr);
         break;
@@ -547,37 +637,6 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     }
     return result;
 
-}
-
-
-//hier doe ik nog niets mee omdat jij ook nog bezig gaat met de code en ik zal dit de volgende keer ook implementeren.
-UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
-    UINT result = gx_window_event_process(widget, event_ptr);
-    switch (event_ptr->gx_event_type){
-        case GX_SIGNAL(BUTBACKALSEL, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM1, GX_EVENT_CLICKED):
-            setAlarmsel(1);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM2, GX_EVENT_CLICKED):
-            setAlarmsel(2);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM3, GX_EVENT_CLICKED):
-            setAlarmsel(3);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(ALARM4, GX_EVENT_CLICKED):
-            setAlarmsel(4);
-            show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        default:
-            break;
-    }
-
-    return result;
 }
 
 
