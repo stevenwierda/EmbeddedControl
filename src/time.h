@@ -84,6 +84,16 @@ int intervalSec();
 int intervalMin();
 int intervalHour();
 
+void AchangeMinUp();
+void AchangeMinDown();
+void AchangeHourUp();
+void AchangeHourDown();
+void SetWeekday();
+int AgetHour();
+int AgetMin();
+
+
+
 //I2C stuff
 void sync_time();
 void set_time(int,int,int,int,int,int,int);

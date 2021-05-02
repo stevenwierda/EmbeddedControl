@@ -9,11 +9,9 @@ unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
 bool onOff;
 
-extern GX_WINDOW_ROOT * p_window_root;
+int Aweekday[7] = {0,0,0,0,0,0,0};
 
-//variables for setting the alarm
-int AlarmHour = 0;
-int AlarmMin = 0;
+extern GX_WINDOW_ROOT * p_window_root;
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old);
 static void update_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id);
@@ -377,6 +375,9 @@ UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     int CurrentAlarm = getAlarm();
 
+    update_number_id(widget->gx_widget_parent, PRMPTHOUR,  AgetHour());
+    update_number_id(widget->gx_widget_parent, PRMPTMIN, AgetMin());
+
     UINT result = gx_window_event_process(widget, event_ptr);
     switch (event_ptr->gx_event_type)
     {
@@ -428,61 +429,84 @@ UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
     //Every setting that has to do with time
     case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
         //change alarm hour up
-        AlarmHour = AlarmHour +1;
-        if(AlarmHour >= 24){
-            AlarmHour = 0;
-        }
-        update_number_id(widget->gx_widget_parent, PRMPTHOUR, AlarmHour);
+        AchangeHourUp();
+        update_number_id(widget->gx_widget_parent, PRMPTHOUR,  AgetHour());
         break;
     case GX_SIGNAL(BUTHOURMIN, GX_EVENT_CLICKED):
         //change alarm hour down
-        AlarmHour = AlarmHour - 1;
-        if(AlarmHour < 0){
-            AlarmHour = 24;
-        }
-        update_number_id(widget->gx_widget_parent, PRMPTHOUR, AlarmHour);
+        AchangeHourDown();
+        update_number_id(widget->gx_widget_parent, PRMPTHOUR,  AgetHour());
         break;
     case GX_SIGNAL(BUTMINPLUS, GX_EVENT_CLICKED):
         //change alarm minute up
-            AlarmMin = AlarmMin + 1;
-            if (AlarmMin >= 60){
-                AlarmMin = 0;
-            }
-        update_number_id(widget->gx_widget_parent, PRMPTMIN, AlarmMin);
+        AchangeMinUp();
+        update_number_id(widget->gx_widget_parent, PRMPTMIN, AgetMin());
         break;
     case GX_SIGNAL(BUTMINMIN, GX_EVENT_CLICKED):
         //change alarm minute down
-        AlarmMin = AlarmMin - 1;
-        if (AlarmMin < 0){
-            AlarmMin = 60;
-        }
-        update_number_id(widget->gx_widget_parent, PRMPTMIN, AlarmMin);
+        AchangeMinDown();
+        update_number_id(widget->gx_widget_parent, PRMPTMIN, AgetMin());
         break;
 
 
     case GX_SIGNAL(chkMonday, GX_EVENT_TOGGLE_ON):
+        Aweekday[0] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(chkthuesday, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[1] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(CHWEDNESDAY, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[2] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(CHTHURSDAY, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[3] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(CHFRIDAY, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[4] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(CHSATERDAY, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[5] = 1;
+        SetWeekday(Aweekday);
         break;
     case GX_SIGNAL(CHSUNDAY, GX_EVENT_TOGGLE_ON):
-
+        Aweekday[6] = 1;
+        SetWeekday(Aweekday);
         break;
-
-
-
+    //
+    //turn off the checkmarks
+    case GX_SIGNAL(chkMonday, GX_EVENT_TOGGLE_OFF):
+        Aweekday[0] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(chkthuesday, GX_EVENT_TOGGLE_OFF):
+        Aweekday[1] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(CHWEDNESDAY, GX_EVENT_TOGGLE_OFF):
+        Aweekday[2] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(CHTHURSDAY, GX_EVENT_TOGGLE_OFF):
+        Aweekday[3] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(CHFRIDAY, GX_EVENT_TOGGLE_OFF):
+        Aweekday[4] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(CHSATERDAY, GX_EVENT_TOGGLE_OFF):
+        Aweekday[5] = 0;
+        SetWeekday(Aweekday);
+        break;
+    case GX_SIGNAL(CHSUNDAY, GX_EVENT_TOGGLE_OFF):
+        Aweekday[6] = 0;
+        SetWeekday(Aweekday);
+        break;
 
     default:
         gx_window_event_process(widget, event_ptr);

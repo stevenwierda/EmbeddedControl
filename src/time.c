@@ -968,9 +968,228 @@ int getAlarm(){
     return CurrentAlarm;
 }
 
+void AchangeMinUp(){
+    switch(CurrentAlarm){
+        case 1:
+            alarm1Min = alarm1Min + 1;
+            if (alarm1Min > 60){
+                alarm1Min = 0;
+            }
+            break;
+
+        case 2:
+            alarm2Min = alarm2Min + 1;
+            if (alarm2Min > 60){
+                alarm2Min = 0;
+            }
+            break;
+        case 3:
+            alarm3Min = alarm3Min + 1;
+            if (alarm3Min > 60){
+                alarm3Min = 0;
+            }
+            break;
+
+        case 4:
+            alarm4Min = alarm4Min + 1;
+            if (alarm4Min > 60){
+                alarm4Min = 0;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+void AchangeMinDown(){
+    switch(CurrentAlarm){
+        case 1:
+            alarm1Min = alarm1Min - 1;
+            if (alarm1Min < 0){
+                alarm1Min = 60;
+            }
+            break;
+
+        case 2:
+            alarm2Min = alarm2Min - 1;
+            if (alarm2Min < 0){
+                alarm2Min = 60;
+            }
+            break;
+        case 3:
+            alarm3Min = alarm3Min - 1;
+            if (alarm3Min < 0){
+                alarm3Min = 60;
+            }
+            break;
+
+        case 4:
+            alarm4Min = alarm4Min - 1;
+            if (alarm4Min < 0){
+                alarm4Min = 60;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+void AchangeHourUp(){
+    switch(CurrentAlarm){
+        case 1:
+            alarm1Hour = alarm1Hour + 1;
+            if (alarm1Hour > 23){
+                alarm1Hour = 0;
+            }
+            break;
+
+        case 2:
+            alarm2Hour = alarm2Hour + 1;
+            if (alarm2Hour > 23){
+                alarm2Hour = 0;
+            }
+            break;
+        case 3:
+            alarm3Hour = alarm3Hour + 1;
+            if (alarm3Hour > 23){
+                alarm3Hour = 0;
+            }
+            break;
+
+        case 4:
+            alarm4Hour = alarm3Hour + 1;
+            if (alarm4Hour > 23){
+                alarm4Hour = 0;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+void AchangeHourDown(){
+    switch(CurrentAlarm){
+        case 1:
+            alarm1Hour = alarm1Hour - 1;
+            if (alarm1Hour < 0){
+                alarm1Hour = 23;
+            }
+            break;
+
+        case 2:
+            alarm2Hour = alarm2Hour - 1;
+            if (alarm2Hour < 0){
+                alarm2Hour = 23;
+            }
+            break;
+        case 3:
+            alarm3Hour = alarm3Hour - 1;
+            if (alarm3Hour < 0){
+                alarm3Hour = 23;
+            }
+            break;
+
+        case 4:
+            alarm4Hour = alarm4Hour - 1;
+            if (alarm4Hour < 0){
+                alarm4Hour = 23;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+void SetWeekday(int weekday[]){
+    switch(CurrentAlarm){
+        case 1:
+            alarm1Mon = weekday[0];
+            alarm1Tue = weekday[1];
+            alarm1Wed = weekday[2];
+            alarm1Thu = weekday[3];
+            alarm1Fri = weekday[4];
+            alarm1Sat = weekday[5];
+            alarm1Sun = weekday[6];
+            break;
+        case 2:
+            alarm2Mon = weekday[0];
+            alarm2Tue = weekday[1];
+            alarm2Wed = weekday[2];
+            alarm2Thu = weekday[3];
+            alarm2Fri = weekday[4];
+            alarm2Sat = weekday[5];
+            alarm2Sun = weekday[6];
+            break;
+        case 3:
+            alarm3Mon = weekday[0];
+            alarm3Tue = weekday[1];
+            alarm3Wed = weekday[2];
+            alarm3Thu = weekday[3];
+            alarm3Fri = weekday[4];
+            alarm3Sat = weekday[5];
+            alarm3Sun = weekday[6];
+            break;
+        case 4:
+            alarm4Mon = weekday[0];
+            alarm4Tue = weekday[1];
+            alarm4Wed = weekday[2];
+            alarm4Thu = weekday[3];
+            alarm4Fri = weekday[4];
+            alarm4Sat = weekday[5];
+            alarm4Sun = weekday[6];
+            break;
+    }
+}
+
+int AgetHour(){
+    int Aget = 0;
+    switch(CurrentAlarm){
+        case 1:
+           Aget = alarm1Hour;
+           break;
+        case 2:
+            Aget = alarm2Hour;
+            break;
+        case 3:
+            Aget = alarm3Hour;
+            break;
+        case 4:
+            Aget = alarm4Hour;
+            break;
+        default:
+            break;
+    }
+    return Aget;
+}
+
+int AgetMin(){
+    int Aget = 0;
+    switch(CurrentAlarm){
+        case 1:
+           Aget = alarm1Min;
+           break;
+        case 2:
+            Aget = alarm2Min;
+            break;
+        case 3:
+            Aget = alarm3Min;
+            break;
+        case 4:
+            Aget = alarm4Min;
+            break;
+        default:
+            break;
+    }
+    return Aget;
+}
+
+
 //function to set the current time and save it to RTC
-void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year)
-{
+void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year){
     //to write the values to the RTC the pointer needs to be set at 0 thats why the writing of the values starts at [1]
     uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
