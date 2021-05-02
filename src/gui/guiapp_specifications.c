@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 27. 4.2021   Time (hh:mm): 15:02                        */
+/*  Date (dd.mm.yyyy):  2. 5.2021   Time (hh:mm): 12:55                        */
 /*******************************************************************************/
 
 
@@ -1654,7 +1654,7 @@ GX_TEXT_BUTTON_PROPERTIES setAlarmOFF_AHourMin_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES setAlarmOFF_AMinPlus_properties =
+GX_TEXT_BUTTON_PROPERTIES setAlarmOFF_MinPlus_properties =
 {
     GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
@@ -1772,7 +1772,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_promptMin_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {113, 88, 192, 111},                     /* widget size                    */
+    {115, 88, 194, 111},                     /* widget size                    */
     &setAlarmOFF_buttonTerugSettings_define, /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_promptMin), /* control block */
@@ -1807,7 +1807,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AMinMin_define =
 {
     "AMinMin",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTAMINMIN,                              /* widget id                      */
+    BUTMINMIN,                               /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -1827,11 +1827,11 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AMinMin_define =
     (void *) &setAlarmOFF_AMinMin_properties /* extended properties            */
 };
 
-GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AMinPlus_define =
+GX_CONST GX_STUDIO_WIDGET setAlarmOFF_MinPlus_define =
 {
-    "AMinPlus",
+    "MinPlus",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTAMINPLUS,                             /* widget id                      */
+    BUTMINPLUS,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -1847,15 +1847,15 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AMinPlus_define =
     {114, 66, 193, 89},                      /* widget size                    */
     &setAlarmOFF_AMinMin_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_AMinPlus), /* control block */
-    (void *) &setAlarmOFF_AMinPlus_properties /* extended properties           */
+    offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_MinPlus), /* control block */
+    (void *) &setAlarmOFF_MinPlus_properties /* extended properties            */
 };
 
 GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AHourMin_define =
 {
     "AHourMin",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTAHOURMIN,                             /* widget id                      */
+    BUTHOURMIN,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -1869,7 +1869,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AHourMin_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {34, 111, 113, 134},                     /* widget size                    */
-    &setAlarmOFF_AMinPlus_define,            /* next widget definition         */
+    &setAlarmOFF_MinPlus_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_AHourMin), /* control block */
     (void *) &setAlarmOFF_AHourMin_properties /* extended properties           */
@@ -1879,7 +1879,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_AHourPlus_define =
 {
     "AHourPlus",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTAHOURPLUS,                            /* widget id                      */
+    BUTHOURPLUS,                             /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif

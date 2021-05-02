@@ -4,12 +4,16 @@
 #include "time.h"
 
 static bool button_enabled = false;
-bool onOff;
 int weekday;
 unsigned long int InteruptTimer = 250;
 bsp_leds_t leds;
+bool onOff;
 
 extern GX_WINDOW_ROOT * p_window_root;
+
+//variables for setting the alarm
+int AlarmHour = 0;
+int AlarmMin = 0;
 
 static UINT show_window(GX_WINDOW * p_new, GX_WIDGET * p_widget, bool detach_old);
 static void update_text_id(GX_WIDGET * p_widget, GX_RESOURCE_ID id, UINT string_id);
@@ -369,9 +373,7 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
 //Function for setting the time the alarm switches off.
 UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
     //as i remember day 0 is Monday so that is how i make the code
-
-    int AlarmMin;
-    int AlarmHour;
+    //get the old date first so I can save the time only once
 
     int CurrentAlarm = getAlarm();
 
@@ -427,34 +429,34 @@ UINT AlarmOffSwitch(GX_WINDOW *widget, GX_EVENT *event_ptr){
     case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
         //change alarm hour up
         AlarmHour = AlarmHour +1;
-        if(AlarmHour == 24){
+        if(AlarmHour >= 24){
             AlarmHour = 0;
         }
-        update_number_id(widget->gx_widget_parent, PROMPTHOUR, AlarmHour);
+        update_number_id(widget->gx_widget_parent, PRMPTHOUR, AlarmHour);
         break;
     case GX_SIGNAL(BUTHOURMIN, GX_EVENT_CLICKED):
         //change alarm hour down
         AlarmHour = AlarmHour - 1;
-        if(AlarmHour == 0){
+        if(AlarmHour < 0){
             AlarmHour = 24;
         }
-        update_number_id(widget->gx_widget_parent, PROMPTHOUR, AlarmHour);
+        update_number_id(widget->gx_widget_parent, PRMPTHOUR, AlarmHour);
         break;
-    case GX_SIGNAL(BUTMINUTEPLUS, GX_EVENT_CLICKED):
+    case GX_SIGNAL(BUTMINPLUS, GX_EVENT_CLICKED):
         //change alarm minute up
             AlarmMin = AlarmMin + 1;
-            if (AlarmMin == 60){
+            if (AlarmMin >= 60){
                 AlarmMin = 0;
             }
-        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, AlarmMin);
+        update_number_id(widget->gx_widget_parent, PRMPTMIN, AlarmMin);
         break;
-    case GX_SIGNAL(BUTMINUTEMIN, GX_EVENT_CLICKED):
+    case GX_SIGNAL(BUTMINMIN, GX_EVENT_CLICKED):
         //change alarm minute down
         AlarmMin = AlarmMin - 1;
-        if (AlarmMin == 0){
+        if (AlarmMin < 0){
             AlarmMin = 60;
         }
-        update_number_id(widget->gx_widget_parent, PROMPTMINUTE, AlarmMin);
+        update_number_id(widget->gx_widget_parent, PRMPTMIN, AlarmMin);
         break;
 
 

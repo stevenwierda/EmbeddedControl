@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 27. 4.2021   Time (hh:mm): 15:02                        */
+/*  Date (dd.mm.yyyy):  2. 5.2021   Time (hh:mm): 12:55                        */
 /*******************************************************************************/
 
 
@@ -58,46 +58,47 @@ extern   "C" {
 #define BUTMSECUP 34
 #define BUTMSECMIN 35
 #define ENABLEALARM 36
-#define BUTTERUGTIMESET 37
-#define BUTYEARPLUS 38
-#define BUTHOURMIN 39
-#define BUTHOURPLUS 40
-#define BUTMINUTEMIN 41
-#define BUTMINUTEPLUS 42
-#define BUTDATEMIN 43
-#define BUTDATEPLUS 44
-#define BUTMONTHMIN 45
-#define BUTMONTHPLUS 46
-#define BUTYEARMIN 47
-#define BUTNAMEDAYPLUS 48
-#define BUTNAMEDAYMIN 49
-#define PRMPTDAYNAME 50
-#define PROMPTHOUR 51
-#define PROMPTMINUTE 52
-#define PROMPTYEAR 53
-#define PROMPTMONTH 54
-#define PROMPTDATE 55
-#define PROMPTSEC 56
-#define WINDOW_LED1 57
-#define BUTDECREASE 58
-#define BUTINCREASE 59
-#define TIME 60
-#define windowLED 61
-#define butterugLED 62
-#define LEDSTATUS 63
-#define LEDSWITCH 64
-#define WINDOWTIME 65
-#define BUTTERUGTIME 66
-#define PROMPTMSEC 67
-#define WINDOW_SETTINGS 68
-#define BUTTERUGSETTINGS 69
-#define BUTSETTIME 70
-#define BUTLEDINTERUPT 71
-#define WINDOW_MAIN 72
-#define BUTSETTINGS 73
-#define BUTTIME 74
-#define BUTLED 75
-#define BUTSETALARM 76
+#define BUTHOURPLUS 37
+#define BUTHOURMIN 38
+#define BUTMINPLUS 39
+#define BUTTERUGTIMESET 40
+#define BUTYEARPLUS 41
+#define BUTMINUTEMIN 42
+#define BUTMINUTEPLUS 43
+#define BUTDATEMIN 44
+#define BUTDATEPLUS 45
+#define BUTMONTHMIN 46
+#define BUTMONTHPLUS 47
+#define BUTYEARMIN 48
+#define BUTNAMEDAYPLUS 49
+#define BUTNAMEDAYMIN 50
+#define PRMPTDAYNAME 51
+#define PROMPTHOUR 52
+#define PROMPTMINUTE 53
+#define PROMPTYEAR 54
+#define PROMPTMONTH 55
+#define PROMPTDATE 56
+#define PROMPTSEC 57
+#define WINDOW_LED1 58
+#define BUTDECREASE 59
+#define BUTINCREASE 60
+#define TIME 61
+#define windowLED 62
+#define butterugLED 63
+#define LEDSTATUS 64
+#define LEDSWITCH 65
+#define WINDOWTIME 66
+#define BUTTERUGTIME 67
+#define PROMPTMSEC 68
+#define WINDOW_SETTINGS 69
+#define BUTTERUGSETTINGS 70
+#define BUTSETTIME 71
+#define BUTLEDINTERUPT 72
+#define WINDOW_MAIN 73
+#define BUTSETTINGS 74
+#define BUTTIME 75
+#define BUTLED 76
+#define BUTSETALARM 77
 
 
 /* Define animation ids                                                        */
@@ -263,7 +264,7 @@ typedef struct SETALARMOFF_CONTROL_BLOCK_STRUCT
     GX_CHECKBOX setAlarmOFF_alarmSaterday;
     GX_TEXT_BUTTON setAlarmOFF_AHourPlus;
     GX_TEXT_BUTTON setAlarmOFF_AHourMin;
-    GX_TEXT_BUTTON setAlarmOFF_AMinPlus;
+    GX_TEXT_BUTTON setAlarmOFF_MinPlus;
     GX_TEXT_BUTTON setAlarmOFF_AMinMin;
     GX_NUMERIC_PROMPT setAlarmOFF_promptHour;
     GX_NUMERIC_PROMPT setAlarmOFF_promptMin;

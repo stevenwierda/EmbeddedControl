@@ -7,15 +7,14 @@
 #include "time.h"
 #include "common_data.h"
 
-int msec =9;
-int sec = 9;
-int min = 9;
-int hour =9;
-int date = 9;        //date
-int month = 9;
-int year = 99;
-int weekday =1;      //day of the week
-int test = 99;
+int msec         =0;
+int sec         = 0;
+int min         = 0;
+int hour        = 0;
+int date        = 0;        //date
+int month       = 0;
+int year        = 0;
+int weekday     = 0;      //day of the week
 
 int alarm1Hour = 0;
 int alarm1Min = 0;
@@ -103,6 +102,7 @@ int CurrentAlarm = 1;
 //I2C variabbles
 #define I2C_ADDRESS   0x68
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+
 
 //get the time from the RTC
 void sync_time()
@@ -695,22 +695,22 @@ void deactivatePWM(){
 void setIntervalHourPlus(){
     if (CurrentAlarm == 1){
         addInterval1Hour=addInterval1Hour+1;
-        if (addInterval1Hour <= 24){
+        if (addInterval1Hour >= 24){
             addInterval1Hour = 0;
         }
     }else if(CurrentAlarm == 2){
         addInterval2Hour=addInterval2Hour+1;
-        if (addInterval2Hour <= 24){
+        if (addInterval2Hour >= 24){
             addInterval2Hour = 0;
         }
     }else if(CurrentAlarm == 3){
         addInterval3Hour=addInterval3Hour+1;
-        if (addInterval3Hour <= 24){
+        if (addInterval3Hour >= 24){
             addInterval3Hour = 0;
         }
     }else if(CurrentAlarm == 4){
         addInterval4Hour=addInterval4Hour+1;
-        if (addInterval4Hour <= 24){
+        if (addInterval4Hour >= 24){
             addInterval4Hour = 0;
         }
     }
@@ -739,22 +739,22 @@ void setIntervalHourMin(){
 void setIntervalMinPlus(){
     if (CurrentAlarm == 1){
         addInterval1Min=addInterval1Min+1;
-        if (addInterval1Min <= 60){
+        if (addInterval1Min >= 60){
             addInterval1Min = 0;
         }
     }else if(CurrentAlarm == 2){
         addInterval2Min=addInterval2Min+1;
-        if (addInterval2Min <= 60){
+        if (addInterval2Min >= 60){
             addInterval2Min = 0;
         }
     }else if(CurrentAlarm == 3){
         addInterval3Min=addInterval3Min+1;
-        if (addInterval3Min <= 60){
+        if (addInterval3Min >= 60){
             addInterval3Min = 0;
         }
     }else if(CurrentAlarm == 4){
         addInterval4Min=addInterval4Min+1;
-        if (addInterval4Min <= 60){
+        if (addInterval4Min >= 60){
             addInterval4Min = 0;
         }
     }
@@ -787,22 +787,22 @@ void setIntervalMinMin(){
 void setIntervalSecPlus(){
     if (CurrentAlarm == 1){
         addInterval1Sec=addInterval1Sec+1;
-        if (addInterval1Sec <= 60){
+        if (addInterval1Sec >= 60){
             addInterval1Sec = 0;
         }
     }else if (CurrentAlarm == 2){
         addInterval2Sec=addInterval2Sec+1;
-        if (addInterval2Sec <= 60){
+        if (addInterval2Sec >= 60){
             addInterval2Sec = 0;
         }
     }else if (CurrentAlarm == 3){
         addInterval3Sec=addInterval3Sec+1;
-        if (addInterval3Sec <= 60){
+        if (addInterval3Sec >= 60){
             addInterval3Sec = 0;
         }
     }else if (CurrentAlarm == 4){
         addInterval4Sec=addInterval4Sec+1;
-        if (addInterval4Sec <= 60){
+        if (addInterval4Sec >= 60){
             addInterval4Sec = 0;
         }
     }
@@ -831,22 +831,22 @@ void setIntervalSecMin(){
 void setIntervalMsecPlus(){
     if (CurrentAlarm == 1){
         addInterval1Msec=addInterval1Msec+10;
-        if (addInterval1Msec <= 1000){
+        if (addInterval1Msec >= 1000){
             addInterval1Msec=0;
         }
     }else if (CurrentAlarm == 2){
         addInterval2Msec=addInterval2Msec+10;
-        if (addInterval2Msec <= 1000){
+        if (addInterval2Msec >= 1000){
             addInterval2Msec=0;
         }
     }else if (CurrentAlarm == 3){
         addInterval3Msec=addInterval3Msec+10;
-        if (addInterval3Msec <= 1000){
+        if (addInterval3Msec >= 1000){
             addInterval3Msec=0;
         }
     }else if (CurrentAlarm == 4){
         addInterval3Msec=addInterval3Msec+10;
-        if (addInterval3Msec <= 1000){
+        if (addInterval3Msec >= 1000){
             addInterval3Msec=0;
         }
     }
