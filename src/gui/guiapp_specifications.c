@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  2. 5.2021   Time (hh:mm): 12:55                        */
+/*  Date (dd.mm.yyyy):  9. 5.2021   Time (hh:mm): 14:20                        */
 /*******************************************************************************/
 
 
@@ -564,7 +564,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_alarmSunday_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {123, 220, 214, 243},                    /* widget size                    */
+    {121, 220, 212, 243},                    /* widget size                    */
     &setAlarmON_alarmSaterday_define,        /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMON_CONTROL_BLOCK, setAlarmON_alarmSunday), /* control block */
@@ -647,9 +647,9 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_alarmThueseday_define =
 {
     "alarmThueseday",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    chkthuesday,                             /* widget id                      */
+    CHTHUESDAY,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
-    CHKTHUESDAY,                             /* user data                      */
+    0,                                       /* user data                      */
     #endif
     GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
@@ -671,7 +671,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmON_alarmMonday_define =
 {
     "alarmMonday",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    chkMonday,                               /* widget id                      */
+    CHMONDAY,                                /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -2023,9 +2023,9 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_alarmThueseday_define =
 {
     "alarmThueseday",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    chkthuesday,                             /* widget id                      */
+    CHTHUESDAY,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
-    CHKTHUESDAY,                             /* user data                      */
+    0,                                       /* user data                      */
     #endif
     GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
@@ -2036,7 +2036,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_alarmThueseday_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {11, 171, 102, 194},                     /* widget size                    */
+    {10, 171, 101, 194},                     /* widget size                    */
     &setAlarmOFF_alarmWednesday_define,      /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_alarmThueseday), /* control block */
@@ -2047,7 +2047,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_alarmMonday_define =
 {
     "alarmMonday",
     GX_TYPE_CHECKBOX,                        /* widget type                    */
-    chkMonday,                               /* widget id                      */
+    CHMONDAY,                                /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -2084,7 +2084,7 @@ GX_CONST GX_STUDIO_WIDGET setAlarmOFF_enableAlarm_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {114, 12, 313, 51},                      /* widget size                    */
+    {113, 12, 312, 51},                      /* widget size                    */
     &setAlarmOFF_alarmMonday_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETALARMOFF_CONTROL_BLOCK, setAlarmOFF_enableAlarm), /* control block */

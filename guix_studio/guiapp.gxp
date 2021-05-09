@@ -1584,7 +1584,7 @@
 <normal_fill_color>BTN_LOWER</normal_fill_color>
 <selected_fill_color>BTN_UPPER</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
-<id_name>chkMonday</id_name>
+<id_name>CHMONDAY</id_name>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <text_id>MONDAY</text_id>
@@ -1610,8 +1610,7 @@
 <normal_fill_color>BTN_LOWER</normal_fill_color>
 <selected_fill_color>BTN_UPPER</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
-<id_name>chkthuesday</id_name>
-<user_data>CHKTHUESDAY</user_data>
+<id_name>CHTHUESDAY</id_name>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <text_id>THUSEDAY</text_id>
@@ -1704,9 +1703,9 @@
 <type>checkbox</type>
 <app_name>alarmSunday</app_name>
 <size>
-<left>123</left>
+<left>121</left>
 <top>220</top>
-<right>214</right>
+<right>212</right>
 <bottom>243</bottom>
 </size>
 <style>1342181408</style>
@@ -2555,9 +2554,9 @@
 <type>checkbox</type>
 <app_name>enableAlarm</app_name>
 <size>
-<left>114</left>
+<left>113</left>
 <top>12</top>
-<right>313</right>
+<right>312</right>
 <bottom>51</bottom>
 </size>
 <style>1342181408</style>
@@ -2592,7 +2591,7 @@
 <normal_fill_color>BTN_LOWER</normal_fill_color>
 <selected_fill_color>BTN_UPPER</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
-<id_name>chkMonday</id_name>
+<id_name>CHMONDAY</id_name>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <text_id>MONDAY</text_id>
@@ -2607,9 +2606,9 @@
 <type>checkbox</type>
 <app_name>alarmThueseday</app_name>
 <size>
-<left>11</left>
+<left>10</left>
 <top>171</top>
-<right>102</right>
+<right>101</right>
 <bottom>194</bottom>
 </size>
 <style>1342181408</style>
@@ -2618,8 +2617,7 @@
 <normal_fill_color>BTN_LOWER</normal_fill_color>
 <selected_fill_color>BTN_UPPER</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
-<id_name>chkthuesday</id_name>
-<user_data>CHKTHUESDAY</user_data>
+<id_name>CHTHUESDAY</id_name>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
 <text_id>THUSEDAY</text_id>

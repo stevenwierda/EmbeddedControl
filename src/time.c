@@ -346,7 +346,6 @@ int checkAlarm1(){
                (alarm1Sat == 1 && weekday == 6)||
                (alarm1Sun == 1 && weekday == 7)){
                action = 1;
-               return action;
            }
        }
        else if(alarm1Mode == 2){
@@ -358,15 +357,18 @@ int checkAlarm1(){
                    action = 0;
                }
                intervalAlarm1();
-               return action;
            }
        }
    }
-   return 3;
+   else{
+       action = 3;
+   }
+   return action;
 }
 
 int checkAlarm2(){
-   if(hour == alarm2Hour && min == alarm2Min && sec == alarm2Sec && alarm2Msec == msec && alarm2Active == 1){
+   //if(hour == alarm2Hour && min == alarm2Min && sec == alarm2Sec && alarm2Msec == msec && alarm2Active == 1){
+   if(hour == alarm2Hour && min == alarm2Min && alarm2Active == 1){
        if(alarm2Mode == 1){
            if((alarm2Mon == 1 && weekday == 1)||
                (alarm2Tue == 1 && weekday == 2)||
@@ -376,7 +378,6 @@ int checkAlarm2(){
                (alarm2Sat == 1 && weekday == 6)||
                (alarm2Sun == 1 && weekday == 7)){
                action = 1;
-               return action;
            }
        }
        else if(alarm2Mode == 2){
@@ -388,11 +389,15 @@ int checkAlarm2(){
                    action = 0;
                }
                intervalAlarm2();
-               return action;
            }
        }
    }
-   return 3;
+
+   else{
+       action = 3;
+   }
+
+   return action;
 }
 
 int checkAlarm3(){
@@ -406,7 +411,6 @@ int checkAlarm3(){
                (alarm3Sat == 1 && weekday == 6)||
                (alarm3Sun == 1 && weekday == 7)){
                action = 1;
-               return action;
            }
        }
        else if(alarm3Mode == 2){
@@ -418,11 +422,13 @@ int checkAlarm3(){
                    action = 0;
                }
                intervalAlarm3();
-               return action;
            }
        }
    }
-   return 3;
+   else{
+       action = 3;
+   }
+   return action;
 }
 
 int checkAlarm4(){
@@ -436,7 +442,6 @@ int checkAlarm4(){
                (alarm4Sat == 1 && weekday == 6)||
                (alarm4Sun == 1 && weekday == 7)){
                action = 1;
-               return action;
            }
        }
        else if(alarm1Mode == 2){
@@ -448,11 +453,13 @@ int checkAlarm4(){
                    action = 0;
                }
                intervalAlarm4();
-               return action;
            }
        }
    }
-   return 3;
+   else{
+       action = 3;
+   }
+   return action;
 }
 
 void intervalAlarm1(){
@@ -923,21 +930,29 @@ int intervalHour(){
 void startAlarm1(){
     alarm1Active = 1;
     alarm1Mode = 1;
+    alarm1Sec = 0;
+    alarm1Msec =0;
 }
 
 void startAlarm2(){
     alarm2Active = 1;
     alarm2Mode = 1;
+    alarm2Sec = 0;
+    alarm2Msec = 0;
 }
 
 void startAlarm3(){
     alarm3Active = 1;
     alarm3Mode = 1;
+    alarm3Sec = 0;
+    alarm3Msec =0;
 }
 
 void startAlarm4(){
     alarm4Active = 1;
     alarm4Mode = 1;
+    alarm4Sec = 0;
+    alarm4Msec =0;
 }
 
 void stopAlarm1(){
@@ -976,7 +991,6 @@ void AchangeMinUp(){
                 alarm1Min = 0;
             }
             break;
-
         case 2:
             alarm2Min = alarm2Min + 1;
             if (alarm2Min > 60){
@@ -1104,43 +1118,43 @@ void AchangeHourDown(){
     }
 }
 
-void SetWeekday(int weekday[]){
+void SetWeekday(int Aweekday[]){
     switch(CurrentAlarm){
         case 1:
-            alarm1Mon = weekday[0];
-            alarm1Tue = weekday[1];
-            alarm1Wed = weekday[2];
-            alarm1Thu = weekday[3];
-            alarm1Fri = weekday[4];
-            alarm1Sat = weekday[5];
-            alarm1Sun = weekday[6];
+            alarm1Mon = Aweekday[0];
+            alarm1Tue = Aweekday[1];
+            alarm1Wed = Aweekday[2];
+            alarm1Thu = Aweekday[3];
+            alarm1Fri = Aweekday[4];
+            alarm1Sat = Aweekday[5];
+            alarm1Sun = Aweekday[6];
             break;
         case 2:
-            alarm2Mon = weekday[0];
-            alarm2Tue = weekday[1];
-            alarm2Wed = weekday[2];
-            alarm2Thu = weekday[3];
-            alarm2Fri = weekday[4];
-            alarm2Sat = weekday[5];
-            alarm2Sun = weekday[6];
+            alarm2Mon = Aweekday[0];
+            alarm2Tue = Aweekday[1];
+            alarm2Wed = Aweekday[2];
+            alarm2Thu = Aweekday[3];
+            alarm2Fri = Aweekday[4];
+            alarm2Sat = Aweekday[5];
+            alarm2Sun = Aweekday[6];
             break;
         case 3:
-            alarm3Mon = weekday[0];
-            alarm3Tue = weekday[1];
-            alarm3Wed = weekday[2];
-            alarm3Thu = weekday[3];
-            alarm3Fri = weekday[4];
-            alarm3Sat = weekday[5];
-            alarm3Sun = weekday[6];
+            alarm3Mon = Aweekday[0];
+            alarm3Tue = Aweekday[1];
+            alarm3Wed = Aweekday[2];
+            alarm3Thu = Aweekday[3];
+            alarm3Fri = Aweekday[4];
+            alarm3Sat = Aweekday[5];
+            alarm3Sun = Aweekday[6];
             break;
         case 4:
-            alarm4Mon = weekday[0];
-            alarm4Tue = weekday[1];
-            alarm4Wed = weekday[2];
-            alarm4Thu = weekday[3];
-            alarm4Fri = weekday[4];
-            alarm4Sat = weekday[5];
-            alarm4Sun = weekday[6];
+            alarm4Mon = Aweekday[0];
+            alarm4Tue = Aweekday[1];
+            alarm4Wed = Aweekday[2];
+            alarm4Thu = Aweekday[3];
+            alarm4Fri = Aweekday[4];
+            alarm4Sat = Aweekday[5];
+            alarm4Sun = Aweekday[6];
             break;
     }
 }

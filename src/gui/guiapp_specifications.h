@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy):  2. 5.2021   Time (hh:mm): 12:55                        */
+/*  Date (dd.mm.yyyy):  9. 5.2021   Time (hh:mm): 14:20                        */
 /*******************************************************************************/
 
 
@@ -24,8 +24,8 @@ extern   "C" {
 
 #define SETPWM 1
 #define ENABLEALARM_1 2
-#define chkMonday 3
-#define chkthuesday 4
+#define CHMONDAY 3
+#define CHTHUESDAY 4
 #define CHWEDNESDAY 5
 #define CHTHURSDAY 6
 #define CHFRIDAY 7
