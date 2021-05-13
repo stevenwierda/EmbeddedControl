@@ -275,7 +275,7 @@ void led_timer0_callback(timer_callback_args_t * p_args){
         onOff2 = false;
         gx_system_event_send(&g_gx_event);
     }
-    else if (value == 0){
+    else if (value == 3){
         onOff2 = true;
 
     }

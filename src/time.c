@@ -97,7 +97,7 @@ int alarm4Sat = 0;
 int alarm4Sun = 0;
 int alarm4Active = 0;
 
-int CurrentAlarm = 1;
+int CurrentAlarm = 0;
 
 //I2C variabbles
 #define I2C_ADDRESS   0x68
@@ -1120,43 +1120,86 @@ void AchangeHourDown(){
 
 void SetWeekday(int Aweekday[]){
     switch(CurrentAlarm){
-        case 1:
-            alarm1Mon = Aweekday[0];
-            alarm1Tue = Aweekday[1];
-            alarm1Wed = Aweekday[2];
-            alarm1Thu = Aweekday[3];
-            alarm1Fri = Aweekday[4];
-            alarm1Sat = Aweekday[5];
-            alarm1Sun = Aweekday[6];
-            break;
-        case 2:
-            alarm2Mon = Aweekday[0];
-            alarm2Tue = Aweekday[1];
-            alarm2Wed = Aweekday[2];
-            alarm2Thu = Aweekday[3];
-            alarm2Fri = Aweekday[4];
-            alarm2Sat = Aweekday[5];
-            alarm2Sun = Aweekday[6];
-            break;
-        case 3:
-            alarm3Mon = Aweekday[0];
-            alarm3Tue = Aweekday[1];
-            alarm3Wed = Aweekday[2];
-            alarm3Thu = Aweekday[3];
-            alarm3Fri = Aweekday[4];
-            alarm3Sat = Aweekday[5];
-            alarm3Sun = Aweekday[6];
-            break;
-        case 4:
-            alarm4Mon = Aweekday[0];
-            alarm4Tue = Aweekday[1];
-            alarm4Wed = Aweekday[2];
-            alarm4Thu = Aweekday[3];
-            alarm4Fri = Aweekday[4];
-            alarm4Sat = Aweekday[5];
-            alarm4Sun = Aweekday[6];
-            break;
+    case 1:
+        alarm1Mon = Aweekday[0];
+        alarm1Tue = Aweekday[1];
+        alarm1Wed = Aweekday[2];
+        alarm1Thu = Aweekday[3];
+        alarm1Fri = Aweekday[4];
+        alarm1Sat = Aweekday[5];
+        alarm1Sun = Aweekday[6];
+        break;
+    case 2:
+        alarm2Mon = Aweekday[0];
+        alarm2Tue = Aweekday[1];
+        alarm2Wed = Aweekday[2];
+        alarm2Thu = Aweekday[3];
+        alarm2Fri = Aweekday[4];
+        alarm2Sat = Aweekday[5];
+        alarm2Sun = Aweekday[6];
+        break;
+    case 3:
+        alarm3Mon = Aweekday[0];
+        alarm3Tue = Aweekday[1];
+        alarm3Wed = Aweekday[2];
+        alarm3Thu = Aweekday[3];
+        alarm3Fri = Aweekday[4];
+        alarm3Sat = Aweekday[5];
+        alarm3Sun = Aweekday[6];
+        break;
+    case 4:
+        alarm4Mon = Aweekday[0];
+        alarm4Tue = Aweekday[1];
+        alarm4Wed = Aweekday[2];
+        alarm4Thu = Aweekday[3];
+        alarm4Fri = Aweekday[4];
+        alarm4Sat = Aweekday[5];
+        alarm4Sun = Aweekday[6];
+        break;
     }
+}
+
+int getweekday(int index){
+    int ALweekday[7];
+    switch(CurrentAlarm){
+    case 1:
+        ALweekday[0] = alarm1Mon;
+        ALweekday[1] = alarm1Tue;
+        ALweekday[2] = alarm1Wed;
+        ALweekday[3] = alarm1Thu;
+        ALweekday[4] = alarm1Fri;
+        ALweekday[5] = alarm1Sat;
+        ALweekday[6] = alarm1Sun;
+        break;
+    case 2:
+        ALweekday[0] = alarm2Mon;
+        ALweekday[1] = alarm2Tue;
+        ALweekday[2] = alarm2Wed;
+        ALweekday[3] = alarm2Thu;
+        ALweekday[4] = alarm2Fri;
+        ALweekday[5] = alarm2Sat;
+        ALweekday[6] = alarm2Sun;
+        break;
+    case 3:
+        ALweekday[0] = alarm3Mon;
+        ALweekday[1] = alarm3Tue;
+        ALweekday[2] = alarm3Wed;
+        ALweekday[3] = alarm3Thu;
+        ALweekday[4] = alarm3Fri;
+        ALweekday[5] = alarm3Sat;
+        ALweekday[6] = alarm3Sun;
+        break;
+    case 4:
+        ALweekday[0] = alarm4Mon;
+        ALweekday[1] = alarm4Tue;
+        ALweekday[2] = alarm4Wed;
+        ALweekday[3] = alarm4Thu;
+        ALweekday[4] = alarm4Fri;
+        ALweekday[5] = alarm4Sat;
+        ALweekday[6] = alarm4Sun;
+        break;
+}
+   return ALweekday[index];
 }
 
 int AgetHour(){

@@ -86,6 +86,7 @@ void AchangeMinDown();
 void AchangeHourUp();
 void AchangeHourDown();
 void SetWeekday();
+int getweekday();
 int AgetHour();
 int AgetMin();
 
