@@ -30,7 +30,10 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args);
 static GX_EVENT g_gx_event;
 bool onOff = true;
 bool onOff2 = true;
+bool onOff3 = true;
 int value = 0;
+int value2 = 0;
+int value3 = 0;
 long unsigned int interuptTime;
 
 GX_WINDOW_ROOT * p_window_root;
@@ -268,19 +271,35 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 
 void led_timer0_callback(timer_callback_args_t * p_args){
 
-    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff2);
+    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff);
     addMs();
     value = checkAlarm2();
     if (value == 1){
-        onOff2 = false;
+        onOff = false;
         gx_system_event_send(&g_gx_event);
     }
-    else if (value == 3){
-        onOff2 = true;
+    else if (value == 0){
+        onOff = true;
 
     }
-    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff);
     onOff = !onOff;
+
+    value2 = checkAlarm3();
+        if (value2 == 1){
+            onOff2 = false;
+            gx_system_event_send(&g_gx_event);
+        }
+        else if (value2 == 0){
+            onOff2 = true;
+
+        }
+        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff2);
+        onOff2 = !onOff2;
+
+
+
+    //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff);
+
 }
 
 void TimeAdd_timer0_callback(timer_callback_args_t * p_args){

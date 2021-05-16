@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 13. 5.2021   Time (hh:mm): 15:05                        */
+/*  Date (dd.mm.yyyy): 16. 5.2021   Time (hh:mm): 14:42                        */
 /*******************************************************************************/
 
 
@@ -1318,7 +1318,7 @@ GX_NUMERIC_PROMPT_PROPERTIES SetPWM_promptMsec_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourUp_properties =
 {
-    GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
+    GX_STRING_ID_HOURPLUS,                   /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -1326,7 +1326,7 @@ GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourUp_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourDown_properties =
 {
-    GX_STRING_ID_MINUTEMIN,                  /* string id                      */
+    GX_STRING_ID_HOURMIN,                    /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -1334,7 +1334,7 @@ GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonHourDown_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMinMin_properties =
 {
-    GX_STRING_ID_HOURMIN,                    /* string id                      */
+    GX_STRING_ID_MINUTEMIN,                  /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -1342,7 +1342,7 @@ GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMinMin_properties =
 };
 GX_TEXT_BUTTON_PROPERTIES SetPWM_buttonMinUp_properties =
 {
-    GX_STRING_ID_HOURPLUS,                   /* string id                      */
+    GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
     GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
@@ -1430,7 +1430,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMsecDown_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {89, 193, 168, 216},                     /* widget size                    */
+    {112, 172, 191, 195},                    /* widget size                    */
     &SetPWM_buttonTerugSettings_define,      /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMsecDown), /* control block    */
@@ -1454,7 +1454,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMsecUp_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {90, 147, 169, 170},                     /* widget size                    */
+    {113, 126, 192, 149},                    /* widget size                    */
     &SetPWM_buttonMsecDown_define,           /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMsecUp), /* control block      */
@@ -1478,7 +1478,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonSecMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {9, 193, 88, 216},                       /* widget size                    */
+    {32, 172, 111, 195},                     /* widget size                    */
     &SetPWM_buttonMsecUp_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonSecMin), /* control block      */
@@ -1502,7 +1502,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonSecPlus_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {11, 147, 90, 170},                      /* widget size                    */
+    {34, 126, 113, 149},                     /* widget size                    */
     &SetPWM_buttonSecMin_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonSecPlus), /* control block     */
@@ -1526,7 +1526,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMinUp_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 65, 91, 88},                        /* widget size                    */
+    {115, 40, 194, 63},                      /* widget size                    */
     &SetPWM_buttonSecPlus_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMinUp), /* control block       */
@@ -1550,7 +1550,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonMinMin_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {12, 110, 91, 133},                      /* widget size                    */
+    {117, 92, 196, 115},                     /* widget size                    */
     &SetPWM_buttonMinUp_define,              /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonMinMin), /* control block      */
@@ -1574,7 +1574,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonHourDown_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {93, 111, 172, 134},                     /* widget size                    */
+    {35, 91, 114, 114},                      /* widget size                    */
     &SetPWM_buttonMinMin_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonHourDown), /* control block    */
@@ -1598,7 +1598,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_buttonHourUp_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {91, 65, 170, 88},                       /* widget size                    */
+    {35, 41, 114, 64},                       /* widget size                    */
     &SetPWM_buttonHourDown_define,           /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_buttonHourUp), /* control block      */
@@ -1622,7 +1622,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_promptMsec_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {89, 169, 168, 192},                     /* widget size                    */
+    {112, 148, 191, 171},                    /* widget size                    */
     &SetPWM_buttonHourUp_define,             /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptMsec), /* control block        */
@@ -1646,7 +1646,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_promptSec_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {10, 169, 89, 192},                      /* widget size                    */
+    {33, 148, 112, 171},                     /* widget size                    */
     &SetPWM_promptMsec_define,               /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptSec), /* control block         */
@@ -1670,7 +1670,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_promptHour_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {11, 87, 90, 110},                       /* widget size                    */
+    {34, 66, 113, 89},                       /* widget size                    */
     &SetPWM_promptSec_define,                /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptHour), /* control block        */
@@ -1694,7 +1694,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_promptMin_define =
     gx_studio_numeric_prompt_create,         /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {91, 87, 170, 110},                      /* widget size                    */
+    {114, 66, 193, 89},                      /* widget size                    */
     &SetPWM_promptHour_define,               /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_promptMin), /* control block         */
@@ -1718,7 +1718,7 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_activateAlarm_define =
     gx_studio_checkbox_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {18, 229, 137, 252},                     /* widget size                    */
+    {47, 220, 166, 243},                     /* widget size                    */
     &SetPWM_promptMin_define,                /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETPWM_CONTROL_BLOCK, SetPWM_activateAlarm), /* control block     */
