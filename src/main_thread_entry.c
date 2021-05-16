@@ -49,28 +49,37 @@ void main_thread_entry(void) {
 
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
-	UINT      status = TX_SUCCESS;
+	UINT      status    = TX_SUCCESS;
+	UINT      statusI2C = TX_SUCCESS;
+
+
+
+
+
 
     //I2C stuff
-
-	/*
-	fancy functie die bijhoud of de bus kaputskie is
-	/
-	/
-	/
-	/
-	/
-	/
-	/
-	/
-
-	/
-	/
-	/
-
-	*/
+    #define I2C_ADDRESS   0x68
     g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
+
+    statusI2C = g_i2c0.p_api->read(g_i2c0.p_ctrl, 0, 1, false);
+    if(TX_SUCCESS != statusI2C){
+        //while(1);
+        //doe dit als de RTC er niet is
+    }
     sync_time();    //sync the time when the microcontroller starts.
+
+
+
+    //dit moet allemaal ook even onder een 4 sec timer staan zodat hij het merkt als de RTC er niet is
+
+
+
+
+
+
 
 
     /* Initializes GUIX. */
@@ -271,7 +280,7 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 
 void led_timer0_callback(timer_callback_args_t * p_args){
 
-    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff);
+    //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff);
     addMs();
     value = checkAlarm2();
     if (value == 1){
@@ -293,7 +302,7 @@ void led_timer0_callback(timer_callback_args_t * p_args){
             onOff2 = true;
 
         }
-        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff2);
+        //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff2);
         onOff2 = !onOff2;
 
 

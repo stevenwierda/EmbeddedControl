@@ -100,7 +100,7 @@ int CurrentAlarm = 0;
 
 //I2C variabbles
 #define I2C_ADDRESS   0x68
-#define I2C_ADDRESSEEPROM   0x57
+//#define I2C_ADDRESSEEPROM   0x57
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 
 
