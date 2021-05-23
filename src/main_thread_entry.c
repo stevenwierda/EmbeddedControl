@@ -28,13 +28,27 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args);
     Private global variables
  ***********************************************************************************************************************/
 static GX_EVENT g_gx_event;
-bool onOff = true;
-bool onOff2 = true;
-bool onOff3 = true;
-int value = 0;
+
+//Timer1
+bool            OnOff     = false;
+UINT            statusI2C = SSP_SUCCESS;
+int             DUMMY;
+
+int value  = 0;
+int value1 = 0;
 int value2 = 0;
 int value3 = 0;
+
+bool AL0 = true;
+bool AL1 = true;
+bool AL2 = true;
+bool AL3 = true;
 long unsigned int interuptTime;
+
+#define Alarm1Pin IOPORT_PORT_04_PIN_02 //Pin 42
+#define Alarm2Pin IOPORT_PORT_04_PIN_03 //Pin 43
+#define Alarm3Pin IOPORT_PORT_04_PIN_04 //Pin 44
+#define Alarm4Pin IOPORT_PORT_04_PIN_05 //Pin 45
 
 GX_WINDOW_ROOT * p_window_root;
 extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
@@ -45,17 +59,17 @@ extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
 void main_thread_entry(void) {
     /* the interrupt configuration*/
     led_timer0.p_api->open(led_timer0.p_ctrl,led_timer0.p_cfg);
-    TimeAdd_timer0.p_api->open(TimeAdd_timer0.p_ctrl,TimeAdd_timer0.p_cfg);
+    Timer1.p_api->open(Timer1.p_ctrl,Timer1.p_cfg);
+    //TimeAdd_timer0.p_api->open(TimeAdd_timer0.p_ctrl,TimeAdd_timer0.p_cfg);
+
+    //all leds off
+    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, true);   // GREEN LED
+    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, true);   // Yellow LED
+    g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, true);   // Red LED
 
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
 	UINT      status    = TX_SUCCESS;
-	UINT      statusI2C = TX_SUCCESS;
-
-
-
-
-
 
     //I2C stuff
     #define I2C_ADDRESS   0x68
@@ -64,22 +78,7 @@ void main_thread_entry(void) {
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
 
-    statusI2C = g_i2c0.p_api->read(g_i2c0.p_ctrl, 0, 1, false);
-    if(TX_SUCCESS != statusI2C){
-        //while(1);
-        //doe dit als de RTC er niet is
-    }
     sync_time();    //sync the time when the microcontroller starts.
-
-
-
-    //dit moet allemaal ook even onder een 4 sec timer staan zodat hij het merkt als de RTC er niet is
-
-
-
-
-
-
 
 
     /* Initializes GUIX. */
@@ -279,40 +278,76 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 #endif
 
 void led_timer0_callback(timer_callback_args_t * p_args){
-
-    //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, onOff);
     addMs();
-    value = checkAlarm2();
+
+    //Alarm 1
+    value  = checkAlarm1();
     if (value == 1){
-        onOff = false;
+        AL0 = false;
         gx_system_event_send(&g_gx_event);
     }
     else if (value == 0){
-        onOff = true;
-
+        AL0 = true;
     }
-    onOff = !onOff;
+    AL0 = !AL0;
+    g_ioport.p_api->pinWrite(Alarm1Pin, AL0);
 
+    //Alarm 2
+    value1 = checkAlarm2();
+    if (value1 == 1){
+        AL1 = false;
+        gx_system_event_send(&g_gx_event);
+    }
+    else if (value1 == 0){
+        AL1 = true;
+    }
+    AL1 = !AL1;
+    g_ioport.p_api->pinWrite(Alarm2Pin, AL1);
+
+    //Alarm 3
     value2 = checkAlarm3();
-        if (value2 == 1){
-            onOff2 = false;
-            gx_system_event_send(&g_gx_event);
-        }
-        else if (value2 == 0){
-            onOff2 = true;
+    if (value2 == 1){
+        AL2 = false;
+        gx_system_event_send(&g_gx_event);
+    }
+    else if (value2 == 0){
+        AL2 = true;
+    }
+    AL2 = !AL2;
+    g_ioport.p_api->pinWrite(Alarm3Pin, AL2);
 
-        }
-        //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff2);
-        onOff2 = !onOff2;
-
-
-
-    //g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, !onOff);
-
+    //Alarm 4
+    value3 = checkAlarm4();
+    if (value3 == 1){
+        AL3 = false;
+        gx_system_event_send(&g_gx_event);
+    }
+    else if (value3 == 0){
+        AL3 = true;
+    }
+    AL3 = !AL3;
+    g_ioport.p_api->pinWrite(Alarm4Pin, AL3);
 }
 
-void TimeAdd_timer0_callback(timer_callback_args_t * p_args){
+//Timer that runs every second
+void Timer1_callback(timer_callback_args_t * p_args){
+//every second check if the RTC is online.
+//if its not then blink red if it is then blink green
 
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
+
+    statusI2C = g_i2c0.p_api->read(g_i2c0.p_ctrl, &DUMMY, 1, false);
+
+    if(SSP_SUCCESS == statusI2C){
+        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, true);   // Red LED
+        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, false);   // GREEN LED
+    }
+    else if(SSP_SUCCESS != statusI2C){
+        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, OnOff);   // Red LED
+        g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, true);   // GREEN LED
+        OnOff = !OnOff;
+    }
 }
 
 

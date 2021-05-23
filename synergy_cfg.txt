@@ -68,19 +68,19 @@ Synergy Configuration
       AVCCUSBHS 26 USBHS0_AVCCUSBHS - - - - - - - 
       AVSS0 156 ADC_AVSS0 - - - - - - - 
       AVSSUSBHS 28 USBHS0_AVSSUSBHS - - - - - - - 
-      P000 169 ADC0_AN00 GPIO29 - - "Analog mode" - - "ADC0: AN00; CMP0: IVCMP2; IRQ0: IRQ06" 
-      P001 168 ADC0_AN01 GPIO28 - - "Analog mode" - - "ADC0: AN01; CMP0: IVCMP2; IRQ0: IRQ07" 
-      P002 167 ADC0_AN02 GPIO27 - - "Analog mode" - - "ADC0: AN02; CMP0: IVCMP2; IRQ0: IRQ08" 
+      P000 169 - - - - Disabled - - "ADC0: AN00; CMP0: IVCMP2; IRQ0: IRQ06" 
+      P001 168 - - - - Disabled - - "ADC0: AN01; CMP0: IVCMP2; IRQ0: IRQ07" 
+      P002 167 - - - - Disabled - - "ADC0: AN02; CMP0: IVCMP2; IRQ0: IRQ08" 
       P003 166 - - - - Disabled - - "ADC0: PGAVSS0" 
       P004 165 GPIO GPIO26 - IRQ9-DS "Input mode" - - "ADC1: AN00; CMP0: IVCMP2; IRQ0: IRQ09" 
       P005 164 GPIO GPIO25 - IRQ10-DS "Input mode" - - "ADC1: AN01; CMP0: IVCMP2; IRQ0: IRQ10" 
       P006 163 GPIO GPIO24 - IRQ11-DS "Input mode" - - "ADC1: AN02; CMP0: IVCMP2; IRQ0: IRQ11" 
       P007 162 - - - - Disabled - - "ADC1: PGAVSS0" 
-      P008 161 ADC0_AN03 GPIO23 - - "Analog mode" - - "ADC0: AN03; IRQ0: IRQ12" 
-      P009 160 ADC0_AN04 GPIO22 - - "Analog mode" - - "ADC0: AN04; IRQ0: IRQ13" 
+      P008 161 - - - - Disabled - - "ADC0: AN03; IRQ0: IRQ12" 
+      P009 160 - - - - Disabled - - "ADC0: AN04; IRQ0: IRQ13" 
       P010 159 GPIO GPIO20 - IRQ14-DS "Input mode" - None "ADC1: AN03; IRQ0: IRQ14" 
-      P014 152 DAC0_DA GPIO19 - - "Analog mode" - - "ADC0: AN05; ADC1: AN05; CMP0: IVREF3; DAC120: DA" 
-      P015 151 ADC0_AN06 GPIO18 - - "Analog mode" - - "ADC0: AN06; ADC1: AN06; CMP0: IVCMP1; DAC121: DA; IRQ0: IRQ13" 
+      P014 152 - - - - Disabled - - "ADC0: AN05; ADC1: AN05; CMP0: IVREF3; DAC120: DA" 
+      P015 151 - - - - Disabled - - "ADC0: AN06; ADC1: AN06; CMP0: IVCMP1; DAC121: DA; IRQ0: IRQ13" 
       P100 132 SCI0_RXD_MISO SCI0_RXD0_SCL0_MISO0 Low None "Peripheral mode" CMOS None "AGT0: AGTIO; BUS0: D0_DQ0; GLCDC0: LCD_EXTCLK; IIC1: SCL; IRQ0: IRQ02; KINT0: KRM0; POEG0: GTETRG; SCI0: RXD_MISO; SCI0: SCL; SCI1: SCK; SPI0: MISO" 
       P101 131 SCI0_TXD_MOSI SCI0_TXD0_SDA0_MOSI0 Low None "Peripheral mode" CMOS None "AGT0: AGTEE; BUS0: D1_DQ1; GLCDC0: LCD_CLK; IIC1: SDA; IRQ0: IRQ01; KINT0: KRM1; POEG1: GTETRG; SCI0: SDA; SCI0: TXD_MOSI; SCI1: CTS_RTS_SS; SPI0: MOSI" 
       P102 130 SCI0_SCK SCI0_SCK0 Low - "Peripheral mode" CMOS None "ADC0: ADTRG; AGT0: AGTO; BUS0: D2_DQ2; GLCDC0: LCD_TCON0; GPT2: GTIOCB; KINT0: KRM2; OPS0: GTOWLO; SCI0: SCK; SPI0: RSPCK" 
@@ -125,10 +125,10 @@ Synergy Configuration
       P315 57 GLCDC0_LCD_TCON0 GLCD_Controller__Pin_Option_B_LCD_TCON0_B High - "Peripheral mode" CMOS None "BUS0: A22; GLCDC0: LCD_TCON0" 
       P400 1 IIC0_SCL - - None "Peripheral mode" CMOS None "ADC1: ADTRG; GPT6: GTIOCA; IIC0: SCL; IRQ0: IRQ00; SCI4: SCK; SCI7: SCK; SSI: AUDIO_CLK" 
       P401 2 IIC0_SDA - - None "Peripheral mode" CMOS None "CAN0: CTX; ETHERC0: MDC; GPT6: GTIOCB; IIC0: SDA; IRQ0: IRQ05; POEG0: GTETRG; SCI4: CTS_RTS_SS; SCI7: SDA; SCI7: TXD_MOSI" 
-      P402 3 - - - - Disabled - - "AGT0: AGTIO; AGT1: AGTIO; CAN0: CRX; ETHERC0: MDIO; IRQ0: IRQ04; RTC0: RTCIC0; SCI7: RXD_MISO; SCI7: SCL" 
-      P403 4 - - - - Disabled - - "AGT0: AGTIO; AGT1: AGTIO; ETHERC1: MDC; GPT3: GTIOCA; PDC0: PIXD7; RTC0: RTCIC1; SCI7: CTS_RTS_SS; SSI0: SSISCK" 
-      P404 5 - - - - Disabled - - "ETHERC1: MDIO; GPT3: GTIOCB; PDC0: PIXD6; RTC0: RTCIC2; SSI0: SSIWS" 
-      P405 6 - - - - Disabled - - "ETHERC1: TXD_EN; GPT1: GTIOCA; PDC0: PIXD5; SSI0: SSITXD" 
+      P402 3 GPIO - Low None "Output mode (Initial Low)" CMOS None "AGT0: AGTIO; AGT1: AGTIO; CAN0: CRX; ETHERC0: MDIO; IRQ0: IRQ04; RTC0: RTCIC0; SCI7: RXD_MISO; SCI7: SCL" 
+      P403 4 GPIO - Low - "Output mode (Initial Low)" CMOS None "AGT0: AGTIO; AGT1: AGTIO; ETHERC1: MDC; GPT3: GTIOCA; PDC0: PIXD7; RTC0: RTCIC1; SCI7: CTS_RTS_SS; SSI0: SSISCK" 
+      P404 5 GPIO - Low - "Output mode (Initial Low)" CMOS None "ETHERC1: MDIO; GPT3: GTIOCB; PDC0: PIXD6; RTC0: RTCIC2; SSI0: SSIWS" 
+      P405 6 GPIO - Low - "Output mode (Initial Low)" CMOS None "ETHERC1: TXD_EN; GPT1: GTIOCA; PDC0: PIXD5; SSI0: SSITXD" 
       P406 7 - - - - Disabled - - "ETHERC1: TXD1; GPT1: GTIOCB; PDC0: PIXD4; SSI0: SSIRXD" 
       P407 44 USBFS0_VBUS USB_Full_Speed_USB0_VBUS Low - "Peripheral mode" CMOS None "ADC0: ADTRG; CTSU0: TS03; ETHERC0: EXOUT; IIC0: SDA; RTC0: RTCOUT; SCI4: CTS_RTS_SS; SPI1: SSL3; USBFS0: VBUS" 
       P408 43 CTSU0_TS04 Cap_Touch_Sensing_Unit_TS04 Low None "Peripheral mode" CMOS None "CTSU0: TS04; ETHERC0: CRS_DV; GPT10: GTIOCB; IRQ0: IRQ07; OPS0: GTOWLO; SCI3: RXD_MISO; SCI3: SCL; USBFS0: ID; USBHS0: ID" 
@@ -309,9 +309,6 @@ Synergy Configuration
   Module "Touch Panel Driver on touch_panel_sx8654"
   Module "JPEG Common"
   Module "Timer Driver on r_gpt"
-    Parameter Checking: Default (BSP)
-    
-  Module "Timer Driver on r_agt"
     Parameter Checking: Default (BSP)
     
   HAL
@@ -702,22 +699,6 @@ Synergy Configuration
       Callback: led_timer0_callback
       Overflow Interrupt Priority: Priority 9
       
-    Instance "TimeAdd_timer0 Timer Driver on r_agt"
-      Name: TimeAdd_timer0
-      Channel: 0
-      Mode: Periodic
-      Period Value: 10
-      Period Unit: Microseconds
-      Auto Start: True
-      Count Source: PCLKB
-      AGTO Output Enabled: False
-      AGTIO Output Enabled: False
-      Output Inverted: False
-      Enable comparator A output pin: False
-      Enable comparator B output pin: False
-      Callback: TimeAdd_timer0_callback
-      Underflow Interrupt Priority: Priority 9
-      
     Instance "g_i2c0 I2C Master Driver on r_riic"
       Name: g_i2c0
       Channel: 0
@@ -766,6 +747,23 @@ Synergy Configuration
         Callback (Only valid with Software start): NULL
         ELC Software Event Interrupt Priority: Disabled
         
+    Instance "Timer1 Timer Driver on r_gpt"
+      Name: Timer1
+      Channel: 1
+      Mode: Periodic
+      Duty Cycle Range (only applicable in PWM mode): Shortest: 2 PCLK, Longest: (Period - 1) PCLK
+      Period Value: 1
+      Period Unit: Seconds
+      Duty Cycle Value: 1
+      Duty Cycle Unit: Unit Raw Counts
+      Auto Start: True
+      GTIOCA Output Enabled: False
+      GTIOCA Stop Level: Pin Level Low
+      GTIOCB Output Enabled: False
+      GTIOCB Stop Level: Pin Level Low
+      Callback: Timer1_callback
+      Overflow Interrupt Priority: Priority 9
+      
     Object "g_main_semaphore_lcdc Semaphore"
       Name: Main Semaphore
       Symbol: g_main_semaphore_lcdc

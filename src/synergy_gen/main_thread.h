@@ -9,14 +9,12 @@ extern "C" void main_thread_entry(void);
 #else
 extern void main_thread_entry(void);
 #endif
+#include "r_gpt.h"
+#include "r_timer_api.h"
 #include "r_dtc.h"
 #include "r_transfer_api.h"
 #include "r_riic.h"
 #include "r_i2c_api.h"
-#include "r_agt.h"
-#include "r_timer_api.h"
-#include "r_gpt.h"
-#include "r_timer_api.h"
 #include "r_icu.h"
 #include "r_external_irq_api.h"
 #include "sf_external_irq.h"
@@ -27,6 +25,11 @@ extern void main_thread_entry(void);
 #ifdef __cplusplus
 extern "C"
 {
+#endif
+/** Timer on GPT Instance. */
+extern const timer_instance_t Timer1;
+#ifndef Timer1_callback
+void Timer1_callback(timer_callback_args_t *p_args);
 #endif
 /* Transfer on DTC Instance. */
 extern const transfer_instance_t g_transfer5;
@@ -60,11 +63,6 @@ extern const riic_extended_cfg g_i2c0_extend;
 #endif
 #undef SYNERGY_NOT_DEFINED
 #define g_i2c0_P_EXTEND (&g_i2c0_extend)
-/** AGT Timer Instance */
-extern const timer_instance_t TimeAdd_timer0;
-#ifndef TimeAdd_timer0_callback
-void TimeAdd_timer0_callback(timer_callback_args_t *p_args);
-#endif
 /** Timer on GPT Instance. */
 extern const timer_instance_t led_timer0;
 #ifndef led_timer0_callback

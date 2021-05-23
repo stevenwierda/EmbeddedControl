@@ -82,6 +82,8 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
+ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
+ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h \
@@ -90,10 +92,6 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_agt.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_agt_cfg.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
- C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h \
  C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h \
@@ -269,6 +267,10 @@ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances
 
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h:
 
+C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
+
+C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
+
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h:
 
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
@@ -284,14 +286,6 @@ C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_rii
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h:
 
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
-
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_agt.h:
-
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_agt_cfg.h:
-
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
-
-C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
 
 C:\Users\basha\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h:
 

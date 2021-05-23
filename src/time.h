@@ -96,5 +96,8 @@ int AgetMin();
 void sync_time();
 void set_time(int,int,int,int,int,int,int);
 
+//void GetAlarmData();
+//void SetAlarmData();
+
 
 #endif /* TIME_H_ */

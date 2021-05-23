@@ -5,18 +5,6 @@
 #endif
 const ioport_pin_cfg_t g_bsp_pin_cfg_data[] = {
 	{
-		.pin = IOPORT_PORT_00_PIN_00,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
-		.pin = IOPORT_PORT_00_PIN_01,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
-		.pin = IOPORT_PORT_00_PIN_02,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
 		.pin = IOPORT_PORT_00_PIN_04,
 		.pin_cfg = (IOPORT_CFG_IRQ_ENABLE | IOPORT_CFG_PORT_DIRECTION_INPUT),
 	},
@@ -29,24 +17,8 @@ const ioport_pin_cfg_t g_bsp_pin_cfg_data[] = {
 		.pin_cfg = (IOPORT_CFG_IRQ_ENABLE | IOPORT_CFG_PORT_DIRECTION_INPUT),
 	},
 	{
-		.pin = IOPORT_PORT_00_PIN_08,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
-		.pin = IOPORT_PORT_00_PIN_09,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
 		.pin = IOPORT_PORT_00_PIN_10,
 		.pin_cfg = (IOPORT_CFG_IRQ_ENABLE | IOPORT_CFG_PORT_DIRECTION_INPUT),
-	},
-	{
-		.pin = IOPORT_PORT_00_PIN_14,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
-	},
-	{
-		.pin = IOPORT_PORT_00_PIN_15,
-		.pin_cfg = (IOPORT_CFG_ANALOG_ENABLE),
 	},
 	{
 		.pin = IOPORT_PORT_01_PIN_00,
@@ -199,6 +171,22 @@ const ioport_pin_cfg_t g_bsp_pin_cfg_data[] = {
 	{
 		.pin = IOPORT_PORT_04_PIN_01,
 		.pin_cfg = (IOPORT_CFG_PERIPHERAL_PIN | IOPORT_PERIPHERAL_RIIC),
+	},
+	{
+		.pin = IOPORT_PORT_04_PIN_02,
+		.pin_cfg = (IOPORT_CFG_PORT_DIRECTION_OUTPUT | IOPORT_CFG_PORT_OUTPUT_LOW),
+	},
+	{
+		.pin = IOPORT_PORT_04_PIN_03,
+		.pin_cfg = (IOPORT_CFG_PORT_DIRECTION_OUTPUT | IOPORT_CFG_PORT_OUTPUT_LOW),
+	},
+	{
+		.pin = IOPORT_PORT_04_PIN_04,
+		.pin_cfg = (IOPORT_CFG_PORT_DIRECTION_OUTPUT | IOPORT_CFG_PORT_OUTPUT_LOW),
+	},
+	{
+		.pin = IOPORT_PORT_04_PIN_05,
+		.pin_cfg = (IOPORT_CFG_PORT_DIRECTION_OUTPUT | IOPORT_CFG_PORT_OUTPUT_LOW),
 	},
 	{
 		.pin = IOPORT_PORT_04_PIN_07,

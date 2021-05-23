@@ -101,6 +101,7 @@ int CurrentAlarm = 0;
 //I2C variabbles
 #define I2C_ADDRESS   0x68
 //#define I2C_ADDRESSEEPROM   0x57
+
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 
 
@@ -133,6 +134,27 @@ void sync_time()
         month       = buffer[5];
         year        = buffer[6] +2000;
     }
+}
+
+//function to set the current time and save it to RTC
+void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year){
+    //to write the values to the RTC the pointer needs to be set at 0 thats why the writing of the values starts at [1]
+    uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    //change i2c slave adress
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
+
+    rtc_set_time[1] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
+    rtc_set_time[2] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
+    rtc_set_time[3] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
+
+    rtc_set_time[4] = (uint8_t)(s_time_days);
+    rtc_set_time[5] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
+    rtc_set_time[6] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
+    rtc_set_time[7] = (uint8_t)((((s_time_year-2000)/10) << 4) | ((s_time_year-2000) % 10));
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 8, false);
 }
 
 void addMs(){
@@ -180,6 +202,15 @@ void addMs(){
         }
     }
 }
+/*
+
+void GetAlarmData(){
+}
+
+void SetAlarmData(){
+
+}
+*/
 
 void changeYearUp(){
     year = year + 1;
@@ -1211,23 +1242,4 @@ int AgetMin(){
 }
 
 
-//function to set the current time and save it to RTC
-void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year){
-    //to write the values to the RTC the pointer needs to be set at 0 thats why the writing of the values starts at [1]
-    uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-    //change i2c slave adress
-    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
-    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
-
-    rtc_set_time[1] = (uint8_t)(((s_time_secs/10) << 4) | (s_time_secs % 10));
-    rtc_set_time[2] = (uint8_t)(((s_time_mins/10) << 4) | (s_time_mins % 10));
-    rtc_set_time[3] = (uint8_t)(((s_time_hours/10) << 4) | (s_time_hours % 10));
-
-    rtc_set_time[4] = (uint8_t)(s_time_days);
-    rtc_set_time[5] = (uint8_t)(((s_time_date/10) << 4) | (s_time_date % 10));
-    rtc_set_time[6] = (uint8_t)(((s_time_month/10) << 4) | (s_time_month % 10));   //hier wordt geen rekening gehouden met het century bit maar dat zou niet nodig moeten zijn
-    rtc_set_time[7] = (uint8_t)((((s_time_year-2000)/10) << 4) | ((s_time_year-2000) % 10));
-
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 8, false);
-}
