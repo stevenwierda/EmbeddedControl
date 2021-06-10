@@ -25,7 +25,6 @@ int addInterval1Msec = 200;
 int addInterval1Sec = 1;
 int addInterval1Min  = 0;
 int addInterval1Hour = 0;
-int addInterval1Day = 0;
 int alarm1Mon = 0;
 int alarm1Tue = 0;
 int alarm1Wed = 0;
@@ -45,7 +44,6 @@ int addInterval2Msec = 200;
 int addInterval2Sec = 1;
 int addInterval2Min  = 0;
 int addInterval2Hour = 0;
-int addInterval2Day = 0;
 int alarm2Mon = 0;
 int alarm2Tue = 0;
 int alarm2Wed = 0;
@@ -65,7 +63,6 @@ int addInterval3Msec = 200;
 int addInterval3Sec = 1;
 int addInterval3Min  = 0;
 int addInterval3Hour = 0;
-int addInterval3Day = 0;
 int alarm3Mon = 0;
 int alarm3Tue = 0;
 int alarm3Wed = 0;
@@ -85,7 +82,6 @@ int addInterval4Msec = 200;
 int addInterval4Sec = 1;
 int addInterval4Min  = 0;
 int addInterval4Hour = 0;
-int addInterval4Day = 0;
 int alarm4Mon = 0;
 int alarm4Tue = 0;
 int alarm4Wed = 0;
@@ -98,11 +94,20 @@ int action4 = 0;
 
 int CurrentAlarm = 0;
 
-//I2C variabbles
-#define I2C_ADDRESS   0x68
-//#define I2C_ADDRESSEEPROM   0x57
+//I2C Adresses
+#define I2C_ADDRESS         0x68
+#define I2C_ADDRESSEEPROM   0x57
 
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+
+//EEPRom variables
+UINT E2 = 0;
+UINT E3 = 0;
+
+UINT EEPRWRITE;
+UINT EEPRREAD;
+uint8_t EP_reg[3] = {0x00, 0x00, 0x13};
+
 
 
 //get the time from the RTC
@@ -137,7 +142,7 @@ void sync_time()
 }
 
 //function to set the current time and save it to RTC
-void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, s_time_month, s_time_year){
+void set_time(int s_time_secs, int s_time_mins, int s_time_hours, int s_time_days, int s_time_date, int s_time_month, int s_time_year){
     //to write the values to the RTC the pointer needs to be set at 0 thats why the writing of the values starts at [1]
     uint8_t  rtc_set_time[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -156,6 +161,35 @@ void set_time(s_time_secs, s_time_mins, s_time_hours, s_time_days, s_time_date, 
 
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 8, false);
 }
+
+void EEPromWrite(){
+    //scrhijf de waardes van de EEPROM waneer er een verandering is en de user klaar is en op de terug knop drukt.
+
+    //de aanroep functies staan in de event handelers in de main scherm functies/ aanroepen van onderdelen
+
+    //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    //set het adres met 2 bytes en schrijf daarna de bytes van de rest van de data.
+    EEPRWRITE = g_i2c0.p_api->write(g_i2c0.p_ctrl, &EP_reg[0], 3, false); //2 bytes scrijven
+
+    E2 = EP_reg[2];
+}
+
+void EEPromRead(){
+    uint8_t EP[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &EP_reg[0], 2, false);
+
+    EEPRREAD = g_i2c0.p_api->read(g_i2c0.p_ctrl, &EP[0], 1, true);
+    E3 = EP[0];
+}
+
+
 
 void addMs(){
     msec = msec + 1;
@@ -202,15 +236,6 @@ void addMs(){
         }
     }
 }
-/*
-
-void GetAlarmData(){
-}
-
-void SetAlarmData(){
-
-}
-*/
 
 void changeYearUp(){
     year = year + 1;
@@ -850,19 +875,19 @@ void setIntervalMsecPlus(){
 
 void setIntervalMsecMin(){
     if (CurrentAlarm == 1){
-        if (addInterval1Msec >= 10){
+        if (addInterval1Msec > 10){
             addInterval1Msec=addInterval1Msec-10;
         }
     }else if (CurrentAlarm == 2){
-        if (addInterval2Msec >= 10){
+        if (addInterval2Msec > 10){
             addInterval2Msec=addInterval2Msec-10;
         }
     }else if (CurrentAlarm == 3){
-        if (addInterval3Msec >= 10){
+        if (addInterval3Msec > 10){
             addInterval3Msec=addInterval3Msec-10;
         }
     }else if (CurrentAlarm == 4){
-        if (addInterval4Msec >= 10){
+        if (addInterval4Msec > 10){
             addInterval4Msec=addInterval4Msec-10;
         }
     }
@@ -1241,5 +1266,175 @@ int AgetMin(){
     return Aget;
 }
 
+
+void GetAlarmE(){
+    //function for getting the data out of the EEprom
+//I2C dingen
+
+    alarm1Active = 1;
+    alarm2Active = 1;
+    alarm3Active = 1;
+    alarm4Active = 1;
+
+    alarm1Mode = 2;
+    alarm2Mode = 2;
+    alarm3Mode = 2;
+    alarm4Mode = 2;
+
+    //Alarm 1
+    alarm1Hour = 0;
+    alarm1Min = 0;
+    alarm1Sec = 10;
+    alarm1Msec = 0;
+    alarm1Mode = 2;
+    addInterval1Msec = 10;
+    addInterval1Sec = 0;
+    addInterval1Min  = 0;
+    addInterval1Hour = 0;
+    alarm1Mon = 1;
+    alarm1Tue = 0;
+    alarm1Wed = 0;
+    alarm1Thu = 0;
+    alarm1Fri = 0;
+    alarm1Sat = 0;
+    alarm1Sun = 0;
+
+    //Alarm 2
+    alarm2Hour = 0;
+    alarm2Min = 0;
+    alarm2Sec = 10;
+    alarm2Msec = 0;
+    alarm2Mode = 2;
+    addInterval2Msec = 20;
+    addInterval2Sec = 0;
+    addInterval2Min  = 0;
+    addInterval2Hour = 0;
+    alarm2Mon = 1;
+    alarm2Tue = 0;
+    alarm2Wed = 0;
+    alarm2Thu = 0;
+    alarm2Fri = 0;
+    alarm2Sat = 0;
+    alarm2Sun = 0;
+
+    //Alarm 3
+    alarm3Hour = 0;
+    alarm3Min = 0;
+    alarm3Sec = 10;
+    alarm3Msec = 0;
+    alarm3Mode = 2;
+    addInterval3Msec = 30;
+    addInterval3Sec = 0;
+    addInterval3Min  = 0;
+    addInterval3Hour = 0;
+    alarm3Mon = 1;
+    alarm3Tue = 0;
+    alarm3Wed = 0;
+    alarm3Thu = 0;
+    alarm3Fri = 0;
+    alarm3Sat = 0;
+    alarm3Sun = 0;
+
+    //Alarm 4
+    alarm4Hour = 0;
+    alarm4Min = 0;
+    alarm4Sec = 10;
+    alarm4Msec = 0;
+    alarm4Mode = 2;
+    addInterval4Msec = 40;
+    addInterval4Sec = 0;
+    addInterval4Min  = 0;
+    addInterval4Hour = 0;
+    alarm4Mon = 1;
+    alarm4Tue = 0;
+    alarm4Wed = 0;
+    alarm4Thu = 0;
+    alarm4Fri = 0;
+    alarm4Sat = 0;
+    alarm4Sun = 0;
+}
+
+void SetAlarmE(){
+
+    int test = 0;
+
+    test = alarm1Active;
+    test = alarm2Active;
+    test = alarm3Active;
+    test = alarm4Active;
+
+    test = alarm1Mode;
+    test = alarm2Mode;
+    test = alarm3Mode;
+    test = alarm4Mode;
+
+    //Alarm 1
+    test = alarm1Hour;
+    test = alarm1Min;
+    test = alarm1Sec;
+    test = alarm1Msec;
+    test = addInterval1Msec;
+    test = addInterval1Sec;
+    test = addInterval1Min;
+    test = addInterval1Hour;
+    test = alarm1Mon;
+    test = alarm1Tue;
+    test = alarm1Wed;
+    test = alarm1Thu;
+    test = alarm1Fri;
+    test = alarm1Sat;
+    test = alarm1Sun;
+
+    //Alarm 2
+    test = alarm2Hour;
+    test = alarm2Min;
+    test = alarm2Sec;
+    test = alarm2Msec;
+    test = addInterval2Msec;
+    test = addInterval2Sec;
+    test = addInterval2Min;
+    test = addInterval2Hour;
+    test = alarm2Mon;
+    test = alarm2Tue;
+    test = alarm2Wed;
+    test = alarm2Thu;
+    test = alarm2Fri;
+    test = alarm2Sat;
+    test = alarm2Sun;
+
+    //Alarm 3
+    test = alarm3Hour;
+    test = alarm3Min;
+    test = alarm3Sec;
+    test = alarm3Msec;
+    test = addInterval3Msec;
+    test = addInterval3Sec;
+    test = addInterval3Min;
+    test = addInterval3Hour;
+    test = alarm3Mon;
+    test = alarm3Tue;
+    test = alarm3Wed;
+    test = alarm3Thu;
+    test = alarm3Fri;
+    test = alarm3Sat;
+    test = alarm3Sun;
+
+    //Alarm 4
+    test = alarm4Hour;
+    test = alarm4Min;
+    test = alarm4Sec;
+    test = alarm4Msec;
+    test = addInterval4Msec;
+    test = addInterval4Sec;
+    test = addInterval4Min;
+    test = addInterval4Hour;
+    test = alarm4Mon;
+    test = alarm4Tue;
+    test = alarm4Wed;
+    test = alarm4Thu;
+    test = alarm4Fri;
+    test = alarm4Sat;
+    test = alarm4Sun;
+}
 
 

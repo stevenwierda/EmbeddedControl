@@ -33,9 +33,22 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         break;
     case GX_SIGNAL(BUTLED, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);
+
+
+
+ EEPromWrite();
         break;
+
+
+
     case GX_SIGNAL(BUTSETALARM, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
+
+
+ EEPromRead();
+
+
+
         break;
     default:
         gx_window_event_process(widget, event_ptr);
@@ -123,7 +136,6 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
 {
     UINT result = gx_window_event_process(widget, event_ptr);
-
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(butterugLED, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);

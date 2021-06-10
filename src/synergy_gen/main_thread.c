@@ -93,7 +93,7 @@ SSP_VECTOR_DEFINE_CHAN(iic_eri_isr, IIC, ERI, 0);
 #endif
 riic_instance_ctrl_t g_i2c0_ctrl;
 const riic_extended_cfg g_i2c0_extend =
-{ .timeout_mode = RIIC_TIMEOUT_MODE_SHORT, };
+{ .timeout_mode = RIIC_TIMEOUT_MODE_LONG, };
 const i2c_cfg_t g_i2c0_cfg =
 { .channel = 0, .rate = I2C_RATE_STANDARD, .slave = 0x00, .addr_mode = I2C_ADDR_MODE_7BIT, .sda_delay = 300,
 #define SYNERGY_NOT_DEFINED (1)            

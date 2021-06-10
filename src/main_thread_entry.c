@@ -72,14 +72,15 @@ void main_thread_entry(void) {
 	UINT      status    = TX_SUCCESS;
 
     //I2C stuff
+
     #define I2C_ADDRESS   0x68
     g_i2c0.p_api->open(g_i2c0.p_ctrl, g_i2c0.p_cfg);
 
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
 
-    sync_time();    //sync the time when the microcontroller starts.
-
+    sync_time();        //sync the time when the microcontroller starts.
+    GetAlarmE();        //get the values from the EEProm.
 
     /* Initializes GUIX. */
     status = gx_system_initialize();
@@ -348,6 +349,8 @@ void Timer1_callback(timer_callback_args_t * p_args){
         g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, true);   // GREEN LED
         OnOff = !OnOff;
     }
+    //call on the EEPROM write function
+    //only if something has changed and 5 seconds have passed to make sure to not strain the rtc
 }
 
 

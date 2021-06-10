@@ -645,7 +645,7 @@
       <property id="module.driver.i2c.slave" value="0x00"/>
       <property id="module.driver.i2c.addr_mode" value="module.driver.i2c.addr_mode.addr_mode_7bit"/>
       <property id="module.driver.i2c.sda_delay" value="300"/>
-      <property id="module.driver.i2c.timeout_mode" value="module.driver.i2c.timeout_mode.short_mode"/>
+      <property id="module.driver.i2c.timeout_mode" value="module.driver.i2c.timeout_mode.long_mode"/>
       <property id="module.driver.i2c.p_callback" value="NULL"/>
       <property id="module.driver.i2c.rxi_ipl" value="board.icu.common.irq.priority7"/>
       <property id="module.driver.i2c.txi_ipl" value="board.icu.common.irq.priority7"/>

@@ -95,9 +95,12 @@ int AgetMin();
 //I2C stuff
 void sync_time();
 void set_time(int,int,int,int,int,int,int);
+void EEPromWrite();
+void EEPromRead();
 
-//void GetAlarmData();
-//void SetAlarmData();
+
+void GetAlarmE();
+void SetAlarmE();
 
 
 #endif /* TIME_H_ */
