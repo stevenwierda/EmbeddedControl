@@ -6,6 +6,7 @@
 #include "gui/guiapp_specifications.h"
 #include "gui/guiapp_resources.h"
 #include "time.h"
+#include "stdio.h"
 
 #if defined(BSP_BOARD_S7G2_SK)
 #include "hardware/lcd.h"
@@ -39,11 +40,17 @@ int value1 = 0;
 int value2 = 0;
 int value3 = 0;
 
+int cicle = 0;
+
 bool AL0 = true;
 bool AL1 = true;
 bool AL2 = true;
 bool AL3 = true;
 long unsigned int interuptTime;
+int message1 = 0;
+int message2 = 0;
+
+extern void initialise_monitor_handles(void);
 
 #define Alarm1Pin IOPORT_PORT_04_PIN_02 //Pin 42
 #define Alarm2Pin IOPORT_PORT_04_PIN_03 //Pin 43
@@ -62,6 +69,8 @@ void main_thread_entry(void) {
     Timer1.p_api->open(Timer1.p_ctrl,Timer1.p_cfg);
     //TimeAdd_timer0.p_api->open(TimeAdd_timer0.p_ctrl,TimeAdd_timer0.p_cfg);
 
+    initialise_monitor_handles();
+    printf("hi");
     //all leds off
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, true);   // GREEN LED
     g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, true);   // Yellow LED
@@ -225,7 +234,9 @@ void main_thread_entry(void) {
 		if (new_gui_event) {
 			gx_system_event_send(&g_gx_event);
 		}
+		//cicle = cicle + 1;
 	}
+
 }
 
 static bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * gx_event)
@@ -333,6 +344,12 @@ void led_timer0_callback(timer_callback_args_t * p_args){
 void Timer1_callback(timer_callback_args_t * p_args){
 //every second check if the RTC is online.
 //if its not then blink red if it is then blink green
+
+
+    scanf("%i", &message1);
+
+
+    printf("number = %i", message2);
 
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);

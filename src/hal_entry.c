@@ -4,7 +4,9 @@
 #include "time.h"
 
 
+
 void hal_entry(void)
 {
-
+    while(true){
+    }
 }
