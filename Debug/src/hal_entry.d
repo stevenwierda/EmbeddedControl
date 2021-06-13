@@ -81,16 +81,34 @@ src/hal_entry.o: ../src/hal_entry.c \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/hal_data.h \
+<<<<<<< Updated upstream
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
+=======
+>>>>>>> Stashed changes
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h \
+<<<<<<< Updated upstream
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
+=======
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_uart.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_uart_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_sci_uart_cfg.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_uart_comms.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_comms_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework/sf_uart_comms_cfg.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
+>>>>>>> Stashed changes
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h \
@@ -264,6 +282,7 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_th
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/hal_data.h:
 
+<<<<<<< Updated upstream
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
@@ -296,6 +315,52 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framewo
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
 
+=======
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_uart.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_uart_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_sci_uart_cfg.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_uart_comms.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_comms_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework/sf_uart_comms_cfg.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_external_irq_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
+
+>>>>>>> Stashed changes
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
 
 ../src/time.h:

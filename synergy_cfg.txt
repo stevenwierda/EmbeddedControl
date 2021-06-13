@@ -303,12 +303,22 @@ Synergy Configuration
     
   Module "Transfer Driver on r_dtc"
     Parameter Checking: Enabled
-    Software Start: Disabled
+    Software Start: Enabled
     Linker section to keep DTC vector table: .ssp_dtc_vector_table
     
   Module "Touch Panel Driver on touch_panel_sx8654"
   Module "JPEG Common"
   Module "Timer Driver on r_gpt"
+    Parameter Checking: Default (BSP)
+    
+  Module "Communications Framework on sf_uart_comms"
+    Parameter Checking: Default (BSP)
+    Read Input Queue Size (4-Byte Words): 15
+    
+  Module "UART Driver on r_sci_uart"
+    External RTS Operation: Disable
+    Reception: Enable
+    Transmission: Enable
     Parameter Checking: Default (BSP)
     
   HAL
@@ -764,6 +774,54 @@ Synergy Configuration
       Callback: Timer1_callback
       Overflow Interrupt Priority: Priority 9
       
+    Instance "g_sf_comms0 Communications Framework on sf_uart_comms"
+      Name: g_sf_comms0
+      Name of generated initialization function: sf_comms_init0
+      Auto Initialization: Enable
+      
+      Instance "g_uart0 UART Driver on r_sci_uart"
+        Name: g_uart0
+        Channel: 0
+        Baud Rate: 9600
+        Data Bits: 8bits
+        Parity: None
+        Stop Bits: 1bit
+        CTS/RTS Selection: RTS (CTS is disabled)
+        Name of UART callback function to be defined by user: NULL
+        Name of UART callback function for the RTS external pin control to be defined by user: NULL
+        Clock Source: Internal Clock
+        Baudrate Clock Output from SCK pin: Disable
+        Start bit detection: Falling Edge
+        Noise Cancel: Disable
+        Bit Rate Modulation Enable: Enable
+        Receive FIFO Trigger Level: Max
+        Receive Interrupt Priority: Priority 12
+        Transmit Interrupt Priority: Priority 12
+        Transmit End Interrupt Priority: Priority 12
+        Error Interrupt Priority: Priority 13
+        Baudrate Percent Error: 2.0
+        UART Communication Mode: RS232
+        UART RS485 Communication Mode: Half Duplex
+        RS485 DE Port: 09
+        RS485 DE Pin: 14
+        
+        Instance "g_transfer6 Transfer Driver on r_dtc SCI0 TXI"
+          Name: g_transfer6
+          Mode: Normal
+          Transfer Size: 1 Byte
+          Destination Address Mode: Fixed
+          Source Address Mode: Incremented
+          Repeat Area (Unused in Normal Mode): Source
+          Interrupt Frequency: After all transfers have completed
+          Destination Pointer: NULL
+          Source Pointer: NULL
+          Number of Transfers: 0
+          Number of Blocks (Valid only in Block Mode): 0
+          Activation Source (Must enable IRQ): SCI0 TXI
+          Auto Enable: False
+          Callback (Only valid with Software start): NULL
+          ELC Software Event Interrupt Priority: Disabled
+          
     Object "g_main_semaphore_lcdc Semaphore"
       Name: Main Semaphore
       Symbol: g_main_semaphore_lcdc

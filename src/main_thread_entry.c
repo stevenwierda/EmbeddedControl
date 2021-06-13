@@ -47,15 +47,22 @@ bool AL1 = true;
 bool AL2 = true;
 bool AL3 = true;
 long unsigned int interuptTime;
+<<<<<<< Updated upstream
 int message1 = 0;
 int message2 = 0;
 
 extern void initialise_monitor_handles(void);
+=======
+int cycle;
+int mode7 = 0;
+>>>>>>> Stashed changes
 
 #define Alarm1Pin IOPORT_PORT_04_PIN_02 //Pin 42
 #define Alarm2Pin IOPORT_PORT_04_PIN_03 //Pin 43
 #define Alarm3Pin IOPORT_PORT_04_PIN_04 //Pin 44
 #define Alarm4Pin IOPORT_PORT_04_PIN_05 //Pin 45
+
+extern void initialise_monitor_handles(void);
 
 GX_WINDOW_ROOT * p_window_root;
 extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
@@ -89,6 +96,15 @@ void main_thread_entry(void) {
 
     sync_time();    //sync the time when the microcontroller starts.
 
+
+    /* Start Console*/
+    initialise_monitor_handles();
+    printf("Monitor active \n");
+    //scanf(" %i", &mode7);
+    cycle = getchar();
+    cycle = getchar();
+    printf("%c \n", cycle);
+    mode7 = cycle-'0';
 
     /* Initializes GUIX. */
     status = gx_system_initialize();
@@ -194,6 +210,7 @@ void main_thread_entry(void) {
 
 	while(1)
 	{
+	    //cycle = cycle + 1;
 		bool new_gui_event = false;
 
 		err = g_sf_message0.p_api->pend(g_sf_message0.p_ctrl, &main_thread_message_queue, (sf_message_header_t **) &p_message, TX_WAIT_FOREVER);

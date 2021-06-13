@@ -1,11 +1,6 @@
-src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
- ../src/gui/guiapp_resources.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_api.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h \
- c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h \
+src/UART_Framework_MG.o: ../src/UART_Framework_MG.c \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src/UART_Framework_MG.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h \
  c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_common_api.h \
  c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\ssp_version.h \
@@ -51,11 +46,11 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_feature.h \
  c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_mcu_api.h \
  c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_port.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/gx_user.h \
- ../src/gui/guiapp_specifications.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h \
+ c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/hal_data.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/common_data.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_message.h \
@@ -73,6 +68,10 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_display_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_el_gx.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_el_gx_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_port.h \
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/gx_user.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_display.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_elc.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_elc_cfg.h \
@@ -82,21 +81,10 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_cgc_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_ioport.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h \
-<<<<<<< Updated upstream
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h \
-=======
->>>>>>> Stashed changes
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h \
-<<<<<<< Updated upstream
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
-=======
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_uart.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_uart_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h \
@@ -109,29 +97,17 @@ src/guiapp_event_handlers.o: ../src/guiapp_event_handlers.c \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h \
->>>>>>> Stashed changes
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_external_irq_api.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h \
- C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h \
- ../src/time.h
+ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h
 
-../src/gui/guiapp_resources.h:
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src/UART_Framework_MG.h:
 
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h:
-
-c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h:
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h:
 
@@ -223,15 +199,15 @@ c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu
 
 c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\src\bsp\mcu\all\bsp_error_checking.h:
 
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_port.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/gx_user.h:
-
-../src/gui/guiapp_specifications.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/main_thread.h:
-
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_port.h:
+
+c:\users\steve\onedrive\documents\github\embeddedcontrol\synergy\ssp\inc\framework\el\cm4_gcc\tx_port.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/tx_user.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_cmsis.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\src\synergy_gen/hal_data.h:
 
@@ -267,6 +243,14 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framewo
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_el_gx_api.h:
 
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/tx_api.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_port.h:
+
+C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\framework\el/gx_user.h:
+
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\el/gx_display.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_elc.h:
@@ -285,40 +269,6 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_ioport_cfg.h:
 
-<<<<<<< Updated upstream
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_gpt.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_timer_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_elc_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_dtc_cfg.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_riic.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy_cfg\ssp_cfg\driver/r_riic_cfg.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_i2c_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_icu.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_external_irq_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_external_irq.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\api/sf_external_irq_api.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framework\instances/sf_touch_panel_i2c.h:
-
-C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
-
-=======
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_dtc.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_transfer_api.h:
@@ -363,7 +313,4 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framewo
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
 
->>>>>>> Stashed changes
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
-
-../src/time.h:

@@ -12,12 +12,14 @@ RM := rm -rf
 -include sources.mk
 -include synergy/ssp_supplemental/touch_drivers/touch_panel_i2c_sx8654/subdir.mk
 -include synergy/ssp/src/framework/tes/dave2d/subdir.mk
+-include synergy/ssp/src/framework/sf_uart_comms/subdir.mk
 -include synergy/ssp/src/framework/sf_touch_panel_i2c/subdir.mk
 -include synergy/ssp/src/framework/sf_tes_2d_drw/subdir.mk
 -include synergy/ssp/src/framework/sf_message/subdir.mk
 -include synergy/ssp/src/framework/sf_jpeg_decode/subdir.mk
 -include synergy/ssp/src/framework/sf_external_irq/subdir.mk
 -include synergy/ssp/src/framework/sf_el_gx/subdir.mk
+-include synergy/ssp/src/driver/r_sci_uart/subdir.mk
 -include synergy/ssp/src/driver/r_sci_spi/subdir.mk
 -include synergy/ssp/src/driver/r_riic/subdir.mk
 -include synergy/ssp/src/driver/r_jpeg_decode/subdir.mk

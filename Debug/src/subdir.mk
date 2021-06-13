@@ -4,18 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/UART_Framework_MG.c \
 ../src/guiapp_event_handlers.c \
 ../src/hal_entry.c \
 ../src/main_thread_entry.c \
 ../src/time.c 
 
 OBJS += \
+./src/UART_Framework_MG.o \
 ./src/guiapp_event_handlers.o \
 ./src/hal_entry.o \
 ./src/main_thread_entry.o \
 ./src/time.o 
 
 C_DEPS += \
+./src/UART_Framework_MG.d \
 ./src/guiapp_event_handlers.d \
 ./src/hal_entry.d \
 ./src/main_thread_entry.d \

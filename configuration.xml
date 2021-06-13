@@ -205,6 +205,14 @@
       <description>General Purpose Timer: Provides=[Timer ,GPT]</description>
       <originalPack>Renesas.Synergy.1.7.8.pack</originalPack>
     </component>
+    <component apiversion="" class="Framework Services" condition="" group="all" subgroup="sf_uart_comms" variant="" vendor="Renesas" version="1.7.8">
+      <description>Framework UART Communications: Provides=[Framework UART] , Requires=[ThreadX ,Communications]</description>
+      <originalPack>Renesas.Synergy.1.7.8.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_sci_uart" variant="" vendor="Renesas" version="1.7.8">
+      <description>SCI UART: Provides=[UART] , Requires=[SCI Common]</description>
+      <originalPack>Renesas.Synergy.1.7.8.pack</originalPack>
+    </component>
   </synergyComponentSelection>
   <synergyIcuConfiguration/>
   <synergyMessagingConfiguration>
@@ -703,6 +711,54 @@
       <property id="module.driver.timer.p_callback" value="Timer1_callback"/>
       <property id="module.driver.timer.irq_ipl" value="board.icu.common.irq.priority9"/>
     </module>
+    <module id="module.framework.sf_comms_on_sf_uart_comms.335609019">
+      <property id="module.framework.sf_comms.name" value="g_sf_comms0"/>
+      <property id="module.framework.sf_comms.init_function" value="sf_comms_init0"/>
+      <property id="module.framework.sf_comms.init" value="module.framework.sf_comms.init.enable"/>
+    </module>
+    <module id="module.driver.uart_on_sci_uart.1301529834">
+      <property id="module.driver.uart.name" value="g_uart0"/>
+      <property id="module.driver.uart.channel" value="0"/>
+      <property id="module.driver.uart.baud_rate" value="9600"/>
+      <property id="module.driver.uart.data_bits" value="module.driver.uart.data_bits.data_bits_8"/>
+      <property id="module.driver.uart.parity" value="module.driver.uart.parity.parity_off"/>
+      <property id="module.driver.uart.stop_bits" value="module.driver.uart.stop_bits.stop_bits_1"/>
+      <property id="module.driver.uart.ctsrts_en" value="module.driver.uart.ctsrts_en.false"/>
+      <property id="module.driver.uart.callback" value="user_uart_callback"/>
+      <property id="module.driver.uart.callback.rts_pin_ctrl" value="NULL"/>
+      <property id="module.driver.uart.clk_src" value="module.driver.uart.clk_src.int_clk"/>
+      <property id="module.driver.uart.baudclk_out" value="module.driver.uart.baudclk_out.false"/>
+      <property id="module.driver.uart.rx_edge_start" value="module.driver.uart.rx_edge_start.true"/>
+      <property id="module.driver.uart.noisecancel_en" value="module.driver.uart.noisecancel_en.false"/>
+      <property id="module.driver.uart.bitrate_modulation" value="module.driver.uart.bitrate_modulation.true"/>
+      <property id="module.driver.uart.rx_fifo_trigger" value="module.driver.uart.rx_fifo_trigger.max"/>
+      <property id="module.driver.uart.rxi_ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.driver.uart.txi_ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.driver.uart.tei_ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.driver.uart.eri_ipl" value="board.icu.common.irq.priority13"/>
+      <property id="module.driver.uart.baud_rate_error" value="2.0"/>
+      <property id="module.driver.uart.uart_comm_mode" value="module.driver.uart.uart_comm_mode.uart_rs232_mode"/>
+      <property id="module.driver.uart.uart_rs485_mode" value="module.driver.uart.uart_rs485_mode.uart_hd_mode"/>
+      <property id="module.driver.uart.rs485_de_port" value="module.driver.uart.rs485_de_port.PORT_09"/>
+      <property id="module.driver.uart.rs485_de_pin" value="module.driver.uart.rs485_de_pin.PIN_14"/>
+    </module>
+    <module id="module.driver.transfer_on_dtc.1305606802">
+      <property id="module.driver.transfer.name" value="g_transfer6"/>
+      <property id="module.driver.transfer.mode" value="module.driver.transfer.mode.mode_normal"/>
+      <property id="module.driver.transfer.size" value="module.driver.transfer.size.size_2_byte"/>
+      <property id="module.driver.transfer.dest_addr_mode" value="module.driver.transfer.dest_addr_mode.addr_mode_fixed"/>
+      <property id="module.driver.transfer.src_addr_mode" value="module.driver.transfer.src_addr_mode.addr_mode_fixed"/>
+      <property id="module.driver.transfer.repeat_area" value="module.driver.transfer.repeat_area.repeat_area_source"/>
+      <property id="module.driver.transfer.interrupt" value="module.driver.transfer.interrupt.interrupt_end"/>
+      <property id="module.driver.transfer.p_dest" value="NULL"/>
+      <property id="module.driver.transfer.p_src" value="NULL"/>
+      <property id="module.driver.transfer.length" value="0"/>
+      <property id="module.driver.transfer.num_blocks" value="0"/>
+      <property id="module.driver.transfer.activation_source" value="module.driver.transfer.event.event_elc_software_event_0"/>
+      <property id="module.driver.transfer.auto_enable" value="module.driver.transfer.auto_enable.true"/>
+      <property id="module.driver.transfer.p_callback" value="NULL"/>
+      <property id="module.driver.transfer.irq_ipl" value="board.icu.common.irq.disabled"/>
+    </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.918725209"/>
       <stack module="module.driver.cgc_on_cgc.1335811009"/>
@@ -750,6 +806,11 @@
         <stack module="module.driver.transfer_on_dtc.1741452112" requires="module.driver.i2c_on_riic.requires.transfer_rx"/>
       </stack>
       <stack module="module.driver.timer_on_gpt.1941806096"/>
+      <stack module="module.framework.sf_comms_on_sf_uart_comms.335609019">
+        <stack module="module.driver.uart_on_sci_uart.1301529834" requires="module.framework.sf_comms_on_sf_uart_comms.requires.uart">
+          <stack module="module.driver.transfer_on_dtc.1305606802" requires="module.driver.uart_on_sci_uart.requires.transfer_tx"/>
+        </stack>
+      </stack>
       <object id="rtos.threadx.object.semaphore.2029776137">
         <property id="rtos.threadx.object.semaphore.name" value="Main Semaphore"/>
         <property id="rtos.threadx.object.semaphore.symbol" value="g_main_semaphore_lcdc"/>
@@ -783,6 +844,12 @@
       <property id="config.driver.ioport.checking" value="config.driver.ioport.checking.enabled"/>
     </config>
     <config id="config.threadx.thread"/>
+    <config id="config.driver.sci_uart">
+      <property id="config.driver.sci_uart.external_rts_operation" value="config.driver.sci_uart.external_rts_operation.disabled"/>
+      <property id="config.driver.sci_uart.uart_rx_enable" value="config.driver.sci_uart.uart_rx_enable.enabled"/>
+      <property id="config.driver.sci_uart.uart_tx_enable" value="config.driver.sci_uart.uart_tx_enable.enabled"/>
+      <property id="config.driver.sci_uart.param_checking_enable" value="config.driver.sci_uart.param_checking_enable.bsp"/>
+    </config>
     <config id="config.driver.riic">
       <property id="config.driver.riic.param_checking_enable" value="config.driver.riic.param_checking_enable.enabled"/>
     </config>
@@ -818,12 +885,16 @@
     <config id="config.framework.sf_jpeg_decode">
       <property id="config.framework.sf_jpeg_decode.param_checking_enable" value="config.framework.sf_jpeg_decode.param_checking_enable.enabled"/>
     </config>
+    <config id="config.framework.sf_uart_comms">
+      <property id="config.framework.sf_comms.param_checking_enable" value="config.framework.sf_comms.param_checking_enable.bsp"/>
+      <property id="config.framework.sf_comms.read_size" value="15"/>
+    </config>
     <config id="config.driver.sci_spi">
       <property id="config.driver.sci_spi.param_checking_enable" value="config.driver.sci_spi.param_checking_enable.enabled"/>
     </config>
     <config id="config.driver.dtc">
       <property id="config.driver.dtc.param_checking_enable" value="config.driver.dtc.param_checking_enable.enabled"/>
-      <property id="config.driver.dtc.software_start" value="config.driver.dtc.software_start.disabled"/>
+      <property id="config.driver.dtc.software_start" value="config.driver.dtc.software_start.enabled"/>
       <property id="config.driver.dtc.vector_table" value=".ssp_dtc_vector_table"/>
     </config>
     <config id="config.framework.sf_el_gx">

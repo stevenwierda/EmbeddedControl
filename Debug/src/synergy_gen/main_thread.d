@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 src/synergy_gen/main_thread.o: ../src/synergy_gen/main_thread.c \
  ../src/synergy_gen/main_thread.h \
  C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\bsp/bsp_api.h \
@@ -292,3 +293,6 @@ C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\framewo
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\instances/r_sci_spi.h:
 
 C:\Users\steve\OneDrive\Documents\GitHub\EmbeddedControl\synergy\ssp\inc\driver\api/r_spi_api.h:
+=======
+src/synergy_gen/main_thread.o: 
+>>>>>>> Stashed changes
