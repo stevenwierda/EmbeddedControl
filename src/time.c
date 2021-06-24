@@ -7,20 +7,20 @@
 #include "time.h"
 #include "common_data.h"
 
-int msec         =0;
+int msec        = 0;
 int sec         = 0;
 int min         = 0;
 int hour        = 0;
 int date        = 0;        //date
 int month       = 0;
 int year        = 0;
-int weekday     = 0;      //day of the week
+int weekday     = 0;        //day of the week
 
 int alarm1Hour = 0;
 int alarm1Min = 0;
 int alarm1Sec = 10;
 int alarm1Msec = 0;
-int alarm1Mode = 2;
+int alarm1Mode = 2;         //0 for nothing 1 for alarm 2 for PWM
 int addInterval1Msec = 200;
 int addInterval1Sec = 1;
 int addInterval1Min  = 0;
@@ -100,16 +100,6 @@ int CurrentAlarm = 0;
 
 uint8_t rtc_reg[7] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 
-//EEPRom variables
-UINT E2 = 0;
-UINT E3 = 0;
-
-UINT EEPRWRITE;
-UINT EEPRREAD;
-uint8_t EP_reg[3] = {0x00, 0x00, 0x13};
-
-
-
 //get the time from the RTC
 void sync_time()
 {
@@ -162,33 +152,290 @@ void set_time(int s_time_secs, int s_time_mins, int s_time_hours, int s_time_day
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &rtc_set_time[0], 8, false);
 }
 
-void EEPromWrite(){
-    //scrhijf de waardes van de EEPROM waneer er een verandering is en de user klaar is en op de terug knop drukt.
+void savealarm(int current){
+    int alarmHour[4] = {alarm1Hour, alarm2Hour, alarm3Hour, alarm4Hour};
+    int alarmMin[4] = {alarm1Min, alarm2Min, alarm3Min, alarm4Min};
+    int alarmMode[4] = {alarm1Mode, alarm2Mode, alarm3Mode, alarm4Mode};
+    int alarmMon[4] = {alarm1Mon, alarm2Mon, alarm3Mon, alarm4Mon};
+    int alarmTue[4] = {alarm1Tue, alarm2Tue, alarm3Tue, alarm4Tue};
+    int alarmWed[4] = {alarm1Wed, alarm2Wed, alarm3Wed, alarm4Wed};
+    int alarmThu[4] = {alarm1Thu, alarm2Thu, alarm3Thu, alarm4Thu};
+    int alarmFri[4] = {alarm1Fri, alarm2Fri, alarm3Fri, alarm4Fri};
+    int alarmSat[4] = {alarm1Sat, alarm2Sat, alarm3Sat, alarm4Sat};
+    int alarmSun[4] = {alarm1Sun, alarm2Sun, alarm3Sun, alarm4Sun};
+    int alarmActive[4] = {alarm1Active, alarm2Active, alarm3Active, alarm4Active};
 
-    //de aanroep functies staan in de event handelers in de main scherm functies/ aanroepen van onderdelen
+    int alarmDay = alarmMon[current - 1] + 2*alarmTue[current - 1] + 4*alarmWed[current - 1] + 8*alarmThu[current - 1] + 16*alarmFri[current - 1] + 32*alarmSat[current - 1] + 64*alarmSun[current - 1];
+    uint8_t Wtotal[7];
+
+    Wtotal[0] = current;
+    Wtotal[1] = 0x00;
+    Wtotal[2] = alarmHour[current - 1];
+    Wtotal[3] = alarmMin[current - 1];
+    Wtotal[4] = alarmDay;
+    Wtotal[5] = alarmActive[current - 1];
+    Wtotal[6] = alarmMode[current - 1];
 
     //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
 
     //set het adres met 2 bytes en schrijf daarna de bytes van de rest van de data.
-    EEPRWRITE = g_i2c0.p_api->write(g_i2c0.p_ctrl, &EP_reg[0], 3, false); //2 bytes scrijven
-
-    E2 = EP_reg[2];
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Wtotal[0], 7, false); //7 bytes scrijven
 }
 
-void EEPromRead(){
-    uint8_t EP[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+void savepwm(int current){
+    int alarmMode[4] = {alarm1Mode, alarm2Mode, alarm3Mode, alarm4Mode};
+    int addIntervalMsec[4] = {addInterval1Msec, addInterval2Msec, addInterval3Msec, addInterval4Msec};
+    int addIntervalSec[4] = {addInterval1Sec, addInterval2Sec, addInterval3Sec, addInterval4Sec};
+    int addIntervalMin[4]  = {addInterval1Min, addInterval2Min, addInterval3Min, addInterval4Min};
+    int addIntervalHour[4] = {addInterval1Hour, addInterval2Hour, addInterval3Hour, addInterval4Hour};
+    int alarmActive[4] = {alarm1Active, alarm2Active, alarm3Active, alarm4Active};
+
+    uint8_t Wtotal[8];
+
+    Wtotal[0] = current;
+    Wtotal[1] = 0x04;
+    Wtotal[2] = alarmMode[current - 1];
+    Wtotal[3] = addIntervalHour[current - 1];
+    Wtotal[4] = addIntervalMin[current - 1];
+    Wtotal[5] = addIntervalSec[current - 1];
+    Wtotal[6] = addIntervalMsec[current - 1] / 10;
+    Wtotal[7] = alarmActive[current - 1];
+
+    //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    //set het adres met 2 bytes en schrijf daarna de bytes van de rest van de data.
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Wtotal[0], 8, false); //8 bytes scrijven
+}
+
+void alarmpwm1read(){
+    //uint8_t EP5[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t Rtotal[2];
+    uint8_t arv[10];
+
+    Rtotal[0] = 0x01;
+    Rtotal[1] = 0x00;
 
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
 
-    g_i2c0.p_api->write(g_i2c0.p_ctrl, &EP_reg[0], 2, false);
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
 
-    EEPRREAD = g_i2c0.p_api->read(g_i2c0.p_ctrl, &EP[0], 1, true);
-    E3 = EP[0];
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    alarm1Hour = arv[0];
+    alarm1Min = arv[1];
+    alarm1Active = arv[3];
+    alarm1Mode = arv[4];
+    addInterval1Hour = arv[5];
+    addInterval1Min = arv[6];
+    addInterval1Sec = arv[7];
+    addInterval1Msec = arv[8];
+    addInterval1Msec = addInterval1Msec*10;
+    alarm1Active = arv[9];
+    if (arv[2] > 63){
+        alarm1Sun = 1;
+        arv[2] = arv[2] - 64;
+    }
+    else alarm1Sun = 0;
+    if (arv[2] > 31){
+        alarm1Sat = 1;
+        arv[2] = arv[2] - 32;
+    }
+    else alarm1Sat = 0;
+    if (arv[2] > 15){
+        alarm1Fri = 1;
+        arv[2] = arv[2] - 16;
+    }
+    else alarm1Fri = 0;
+    if (arv[2] > 7){
+        alarm1Thu = 1;
+        arv[2] = arv[2] - 8;
+    }
+    else alarm1Thu = 0;
+    if (arv[2] > 3){
+        alarm1Wed = 1;
+        arv[2] = arv[2] - 4;
+    }
+    else alarm1Wed = 0;
+    if (arv[2] > 1){
+        alarm1Tue = 1;
+        arv[2] = arv[2] - 2;
+    }
+    else alarm1Tue = 0;
+    alarm1Mon = arv[2];
 }
 
+void alarmpwm2read(){
+    uint8_t Rtotal[2];
+    uint8_t arv[10];
+
+    Rtotal[0] = 0x02;
+    Rtotal[1] = 0x00;
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
+
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    alarm2Hour = arv[0];
+    alarm2Min = arv[1];
+    alarm2Active = arv[3];
+    alarm2Mode = arv[4];
+    addInterval2Hour = arv[5];
+    addInterval2Min = arv[6];
+    addInterval2Sec = arv[7];
+    addInterval2Msec = arv[8];
+    addInterval2Msec = addInterval2Msec*10;
+    alarm2Active = arv[9];
+    if (arv[2] > 63){
+        alarm2Sun = 1;
+        arv[2] = arv[2] - 64;
+    }
+    else alarm2Sun = 0;
+    if (arv[2] > 31){
+        alarm2Sat = 1;
+        arv[2] = arv[2] - 32;
+    }
+    else alarm2Sat = 0;
+    if (arv[2] > 15){
+        alarm2Fri = 1;
+        arv[2] = arv[2] - 16;
+    }
+    else alarm2Fri = 0;
+    if (arv[2] > 7){
+        alarm2Thu = 1;
+        arv[2] = arv[2] - 8;
+    }
+    else alarm2Thu = 0;
+    if (arv[2] > 3){
+        alarm2Wed = 1;
+        arv[2] = arv[2] - 4;
+    }
+    else alarm2Wed = 0;
+    if (arv[2] > 1){
+        alarm2Tue = 1;
+        arv[2] = arv[2] - 2;
+    }
+    else alarm2Tue = 0;
+    alarm2Mon = arv[2];
+}
+
+void alarmpwm3read(){
+    uint8_t Rtotal[2];
+    uint8_t arv[10];
+
+    Rtotal[0] = 0x03;
+    Rtotal[1] = 0x00;
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
+
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    alarm3Hour = arv[0];
+    alarm3Min = arv[1];
+    alarm3Active = arv[3];
+    alarm3Mode = arv[4];
+    addInterval3Hour = arv[5];
+    addInterval3Min = arv[6];
+    addInterval3Sec = arv[7];
+    addInterval3Msec = arv[8];
+    addInterval3Msec = addInterval3Msec*10;
+    alarm3Active = arv[9];
+    if (arv[2] > 63){
+        alarm3Sun = 1;
+        arv[2] = arv[2] - 64;
+    }
+    else alarm3Sun = 0;
+    if (arv[2] > 31){
+        alarm3Sat = 1;
+        arv[2] = arv[2] - 32;
+    }
+    else alarm3Sat = 0;
+    if (arv[2] > 15){
+        alarm3Fri = 1;
+        arv[2] = arv[2] - 16;
+    }
+    else alarm3Fri = 0;
+    if (arv[2] > 7){
+        alarm3Thu = 1;
+        arv[2] = arv[2] - 8;
+    }
+    else alarm3Thu = 0;
+    if (arv[2] > 3){
+        alarm3Wed = 1;
+        arv[2] = arv[2] - 4;
+    }
+    else alarm3Wed = 0;
+    if (arv[2] > 1){
+        alarm3Tue = 1;
+        arv[2] = arv[2] - 2;
+    }
+    else alarm3Tue = 0;
+    alarm3Mon = arv[2];
+}
+
+void alarmpwm4read(){
+    //uint8_t EP5[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t Rtotal[2];
+    uint8_t arv[10];
+
+    Rtotal[0] = 0x04;
+    Rtotal[1] = 0x00;
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
+
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    alarm4Hour = arv[0];
+    alarm4Min = arv[1];
+    alarm4Active = arv[3];
+    alarm4Mode = arv[4];
+    addInterval4Hour = arv[5];
+    addInterval4Min = arv[6];
+    addInterval4Sec = arv[7];
+    addInterval4Msec = arv[8];
+    addInterval4Msec = addInterval4Msec*10;
+    alarm4Active = arv[9];
+    if (arv[2] > 63){
+        alarm4Sun = 1;
+        arv[2] = arv[2] - 64;
+    }
+    else alarm4Sun = 0;
+    if (arv[2] > 31){
+        alarm4Sat = 1;
+        arv[2] = arv[2] - 32;
+    }
+    else alarm4Sat = 0;
+    if (arv[2] > 15){
+        alarm4Fri = 1;
+        arv[2] = arv[2] - 16;
+    }
+    else alarm4Fri = 0;
+    if (arv[2] > 7){
+        alarm4Thu = 1;
+        arv[2] = arv[2] - 8;
+    }
+    else alarm4Thu = 0;
+    if (arv[2] > 3){
+        alarm4Wed = 1;
+        arv[2] = arv[2] - 4;
+    }
+    else alarm4Wed = 0;
+    if (arv[2] > 1){
+        alarm4Tue = 1;
+        arv[2] = arv[2] - 2;
+    }
+    else alarm4Tue = 0;
+    alarm4Mon = arv[2];
+}
 
 
 void addMs(){
@@ -1009,30 +1256,29 @@ void AchangeMinUp(){
     switch(CurrentAlarm){
         case 1:
             alarm1Min = alarm1Min + 1;
-            if (alarm1Min > 60){
+            if (alarm1Min > 59){
                 alarm1Min = 0;
             }
             break;
         case 2:
             alarm2Min = alarm2Min + 1;
-            if (alarm2Min > 60){
+            if (alarm2Min > 59){
                 alarm2Min = 0;
             }
             break;
         case 3:
             alarm3Min = alarm3Min + 1;
-            if (alarm3Min > 60){
+            if (alarm3Min > 59){
                 alarm3Min = 0;
             }
             break;
 
         case 4:
             alarm4Min = alarm4Min + 1;
-            if (alarm4Min > 60){
+            if (alarm4Min > 59){
                 alarm4Min = 0;
             }
             break;
-
         default:
             break;
     }
@@ -1043,27 +1289,27 @@ void AchangeMinDown(){
         case 1:
             alarm1Min = alarm1Min - 1;
             if (alarm1Min < 0){
-                alarm1Min = 60;
+                alarm1Min = 59;
             }
             break;
 
         case 2:
             alarm2Min = alarm2Min - 1;
             if (alarm2Min < 0){
-                alarm2Min = 60;
+                alarm2Min = 59;
             }
             break;
         case 3:
             alarm3Min = alarm3Min - 1;
             if (alarm3Min < 0){
-                alarm3Min = 60;
+                alarm3Min = 59;
             }
             break;
 
         case 4:
             alarm4Min = alarm4Min - 1;
             if (alarm4Min < 0){
-                alarm4Min = 60;
+                alarm4Min = 59;
             }
             break;
 
@@ -1095,7 +1341,7 @@ void AchangeHourUp(){
             break;
 
         case 4:
-            alarm4Hour = alarm3Hour + 1;
+            alarm4Hour = alarm4Hour + 1;
             if (alarm4Hour > 23){
                 alarm4Hour = 0;
             }
@@ -1266,175 +1512,25 @@ int AgetMin(){
     return Aget;
 }
 
-
-void GetAlarmE(){
-    //function for getting the data out of the EEprom
-//I2C dingen
-
-    alarm1Active = 1;
-    alarm2Active = 1;
-    alarm3Active = 1;
-    alarm4Active = 1;
-
-    alarm1Mode = 2;
-    alarm2Mode = 2;
-    alarm3Mode = 2;
-    alarm4Mode = 2;
-
-    //Alarm 1
-    alarm1Hour = 0;
-    alarm1Min = 0;
-    alarm1Sec = 10;
-    alarm1Msec = 0;
-    alarm1Mode = 2;
-    addInterval1Msec = 10;
-    addInterval1Sec = 0;
-    addInterval1Min  = 0;
-    addInterval1Hour = 0;
-    alarm1Mon = 1;
-    alarm1Tue = 0;
-    alarm1Wed = 0;
-    alarm1Thu = 0;
-    alarm1Fri = 0;
-    alarm1Sat = 0;
-    alarm1Sun = 0;
-
-    //Alarm 2
-    alarm2Hour = 0;
-    alarm2Min = 0;
-    alarm2Sec = 10;
-    alarm2Msec = 0;
-    alarm2Mode = 2;
-    addInterval2Msec = 20;
-    addInterval2Sec = 0;
-    addInterval2Min  = 0;
-    addInterval2Hour = 0;
-    alarm2Mon = 1;
-    alarm2Tue = 0;
-    alarm2Wed = 0;
-    alarm2Thu = 0;
-    alarm2Fri = 0;
-    alarm2Sat = 0;
-    alarm2Sun = 0;
-
-    //Alarm 3
-    alarm3Hour = 0;
-    alarm3Min = 0;
-    alarm3Sec = 10;
-    alarm3Msec = 0;
-    alarm3Mode = 2;
-    addInterval3Msec = 30;
-    addInterval3Sec = 0;
-    addInterval3Min  = 0;
-    addInterval3Hour = 0;
-    alarm3Mon = 1;
-    alarm3Tue = 0;
-    alarm3Wed = 0;
-    alarm3Thu = 0;
-    alarm3Fri = 0;
-    alarm3Sat = 0;
-    alarm3Sun = 0;
-
-    //Alarm 4
-    alarm4Hour = 0;
-    alarm4Min = 0;
-    alarm4Sec = 10;
-    alarm4Msec = 0;
-    alarm4Mode = 2;
-    addInterval4Msec = 40;
-    addInterval4Sec = 0;
-    addInterval4Min  = 0;
-    addInterval4Hour = 0;
-    alarm4Mon = 1;
-    alarm4Tue = 0;
-    alarm4Wed = 0;
-    alarm4Thu = 0;
-    alarm4Fri = 0;
-    alarm4Sat = 0;
-    alarm4Sun = 0;
-}
-
-void SetAlarmE(){
-
-    int test = 0;
-
-    test = alarm1Active;
-    test = alarm2Active;
-    test = alarm3Active;
-    test = alarm4Active;
-
-    test = alarm1Mode;
-    test = alarm2Mode;
-    test = alarm3Mode;
-    test = alarm4Mode;
-
-    //Alarm 1
-    test = alarm1Hour;
-    test = alarm1Min;
-    test = alarm1Sec;
-    test = alarm1Msec;
-    test = addInterval1Msec;
-    test = addInterval1Sec;
-    test = addInterval1Min;
-    test = addInterval1Hour;
-    test = alarm1Mon;
-    test = alarm1Tue;
-    test = alarm1Wed;
-    test = alarm1Thu;
-    test = alarm1Fri;
-    test = alarm1Sat;
-    test = alarm1Sun;
-
-    //Alarm 2
-    test = alarm2Hour;
-    test = alarm2Min;
-    test = alarm2Sec;
-    test = alarm2Msec;
-    test = addInterval2Msec;
-    test = addInterval2Sec;
-    test = addInterval2Min;
-    test = addInterval2Hour;
-    test = alarm2Mon;
-    test = alarm2Tue;
-    test = alarm2Wed;
-    test = alarm2Thu;
-    test = alarm2Fri;
-    test = alarm2Sat;
-    test = alarm2Sun;
-
-    //Alarm 3
-    test = alarm3Hour;
-    test = alarm3Min;
-    test = alarm3Sec;
-    test = alarm3Msec;
-    test = addInterval3Msec;
-    test = addInterval3Sec;
-    test = addInterval3Min;
-    test = addInterval3Hour;
-    test = alarm3Mon;
-    test = alarm3Tue;
-    test = alarm3Wed;
-    test = alarm3Thu;
-    test = alarm3Fri;
-    test = alarm3Sat;
-    test = alarm3Sun;
-
-    //Alarm 4
-    test = alarm4Hour;
-    test = alarm4Min;
-    test = alarm4Sec;
-    test = alarm4Msec;
-    test = addInterval4Msec;
-    test = addInterval4Sec;
-    test = addInterval4Min;
-    test = addInterval4Hour;
-    test = alarm4Mon;
-    test = alarm4Tue;
-    test = alarm4Wed;
-    test = alarm4Thu;
-    test = alarm4Fri;
-    test = alarm4Sat;
-    test = alarm4Sun;
+Aactive(int currentAlarm){
+    int Active = 0;
+    switch(CurrentAlarm){
+        case 1:
+            Active = alarm1Active;
+           break;
+        case 2:
+            Active = alarm2Active;
+            break;
+        case 3:
+            Active = alarm3Active;
+            break;
+        case 4:
+            Active = alarm4Active;
+            break;
+        default:
+            break;
+    }
+    return Active;
 }
 
 

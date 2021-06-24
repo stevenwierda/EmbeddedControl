@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 16. 5.2021   Time (hh:mm): 14:42                        */
+/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 09:37                        */
 /*******************************************************************************/
 
 
@@ -389,10 +389,13 @@ GX_CONST GX_UBYTE display_1_STRING_18_English[] = "SwitchAlarm";
 GX_CONST GX_UBYTE display_1_STRING_19_English[] = "SwitchA";
 GX_CONST GX_UBYTE display_1_STRING_20_English[] = "radio";
 GX_CONST GX_UBYTE display_1_STRING_21_English[] = "zaterday";
+GX_CONST GX_UBYTE display_1_STRING_22_English[] = "AUTOSTART";
+GX_CONST GX_UBYTE display_1_STRING_23_English[] = "autostart";
+GX_CONST GX_UBYTE display_1_STRING_24_English[] = "Alarm actief";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[63] =
+GX_CONST GX_STRING display_1_English_string_table[66] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_SETTINGS_English, sizeof(display_1_SETTINGS_English) - 1},
@@ -456,7 +459,10 @@ GX_CONST GX_STRING display_1_English_string_table[63] =
     {(GX_CONST GX_CHAR *)display_1_STRING_18_English, sizeof(display_1_STRING_18_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_19_English, sizeof(display_1_STRING_19_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_20_English, sizeof(display_1_STRING_20_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_21_English, sizeof(display_1_STRING_21_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_STRING_21_English, sizeof(display_1_STRING_21_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_22_English, sizeof(display_1_STRING_22_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_23_English, sizeof(display_1_STRING_23_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_24_English, sizeof(display_1_STRING_24_English) - 1}
 };
 
 /*  Language Table                                                             */

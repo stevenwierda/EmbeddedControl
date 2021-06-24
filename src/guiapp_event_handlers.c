@@ -33,22 +33,9 @@ UINT mainWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         break;
     case GX_SIGNAL(BUTLED, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&LEDControle, (GX_WIDGET*)widget, true);
-
-
-
- EEPromWrite();
         break;
-
-
-
     case GX_SIGNAL(BUTSETALARM, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&selectAlarm, (GX_WIDGET*)widget, true);
-
-
- EEPromRead();
-
-
-
         break;
     default:
         gx_window_event_process(widget, event_ptr);
@@ -378,31 +365,33 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
     //get the old date first so I can save the time only once
 
     int CurrentAlarm = getAlarm();
-   //int Week[7] = {0,0,0,0,0,0,0};
-    //Week[0,1,2,3,4,5,6] = getweekday();
+
+    update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
 
     update_number_id(widget->gx_widget_parent, PRMPTHOUR,  AgetHour());
     update_number_id(widget->gx_widget_parent, PRMPTMIN, AgetMin());
 
     update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(0));
     update_number_id(widget->gx_widget_parent, PRMTHUESEDAY,getweekday(1));
-    update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(2));
-    update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(3));
-    update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(4));
-    update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(5));
-    update_number_id(widget->gx_widget_parent, PRMTMONDAY, getweekday(6));
+    update_number_id(widget->gx_widget_parent, PRMTWEDNESDAY, getweekday(2));
+    update_number_id(widget->gx_widget_parent, PRMTTHURSDAY, getweekday(3));
+    update_number_id(widget->gx_widget_parent, PRMTFRIDAY, getweekday(4));
+    update_number_id(widget->gx_widget_parent, PRMTSATERDAY, getweekday(5));
+    update_number_id(widget->gx_widget_parent, PRMTSUNDAY, getweekday(6));
 
     UINT result = gx_window_event_process(widget, event_ptr);
     switch (event_ptr->gx_event_type)
     {
     case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
         show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+        //when the return button is pressed save the current Alarm
+        savealarm(CurrentAlarm);
         break;
 
     //Enable the selected alarm
-    case GX_SIGNAL(ENABLEALARM, GX_EVENT_TOGGLE_ON):
-            switch (CurrentAlarm)
-            {
+    case GX_SIGNAL(ALARMACTIEF, GX_EVENT_CLICKED):
+        if(Aactive(CurrentAlarm) == 0){
+            switch (CurrentAlarm){
             case 1:
                 startAlarm1();
                 break;
@@ -418,28 +407,27 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
             default:
                 break;
             }
-        break;
-    //Disable the selected alarm
-    case GX_SIGNAL(ENABLEALARM, GX_EVENT_TOGGLE_OFF):
-            switch (CurrentAlarm)
-            {
-            case 1:
-                stopAlarm1();
-                break;
-            case 2:
-                stopAlarm2();
-                break;
-            case 3:
-                stopAlarm3();
-                break;
-            case 4:
-                stopAlarm4();
-                break;
-            default:
-                break;
+        }
+        else{
+            switch (CurrentAlarm){
+                case 1:
+                    stopAlarm1();
+                    break;
+                case 2:
+                    stopAlarm2();
+                    break;
+                case 3:
+                    stopAlarm3();
+                    break;
+                case 4:
+                    stopAlarm4();
+                    break;
+                default:
+                    break;
             }
-        break;
-
+            update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
+        }
+    break;
     //Every setting that has to do with time
     case GX_SIGNAL(BUTHOURPLUS, GX_EVENT_CLICKED):
         //change alarm hour up
@@ -481,6 +469,7 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
     case GX_SIGNAL(CHWEDNESDAY, GX_EVENT_CLICKED):
         if(getweekday(2) == 1) {Aweekday[2] = 0;}
         else {Aweekday[2] = 1;}
+        SetWeekday(Aweekday);
         update_number_id(widget->gx_widget_parent, PRMTWEDNESDAY, getweekday(2));
         break;
     case GX_SIGNAL(CHTHURSDAY, GX_EVENT_CLICKED):
@@ -520,6 +509,8 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     int CurrentAlarm = getAlarm();
 
+    update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
+
     update_number_id(widget->gx_widget_parent, PRMPTHOUR, intervalHour());
     update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());
     update_number_id(widget->gx_widget_parent, PRMPTSEC, intervalSec());
@@ -528,6 +519,8 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
+            //when the return button is pressed save the current Alarm
+            savepwm(CurrentAlarm);
             break;
         case GX_SIGNAL(BUTHOURUP, GX_EVENT_CLICKED):
             setIntervalHourPlus();
@@ -553,6 +546,32 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
         case GX_SIGNAL(BUTMSECMIN, GX_EVENT_CLICKED):
             setIntervalMsecMin();
             break;
+
+        case GX_SIGNAL(ALARMACTIEF, GX_EVENT_CLICKED):
+              if(Aactive(CurrentAlarm) == 0){
+                  switch (CurrentAlarm){
+                  case 1:
+                      activatePWM1();
+                      break;
+                  case 2:
+                      activatePWM1();
+                      break;
+                  case 3:
+                      activatePWM1();
+                      break;
+                  case 4:
+                      activatePWM1();
+                      break;
+                  default:
+                      break;
+                  }
+              }
+              else{
+                  deactivatePWM();
+              }
+              update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
+          break;
+          /*
         case GX_SIGNAL(ACTIVEALARM, GX_EVENT_TOGGLE_ON):
             switch (CurrentAlarm)
                 {
@@ -574,7 +593,7 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
             break;
         case GX_SIGNAL(ACTIVEALARM, GX_EVENT_TOGGLE_OFF):
             deactivatePWM();
-            break;
+            break;*/
         case GX_EVENT_TIMER:
             update_number_id(widget->gx_widget_parent, PRMPTHOUR, intervalHour());
             update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());

@@ -89,18 +89,20 @@ void SetWeekday();
 int getweekday();
 int AgetHour();
 int AgetMin();
+int Aactive();
 
 
 
 //I2C stuff
 void sync_time();
 void set_time(int,int,int,int,int,int,int);
-void EEPromWrite();
-void EEPromRead();
 
-
-void GetAlarmE();
-void SetAlarmE();
+void savealarm(int);
+void savepwm(int);
+void alarmpwm1read();
+void alarmpwm2read();
+void alarmpwm3read();
+void alarmpwm4read();
 
 
 #endif /* TIME_H_ */

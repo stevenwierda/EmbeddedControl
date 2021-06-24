@@ -33,6 +33,8 @@ static GX_EVENT g_gx_event;
 bool            OnOff     = false;
 UINT            statusI2C = SSP_SUCCESS;
 int             DUMMY;
+int             teller = 0;
+bool            update = false;
 
 int value  = 0;
 int value1 = 0;
@@ -80,8 +82,6 @@ void main_thread_entry(void) {
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
 
     sync_time();        //sync the time when the microcontroller starts.
-    GetAlarmE();        //get the values from the EEProm.
-
     /* Initializes GUIX. */
     status = gx_system_initialize();
     if(TX_SUCCESS != status)
@@ -285,7 +285,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     value  = checkAlarm1();
     if (value == 1){
         AL0 = false;
-        gx_system_event_send(&g_gx_event);
     }
     else if (value == 0){
         AL0 = true;
@@ -297,7 +296,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     value1 = checkAlarm2();
     if (value1 == 1){
         AL1 = false;
-        gx_system_event_send(&g_gx_event);
     }
     else if (value1 == 0){
         AL1 = true;
@@ -309,7 +307,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     value2 = checkAlarm3();
     if (value2 == 1){
         AL2 = false;
-        gx_system_event_send(&g_gx_event);
     }
     else if (value2 == 0){
         AL2 = true;
@@ -321,7 +318,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     value3 = checkAlarm4();
     if (value3 == 1){
         AL3 = false;
-        gx_system_event_send(&g_gx_event);
     }
     else if (value3 == 0){
         AL3 = true;
@@ -334,6 +330,32 @@ void led_timer0_callback(timer_callback_args_t * p_args){
 void Timer1_callback(timer_callback_args_t * p_args){
 //every second check if the RTC is online.
 //if its not then blink red if it is then blink green
+
+    //every time the timer is called excecute one EEPROM read to not overload the EEPROM
+    if(update == false){
+        switch (teller)
+            {
+            case 1:
+                alarmpwm1read();
+                break;
+            case 2:
+                alarmpwm2read();
+                break;
+            case 3:
+                alarmpwm3read();
+                break;
+            case 4:
+                alarmpwm4read();
+                break;
+            default:
+                break;
+            }
+        teller = teller + 1;
+        if(teller == 4){
+            teller = 0;
+            update = true;
+        }
+    }
 
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
     g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESS, I2C_ADDR_MODE_7BIT);
@@ -350,7 +372,7 @@ void Timer1_callback(timer_callback_args_t * p_args){
         OnOff = !OnOff;
     }
     //call on the EEPROM write function
-    //only if something has changed and 5 seconds have passed to make sure to not strain the rtc
+    //only if something has changed and 5 seconds have passed to make sure to not strain the rtc4
 }
 
 
