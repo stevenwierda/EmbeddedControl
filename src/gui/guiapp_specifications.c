@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 09:37                        */
+/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 15:13                        */
 /*******************************************************************************/
 
 
@@ -20,9 +20,7 @@ SETALARM_1_CONTROL_BLOCK setAlarm_1;
 SELECTALARM_CONTROL_BLOCK selectAlarm;
 ALARMSWITCH_CONTROL_BLOCK AlarmSwitch;
 SETPWM_CONTROL_BLOCK SetPWM;
-SETALARM_CONTROL_BLOCK setAlarm;
 SETTIME_CONTROL_BLOCK setTime;
-SETLEDONEINTERUPT_CONTROL_BLOCK setLedOneInterupt;
 LEDCONTROLE_CONTROL_BLOCK LEDControle;
 TIME_CONTROL_BLOCK Time;
 SETTINGS_CONTROL_BLOCK Settings;
@@ -1030,6 +1028,40 @@ GX_TEXT_BUTTON_PROPERTIES selectAlarm_autostart_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
+GX_NUMERIC_PROMPT_PROPERTIES selectAlarm_promptauto_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    GX_NULL,                                 /* format function                */
+    0                                        /* numeric prompt value           */
+};
+
+GX_CONST GX_STUDIO_WIDGET selectAlarm_promptauto_define =
+{
+    "promptauto",
+    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
+    PRMPTAUTO,                               /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_numeric_prompt_create,         /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {125, 227, 224, 250},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_promptauto), /* control block */
+    (void *) &selectAlarm_promptauto_properties /* extended properties         */
+};
 
 GX_CONST GX_STUDIO_WIDGET selectAlarm_autostart_define =
 {
@@ -1039,7 +1071,7 @@ GX_CONST GX_STUDIO_WIDGET selectAlarm_autostart_define =
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(GX_TEXT_BUTTON),                  /* control block size             */
     GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
@@ -1048,8 +1080,8 @@ GX_CONST GX_STUDIO_WIDGET selectAlarm_autostart_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {126, 253, 225, 298},                    /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {124, 253, 223, 298},                    /* widget size                    */
+    &selectAlarm_promptauto_define,          /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_autostart), /* control block */
     (void *) &selectAlarm_autostart_properties /* extended properties          */
@@ -1144,7 +1176,7 @@ GX_CONST GX_STUDIO_WIDGET selectAlarm_alarm4_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {109, 173, 228, 212},                    /* widget size                    */
+    {109, 187, 228, 226},                    /* widget size                    */
     &selectAlarm_alarm3_define,              /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SELECTALARM_CONTROL_BLOCK, selectAlarm_alarm4), /* control block  */
@@ -1840,582 +1872,6 @@ GX_CONST GX_STUDIO_WIDGET SetPWM_define =
     0,                                       /* control block                  */
     (void *) &SetPWM_properties              /* extended properties            */
 };
-GX_WINDOW_PROPERTIES setAlarm_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_enableAlarm_properties =
-{
-    GX_STRING_ID_ALARMACTIVE,                /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmMonday_properties =
-{
-    GX_STRING_ID_MONDAY,                     /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmThueseday_properties =
-{
-    GX_STRING_ID_THUSEDAY,                   /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmWednesday_properties =
-{
-    GX_STRING_ID_WEDNESDAY,                  /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmThursday_properties =
-{
-    GX_STRING_ID_THURSTDAY,                  /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmFriday_properties =
-{
-    GX_STRING_ID_FRIDAY,                     /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmSunday_properties =
-{
-    GX_STRING_ID_SUNDAY,                     /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_CHECKBOX_PROPERTIES setAlarm_alarmSaterday_properties =
-{
-    GX_STRING_ID_SATERDAY,                   /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* unchecked pixelmap id          */
-    0,                                       /* checked pixelmap id            */
-    0,                                       /* unchecked disabled pixelmap id */
-    0                                        /* checked disabled pixelmap id   */
-};
-GX_TEXT_BUTTON_PROPERTIES setAlarm_AHourPlus_properties =
-{
-    GX_STRING_ID_HOURPLUS,                   /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_TEXT_BUTTON_PROPERTIES setAlarm_AHourMin_properties =
-{
-    GX_STRING_ID_HOURMIN,                    /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_TEXT_BUTTON_PROPERTIES setAlarm_MinPlus_properties =
-{
-    GX_STRING_ID_MINUTEPLUS,                 /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_TEXT_BUTTON_PROPERTIES setAlarm_AMinMin_properties =
-{
-    GX_STRING_ID_MINUTEMIN,                  /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_NUMERIC_PROMPT_PROPERTIES setAlarm_promptHour_properties =
-{
-    0,                                       /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_TEXT,                        /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    GX_NULL,                                 /* format function                */
-    0                                        /* numeric prompt value           */
-};
-GX_NUMERIC_PROMPT_PROPERTIES setAlarm_promptMin_properties =
-{
-    0,                                       /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_TEXT,                        /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    GX_NULL,                                 /* format function                */
-    0                                        /* numeric prompt value           */
-};
-GX_TEXT_BUTTON_PROPERTIES setAlarm_buttonTerugSettings_properties =
-{
-    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES setAlarm_PAGENOTE_properties =
-{
-    GX_STRING_ID_STRING_19,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_TEXT,                        /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_PAGENOTE_define =
-{
-    "PAGENOTE",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {7, 10, 92, 33},                         /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_PAGENOTE), /* control block      */
-    (void *) &setAlarm_PAGENOTE_properties   /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_buttonTerugSettings_define =
-{
-    "buttonTerugSettings",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTTERUGINTERUPTSET,                     /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {13, 254, 112, 303},                     /* widget size                    */
-    &setAlarm_PAGENOTE_define,               /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_buttonTerugSettings), /* control block */
-    (void *) &setAlarm_buttonTerugSettings_properties /* extended properties   */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_promptMin_define =
-{
-    "promptMin",
-    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
-    PRMPTMIN,                                /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_numeric_prompt_create,         /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {115, 88, 194, 111},                     /* widget size                    */
-    &setAlarm_buttonTerugSettings_define,    /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_promptMin), /* control block     */
-    (void *) &setAlarm_promptMin_properties  /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_promptHour_define =
-{
-    "promptHour",
-    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
-    PRMPTHOUR,                               /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_numeric_prompt_create,         /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {34, 89, 113, 112},                      /* widget size                    */
-    &setAlarm_promptMin_define,              /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_promptHour), /* control block    */
-    (void *) &setAlarm_promptHour_properties /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_AMinMin_define =
-{
-    "AMinMin",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTMINMIN,                               /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {113, 111, 192, 134},                    /* widget size                    */
-    &setAlarm_promptHour_define,             /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_AMinMin), /* control block       */
-    (void *) &setAlarm_AMinMin_properties    /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_MinPlus_define =
-{
-    "MinPlus",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTMINPLUS,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {114, 66, 193, 89},                      /* widget size                    */
-    &setAlarm_AMinMin_define,                /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_MinPlus), /* control block       */
-    (void *) &setAlarm_MinPlus_properties    /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_AHourMin_define =
-{
-    "AHourMin",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTHOURMIN,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {34, 111, 113, 134},                     /* widget size                    */
-    &setAlarm_MinPlus_define,                /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_AHourMin), /* control block      */
-    (void *) &setAlarm_AHourMin_properties   /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_AHourPlus_define =
-{
-    "AHourPlus",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTHOURPLUS,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {34, 66, 113, 89},                       /* widget size                    */
-    &setAlarm_AHourMin_define,               /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_AHourPlus), /* control block     */
-    (void *) &setAlarm_AHourPlus_properties  /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmSaterday_define =
-{
-    "alarmSaterday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHSATERDAY,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {124, 192, 215, 215},                    /* widget size                    */
-    &setAlarm_AHourPlus_define,              /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmSaterday), /* control block */
-    (void *) &setAlarm_alarmSaterday_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmSunday_define =
-{
-    "alarmSunday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHSUNDAY,                                /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {124, 215, 215, 238},                    /* widget size                    */
-    &setAlarm_alarmSaterday_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmSunday), /* control block   */
-    (void *) &setAlarm_alarmSunday_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmFriday_define =
-{
-    "alarmFriday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHFRIDAY,                                /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {125, 170, 234, 193},                    /* widget size                    */
-    &setAlarm_alarmSunday_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmFriday), /* control block   */
-    (void *) &setAlarm_alarmFriday_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmThursday_define =
-{
-    "alarmThursday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHTHURSDAY,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {125, 149, 234, 172},                    /* widget size                    */
-    &setAlarm_alarmFriday_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmThursday), /* control block */
-    (void *) &setAlarm_alarmThursday_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmWednesday_define =
-{
-    "alarmWednesday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHWEDNESDAY,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {11, 193, 102, 216},                     /* widget size                    */
-    &setAlarm_alarmThursday_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmWednesday), /* control block */
-    (void *) &setAlarm_alarmWednesday_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmThueseday_define =
-{
-    "alarmThueseday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHTHUESDAY,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {12, 171, 103, 194},                     /* widget size                    */
-    &setAlarm_alarmWednesday_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmThueseday), /* control block */
-    (void *) &setAlarm_alarmThueseday_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_alarmMonday_define =
-{
-    "alarmMonday",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    CHMONDAY,                                /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {13, 151, 109, 174},                     /* widget size                    */
-    &setAlarm_alarmThueseday_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_alarmMonday), /* control block   */
-    (void *) &setAlarm_alarmMonday_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_enableAlarm_define =
-{
-    "enableAlarm",
-    GX_TYPE_CHECKBOX,                        /* widget type                    */
-    ENABLEALARM,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_CHECKBOX),                     /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_checkbox_create,               /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {120, 1, 319, 40},                       /* widget size                    */
-    &setAlarm_alarmMonday_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETALARM_CONTROL_BLOCK, setAlarm_enableAlarm), /* control block   */
-    (void *) &setAlarm_enableAlarm_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET setAlarm_define =
-{
-    "setAlarm",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    SETPWM,                                  /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(SETALARM_CONTROL_BLOCK),          /* control block size             */
-    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
-    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SetAlarmData, /* event function override */
-    {1, 0, 240, 319},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &setAlarm_enableAlarm_define,            /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &setAlarm_properties            /* extended properties            */
-};
 GX_WINDOW_PROPERTIES setTime_properties =
 {
     0                                        /* wallpaper pixelmap id          */
@@ -3096,164 +2552,6 @@ GX_CONST GX_STUDIO_WIDGET setTime_define =
     0,                                       /* control block                  */
     (void *) &setTime_properties             /* extended properties            */
 };
-GX_WINDOW_PROPERTIES setLedOneInterupt_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonDecrease_properties =
-{
-    GX_STRING_ID_DOWN_COUNTER,               /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonIncrease_properties =
-{
-    GX_STRING_ID_UP_COUNTER,                 /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_NUMERIC_PROMPT_PROPERTIES setLedOneInterupt_Time_properties =
-{
-    0,                                       /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_TEXT,                        /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    GX_NULL,                                 /* format function                */
-    0                                        /* numeric prompt value           */
-};
-GX_TEXT_BUTTON_PROPERTIES setLedOneInterupt_buttonTerugSettings_properties =
-{
-    GX_STRING_ID_BACKBUTTON,                 /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_BTN_TEXT                     /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonTerugSettings_define =
-{
-    "buttonTerugSettings",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTTERUGINTERUPTSET,                     /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {12, 241, 161, 290},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonTerugSettings), /* control block */
-    (void *) &setLedOneInterupt_buttonTerugSettings_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_Time_define =
-{
-    "Time",
-    GX_TYPE_NUMERIC_PROMPT,                  /* widget type                    */
-    TIME,                                    /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    InteruptTimer,                           /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_NUMERIC_PROMPT),               /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_numeric_prompt_create,         /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {88, 116, 167, 139},                     /* widget size                    */
-    &setLedOneInterupt_buttonTerugSettings_define, /* next widget definition   */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_Time), /* control block */
-    (void *) &setLedOneInterupt_Time_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonIncrease_define =
-{
-    "buttonIncrease",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTINCREASE,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {89, 86, 168, 109},                      /* widget size                    */
-    &setLedOneInterupt_Time_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonIncrease), /* control block */
-    (void *) &setLedOneInterupt_buttonIncrease_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_buttonDecrease_define =
-{
-    "buttonDecrease",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTDECREASE,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {88, 148, 167, 171},                     /* widget size                    */
-    &setLedOneInterupt_buttonIncrease_define, /* next widget definition        */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETLEDONEINTERUPT_CONTROL_BLOCK, setLedOneInterupt_buttonDecrease), /* control block */
-    (void *) &setLedOneInterupt_buttonDecrease_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET setLedOneInterupt_define =
-{
-    "setLedOneInterupt",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    WINDOW_LED1,                             /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(SETLEDONEINTERUPT_CONTROL_BLOCK), /* control block size             */
-    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
-    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) setLedOneInteruptHandler, /* event function override */
-    {0, 0, 239, 319},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &setLedOneInterupt_buttonDecrease_define, /* child widget                  */
-    0,                                       /* control block                  */
-    (void *) &setLedOneInterupt_properties   /* extended properties            */
-};
 GX_WINDOW_PROPERTIES LEDControle_properties =
 {
     0                                        /* wallpaper pixelmap id          */
@@ -3772,38 +3070,6 @@ GX_TEXT_BUTTON_PROPERTIES Settings_buttonSetTime_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES Settings_buttonInteruptLed_properties =
-{
-    GX_STRING_ID_INTERUPT_LED,               /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET Settings_buttonInteruptLed_define =
-{
-    "buttonInteruptLed",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    BUTLEDINTERUPT,                          /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {12, 141, 111, 190},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonInteruptLed), /* control block */
-    (void *) &Settings_buttonInteruptLed_properties /* extended properties     */
-};
 
 GX_CONST GX_STUDIO_WIDGET Settings_buttonSetTime_define =
 {
@@ -3823,7 +3089,7 @@ GX_CONST GX_STUDIO_WIDGET Settings_buttonSetTime_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {12, 190, 111, 239},                     /* widget size                    */
-    &Settings_buttonInteruptLed_define,      /* next widget definition         */
+    GX_NULL,                                 /* no next widget                 */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SETTINGS_CONTROL_BLOCK, Settings_buttonSetTime), /* control block */
     (void *) &Settings_buttonSetTime_properties /* extended properties         */
@@ -4094,9 +3360,7 @@ GX_CONST GX_STUDIO_WIDGET_ENTRY guiapp_widget_table[] =
     { &selectAlarm_define, (GX_WIDGET *) &selectAlarm },
     { &AlarmSwitch_define, (GX_WIDGET *) &AlarmSwitch },
     { &SetPWM_define, (GX_WIDGET *) &SetPWM },
-    { &setAlarm_define, (GX_WIDGET *) &setAlarm },
     { &setTime_define, (GX_WIDGET *) &setTime },
-    { &setLedOneInterupt_define, (GX_WIDGET *) &setLedOneInterupt },
     { &LEDControle_define, (GX_WIDGET *) &LEDControle },
     { &Time_define, (GX_WIDGET *) &Time },
     { &Settings_define, (GX_WIDGET *) &Settings },

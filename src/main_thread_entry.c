@@ -35,6 +35,9 @@ UINT            statusI2C = SSP_SUCCESS;
 int             DUMMY;
 int             teller = 0;
 bool            update = false;
+bool            Flag = false;
+
+
 
 int value  = 0;
 int value1 = 0;
@@ -51,6 +54,7 @@ long unsigned int interuptTime;
 #define Alarm2Pin IOPORT_PORT_04_PIN_03 //Pin 43
 #define Alarm3Pin IOPORT_PORT_04_PIN_04 //Pin 44
 #define Alarm4Pin IOPORT_PORT_04_PIN_05 //Pin 45
+#define FlagPin   IOPORT_PORT_04_PIN_06 //Pin 46
 
 GX_WINDOW_ROOT * p_window_root;
 extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
@@ -279,6 +283,11 @@ void g_lcd_spi_callback(spi_callback_args_t * p_args)
 #endif
 
 void led_timer0_callback(timer_callback_args_t * p_args){
+    //start the flag and output it on pin
+    Flag = !Flag;
+    g_ioport.p_api->pinWrite(FlagPin, Flag);
+
+
     addMs();
 
     //Alarm 1
@@ -324,6 +333,9 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     }
     AL3 = !AL3;
     g_ioport.p_api->pinWrite(Alarm4Pin, AL3);
+
+    Flag = !Flag;
+    g_ioport.p_api->pinWrite(FlagPin, Flag);
 }
 
 //Timer that runs every second
@@ -336,22 +348,26 @@ void Timer1_callback(timer_callback_args_t * p_args){
         switch (teller)
             {
             case 1:
-                alarmpwm1read();
+                readauto();
                 break;
             case 2:
-                alarmpwm2read();
+                alarmpwm1read();
                 break;
             case 3:
-                alarmpwm3read();
+                alarmpwm2read();
                 break;
             case 4:
+                alarmpwm3read();
+                break;
+            case 5:
                 alarmpwm4read();
                 break;
+
             default:
                 break;
             }
         teller = teller + 1;
-        if(teller == 4){
+        if(teller == 6){
             teller = 0;
             update = true;
         }

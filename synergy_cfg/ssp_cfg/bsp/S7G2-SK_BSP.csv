@@ -326,7 +326,7 @@ SSI0: SSIWS"
 GPT1: GTIOCA
 PDC0: PIXD5
 SSI0: SSITXD"
-"P406","7","","","","","Disabled","","","ETHERC1: TXD1
+"P406","7","GPIO","","Low","","Output mode (Initial Low)","CMOS","None","ETHERC1: TXD1
 GPT1: GTIOCB
 PDC0: PIXD4
 SSI0: SSIRXD"

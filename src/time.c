@@ -93,6 +93,7 @@ int alarm4Active = 0;
 int action4 = 0;
 
 int CurrentAlarm = 0;
+int autostart = 0;
 
 //I2C Adresses
 #define I2C_ADDRESS         0x68
@@ -166,6 +167,7 @@ void savealarm(int current){
     int alarmActive[4] = {alarm1Active, alarm2Active, alarm3Active, alarm4Active};
 
     int alarmDay = alarmMon[current - 1] + 2*alarmTue[current - 1] + 4*alarmWed[current - 1] + 8*alarmThu[current - 1] + 16*alarmFri[current - 1] + 32*alarmSat[current - 1] + 64*alarmSun[current - 1];
+
     uint8_t Wtotal[7];
 
     Wtotal[0] = current;
@@ -173,8 +175,8 @@ void savealarm(int current){
     Wtotal[2] = alarmHour[current - 1];
     Wtotal[3] = alarmMin[current - 1];
     Wtotal[4] = alarmDay;
-    Wtotal[5] = alarmActive[current - 1];
-    Wtotal[6] = alarmMode[current - 1];
+    Wtotal[5] = alarmMode[current - 1];
+    Wtotal[6] = alarmActive[current - 1];
 
     //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
@@ -195,13 +197,13 @@ void savepwm(int current){
     uint8_t Wtotal[8];
 
     Wtotal[0] = current;
-    Wtotal[1] = 0x04;
+    Wtotal[1] = 0x03;
     Wtotal[2] = alarmMode[current - 1];
-    Wtotal[3] = addIntervalHour[current - 1];
-    Wtotal[4] = addIntervalMin[current - 1];
-    Wtotal[5] = addIntervalSec[current - 1];
-    Wtotal[6] = addIntervalMsec[current - 1] / 10;
-    Wtotal[7] = alarmActive[current - 1];
+    Wtotal[3] = alarmActive[current - 1];
+    Wtotal[4] = addIntervalHour[current - 1];
+    Wtotal[5] = addIntervalMin[current - 1];
+    Wtotal[6] = addIntervalSec[current - 1];
+    Wtotal[7] = addIntervalMsec[current - 1] / 10;
 
     //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
     g_i2c0.p_api->reset(g_i2c0.p_ctrl);
@@ -212,9 +214,8 @@ void savepwm(int current){
 }
 
 void alarmpwm1read(){
-    //uint8_t EP5[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
     uint8_t Rtotal[2];
-    uint8_t arv[10];
+    uint8_t arv[9];
 
     Rtotal[0] = 0x01;
     Rtotal[1] = 0x00;
@@ -224,17 +225,26 @@ void alarmpwm1read(){
 
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
 
-    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 9, true);
     alarm1Hour = arv[0];
     alarm1Min = arv[1];
-    alarm1Active = arv[3];
-    alarm1Mode = arv[4];
+    alarm1Mode = arv[3];
+    if(alarm1Mode == 2){
+        activatePWM1();
+    }
+    if(autostart == 1){
+        alarm1Active = arv[4];
+    }
+    else{
+        alarm1Active = 0;
+    }
+    //save the new state for active to make sure it saves it
+    savepwm(1);
     addInterval1Hour = arv[5];
     addInterval1Min = arv[6];
     addInterval1Sec = arv[7];
     addInterval1Msec = arv[8];
     addInterval1Msec = addInterval1Msec*10;
-    alarm1Active = arv[9];
     if (arv[2] > 63){
         alarm1Sun = 1;
         arv[2] = arv[2] - 64;
@@ -270,7 +280,7 @@ void alarmpwm1read(){
 
 void alarmpwm2read(){
     uint8_t Rtotal[2];
-    uint8_t arv[10];
+    uint8_t arv[9];
 
     Rtotal[0] = 0x02;
     Rtotal[1] = 0x00;
@@ -280,17 +290,26 @@ void alarmpwm2read(){
 
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
 
-    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 9, true);
     alarm2Hour = arv[0];
     alarm2Min = arv[1];
-    alarm2Active = arv[3];
-    alarm2Mode = arv[4];
+    alarm2Mode = arv[3];
+    if(alarm2Mode == 2){
+        activatePWM2();
+    }
+    if(autostart == 1){
+        alarm2Active = arv[4];
+    }
+    else{
+        alarm2Active = 0;
+    }
+    //save the new state for active to make sure it saves it
+    savepwm(2);
     addInterval2Hour = arv[5];
     addInterval2Min = arv[6];
     addInterval2Sec = arv[7];
     addInterval2Msec = arv[8];
     addInterval2Msec = addInterval2Msec*10;
-    alarm2Active = arv[9];
     if (arv[2] > 63){
         alarm2Sun = 1;
         arv[2] = arv[2] - 64;
@@ -326,7 +345,7 @@ void alarmpwm2read(){
 
 void alarmpwm3read(){
     uint8_t Rtotal[2];
-    uint8_t arv[10];
+    uint8_t arv[9];
 
     Rtotal[0] = 0x03;
     Rtotal[1] = 0x00;
@@ -336,17 +355,26 @@ void alarmpwm3read(){
 
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
 
-    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 9, true);
     alarm3Hour = arv[0];
     alarm3Min = arv[1];
-    alarm3Active = arv[3];
-    alarm3Mode = arv[4];
+    alarm3Mode = arv[3];
+    if(alarm3Mode == 2){
+        activatePWM3();
+    }
+    if(autostart == 1){
+        alarm3Active = arv[4];
+    }
+    else{
+        alarm3Active = 0;
+    }
+    //save the new state for active to make sure it saves it
+    savepwm(3);
     addInterval3Hour = arv[5];
     addInterval3Min = arv[6];
     addInterval3Sec = arv[7];
     addInterval3Msec = arv[8];
     addInterval3Msec = addInterval3Msec*10;
-    alarm3Active = arv[9];
     if (arv[2] > 63){
         alarm3Sun = 1;
         arv[2] = arv[2] - 64;
@@ -381,9 +409,8 @@ void alarmpwm3read(){
 }
 
 void alarmpwm4read(){
-    //uint8_t EP5[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
     uint8_t Rtotal[2];
-    uint8_t arv[10];
+    uint8_t arv[9];
 
     Rtotal[0] = 0x04;
     Rtotal[1] = 0x00;
@@ -393,17 +420,26 @@ void alarmpwm4read(){
 
     g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
 
-    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 10, true);
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &arv[0], 9, true);
     alarm4Hour = arv[0];
     alarm4Min = arv[1];
-    alarm4Active = arv[3];
-    alarm4Mode = arv[4];
+    alarm4Mode = arv[3];
+    if(alarm4Mode == 2){
+        activatePWM4();
+    }
+    if(autostart == 1){
+        alarm4Active = arv[4];
+    }
+    else{
+        alarm4Active = 0;
+    }
+    //save the new state for active to make sure it saves it
+    savepwm(4);
     addInterval4Hour = arv[5];
     addInterval4Min = arv[6];
     addInterval4Sec = arv[7];
     addInterval4Msec = arv[8];
     addInterval4Msec = addInterval4Msec*10;
-    alarm4Active = arv[9];
     if (arv[2] > 63){
         alarm4Sun = 1;
         arv[2] = arv[2] - 64;
@@ -435,6 +471,29 @@ void alarmpwm4read(){
     }
     else alarm4Tue = 0;
     alarm4Mon = arv[2];
+}
+
+void saveauto(int val){
+    //scrhijf de waardes van de EEPROM wanneer er een verandering is en de user klaar is en op de terug knop drukt.
+    uint8_t Rtotal[3] = {0x05, 0x00, val};
+
+    //houd de functies in de main in de gaten omdat daar de rtc aangeroepen wordt, dit kan een probleem zijn.
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    //set het adres met 2 bytes en schrijf daarna de bytes van de rest van de data.
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 3, false); //2 bytes scrijven
+}
+
+void readauto(){
+    uint8_t Rtotal[2]={0x05,0x00};
+
+    g_i2c0.p_api->reset(g_i2c0.p_ctrl);
+    g_i2c0.p_api->slaveAddressSet(g_i2c0.p_ctrl, I2C_ADDRESSEEPROM, I2C_ADDR_MODE_7BIT);
+
+    g_i2c0.p_api->write(g_i2c0.p_ctrl, &Rtotal[0], 2, false);
+
+    g_i2c0.p_api->read(g_i2c0.p_ctrl, &autostart, 1, true);
 }
 
 
@@ -1113,9 +1172,9 @@ void setIntervalMsecPlus(){
             addInterval3Msec=0;
         }
     }else if (CurrentAlarm == 4){
-        addInterval3Msec=addInterval3Msec+10;
-        if (addInterval3Msec >= 1000){
-            addInterval3Msec=0;
+        addInterval4Msec=addInterval3Msec+10;
+        if (addInterval4Msec >= 1000){
+            addInterval4Msec=0;
         }
     }
 }
@@ -1200,7 +1259,7 @@ void startAlarm1(){
     alarm1Active = 1;
     alarm1Mode = 1;
     alarm1Sec = 0;
-    alarm1Msec =0;
+    alarm1Msec = 0;
 }
 
 void startAlarm2(){
@@ -1214,7 +1273,7 @@ void startAlarm3(){
     alarm3Active = 1;
     alarm3Mode = 1;
     alarm3Sec = 0;
-    alarm3Msec =0;
+    alarm3Msec = 0;
 }
 
 void startAlarm4(){
@@ -1512,9 +1571,9 @@ int AgetMin(){
     return Aget;
 }
 
-Aactive(int currentAlarm){
-    int Active = 0;
-    switch(CurrentAlarm){
+int Aactive(int CurrentA){
+    int Active;
+    switch(CurrentA){
         case 1:
             Active = alarm1Active;
            break;
@@ -1528,9 +1587,23 @@ Aactive(int currentAlarm){
             Active = alarm4Active;
             break;
         default:
+            Active = 0;
             break;
     }
     return Active;
 }
+//if the button is pressed start all the Alarms otherwise it requires a manual user input
+void AutoStartW(){
+    if(autostart == 0){
+        autostart = 1;
+    }
+    else{
+        autostart = 0;
+    }
+    saveauto(autostart);
+}
 
+int AutostartR(){
+    return autostart;
+}
 
