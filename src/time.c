@@ -6,6 +6,7 @@
  */
 #include "time.h"
 #include "common_data.h"
+#include "main_thread.h"
 
 int msec        = 0;
 int sec         = 0;
@@ -502,6 +503,7 @@ void addMs(){
     if(msec >= 1000){
         msec = msec - 1000;
         sec = sec + 1;
+        printf( "%i/%i/%i - %i:%i:%i := current time \n", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
         if(sec >= 60){
             sec = sec - 60;
             min = min + 1;
@@ -698,8 +700,7 @@ int getWeekday(){
 }
 
 int checkAlarm1(){
-   //if(hour == alarm1Hour && min == alarm1Min && sec == alarm1Sec && alarm1Msec == msec && alarm1Active == 1){
-    if(hour == alarm1Hour && min == alarm1Min && alarm1Active == 1){
+    if(hour == alarm1Hour && min == alarm1Min && alarm1Active == 1 && sec == 1 && msec == 1){
        if(alarm1Mode == 1){
            if((alarm1Mon == 1 && weekday == 1)||
                (alarm1Tue == 1 && weekday == 2)||
@@ -710,18 +711,26 @@ int checkAlarm1(){
                (alarm1Sun == 1 && weekday == 7)){
                if (action1 == 0){
                    action1 = 1;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 1 high \n");
                }
                else{
                    action1 = 0;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 1 low \n");
                }
            }
        }
        else if(alarm1Mode == 2 && sec == alarm1Sec && alarm1Msec == msec){
            if (action1 == 0){
                action1 = 1;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 1 high \n");
            }
            else{
                action1 = 0;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 1 low \n");
            }
            intervalAlarm1();
        }
@@ -733,8 +742,7 @@ int checkAlarm1(){
 }
 
 int checkAlarm2(){
-   //if(hour == alarm2Hour && min == alarm2Min &&  && alarm2Active == 1){
-   if(hour == alarm2Hour && min == alarm2Min && alarm2Active == 1){
+   if(hour == alarm2Hour && min == alarm2Min && alarm2Active == 1 && sec == 1 && msec == 1){
        if(alarm2Mode == 1){
            if((alarm2Mon == 1 && weekday == 1)||
                (alarm2Tue == 1 && weekday == 2)||
@@ -743,15 +751,28 @@ int checkAlarm2(){
                (alarm2Fri == 1 && weekday == 5)||
                (alarm2Sat == 1 && weekday == 6)||
                (alarm2Sun == 1 && weekday == 7)){
-               action2 = 1;
+               if (action2 == 0){
+                   action2 = 1;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 2 high \n");
+               }
+               else{
+                   action2 = 0;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 2 low \n");
+               }
            }
        }
        else if(alarm2Mode == 2 && sec == alarm2Sec && alarm2Msec == msec){
                if (action2 == 0){
                    action2 = 1;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 2 high \n");
                }
                else{
                    action2 = 0;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 2 low \n");
                }
                intervalAlarm2();
        }
@@ -763,7 +784,7 @@ int checkAlarm2(){
 }
 
 int checkAlarm3(){
-    if(hour == alarm3Hour && min == alarm3Min && alarm3Active == 1){
+    if(hour == alarm3Hour && min == alarm3Min && alarm3Active == 1 && sec == 1 && msec == 1){
        if(alarm3Mode == 1){
            if((alarm3Mon == 1 && weekday == 1)||
                (alarm3Tue == 1 && weekday == 2)||
@@ -772,15 +793,28 @@ int checkAlarm3(){
                (alarm3Fri == 1 && weekday == 5)||
                (alarm3Sat == 1 && weekday == 6)||
                (alarm3Sun == 1 && weekday == 7)){
-               action3 = 1;
+               if (action3 == 0){
+                   action3 = 1;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 3 high \n");
+               }
+               else{
+                   action3 = 0;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 3 low \n");
+               }
            }
        }
        else if(alarm3Mode == 2 && sec == alarm3Sec && alarm3Msec == msec){
            if (action3 == 0){
                action3 = 1;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 3 high \n");
            }
            else{
                action3 = 0;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 3 low \n");
            }
            intervalAlarm3();
        }
@@ -792,7 +826,7 @@ int checkAlarm3(){
 }
 
 int checkAlarm4(){
-    if(hour == alarm4Hour && min == alarm4Min && alarm4Active == 1){
+    if(hour == alarm4Hour && min == alarm4Min && alarm4Active == 1 && sec == 1 && msec == 1){
        if(alarm4Mode == 1){
            if((alarm4Mon == 1 && weekday == 1)||
                (alarm4Tue == 1 && weekday == 2)||
@@ -801,15 +835,28 @@ int checkAlarm4(){
                (alarm4Fri == 1 && weekday == 5)||
                (alarm4Sat == 1 && weekday == 6)||
                (alarm4Sun == 1 && weekday == 7)){
-               action4 = 1;
+               if (action4 == 0){
+                   action4 = 1;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 4 high \n");
+               }
+               else{
+                   action4 = 0;
+                   printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                   printf("alarm 4 low \n");
+               }
            }
        }
        else if(alarm4Mode == 2 && sec == alarm4Sec && alarm4Msec == msec){
            if (action4 == 0){
                action4 = 1;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 4 high \n");
            }
            else{
                action4 = 0;
+               printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+               printf("alarm 4 low \n");
            }
            intervalAlarm4();
        }
@@ -1186,23 +1233,38 @@ void setIntervalMsecPlus(){
 
 void setIntervalMsecMin(){
     if (CurrentAlarm == 1){
-        if (addInterval1Msec > 10){
+        if (addInterval1Msec >= 10){
             addInterval1Msec=addInterval1Msec-10;
-        }
-    }else if (CurrentAlarm == 2){
-        if (addInterval2Msec > 10){
-            addInterval2Msec=addInterval2Msec-10;
-        }
-    }else if (CurrentAlarm == 3){
-        if (addInterval3Msec > 10){
-            addInterval3Msec=addInterval3Msec-10;
-        }
-    }else if (CurrentAlarm == 4){
-        if (addInterval4Msec > 10){
-            addInterval4Msec=addInterval4Msec-10;
+            if(addInterval1Msec < 10){
+                addInterval1Msec = 990;
+            }
         }
     }
-}
+    else if (CurrentAlarm == 2){
+        if (addInterval2Msec >= 10){
+            addInterval2Msec=addInterval2Msec-10;
+            if(addInterval2Msec < 10){
+                addInterval2Msec = 990;
+            }
+        }
+    }
+    else if (CurrentAlarm == 3){
+        if (addInterval3Msec >= 10){
+            addInterval3Msec=addInterval3Msec-10;
+            if(addInterval3Msec < 10){
+                addInterval3Msec = 990;
+            }
+        }
+    }
+    else if (CurrentAlarm == 4){
+        if (addInterval4Msec >= 10){
+            addInterval4Msec=addInterval4Msec-10;
+            if(addInterval4Msec < 10){
+                addInterval4Msec = 990;
+            }
+        }
+    }
+ }
 
 int intervalMsec(){
     int var = 0;

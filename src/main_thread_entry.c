@@ -6,6 +6,7 @@
 #include "gui/guiapp_specifications.h"
 #include "gui/guiapp_resources.h"
 #include "time.h"
+#include "stdio.h"
 
 #if defined(BSP_BOARD_S7G2_SK)
 #include "hardware/lcd.h"
@@ -19,6 +20,7 @@ int checkAlarm();
 void sync_time();
 void addMs();
 void main_thread_entry(void);
+extern void initialise_monitor_handles(void);
 
 #if defined(BSP_BOARD_S7G2_SK)
 void g_lcd_spi_callback(spi_callback_args_t * p_args);
@@ -88,15 +90,29 @@ void main_thread_entry(void) {
     sync_time();        //sync the time when the microcontroller starts.
     /* Initializes GUIX. */
     status = gx_system_initialize();
+
+
+    /* start monitor */
+    initialise_monitor_handles();
+    printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+    printf("starting usb communication \n");
+    //printf(timestamp() + "starting usb communication \n");
+
+
     if(TX_SUCCESS != status)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to start TX \n");
         while(1);
+
     }
 
     /* Initializes GUIX drivers. */
     err = g_sf_el_gx.p_api->open (g_sf_el_gx.p_ctrl, g_sf_el_gx.p_cfg);
     if(SSP_SUCCESS != err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to start the driver \n");
         while(1);
     }
 
@@ -109,7 +125,10 @@ void main_thread_entry(void) {
     err = g_sf_el_gx.p_api->canvasInit(g_sf_el_gx.p_ctrl, p_window_root);
     if(SSP_SUCCESS != err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to start canvas \n");
         while(1);
+
     }
 
     // Create the widgets we have defined with the GUIX data structures and resources.
@@ -136,6 +155,8 @@ void main_thread_entry(void) {
 
     if(TX_SUCCESS != status)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("attach widget failed \n");
             while(1);
     }
 
@@ -143,6 +164,8 @@ void main_thread_entry(void) {
     status = gx_widget_show(p_window_root);
     if(TX_SUCCESS != status)
     {
+        printf("%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to show widget \n");
         while(1);
     }
 
@@ -150,6 +173,8 @@ void main_thread_entry(void) {
     status = gx_system_start();
     if(TX_SUCCESS != status)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to start GUIX");
         while(1);
     }
 
@@ -158,6 +183,8 @@ void main_thread_entry(void) {
     err = g_spi_lcdc.p_api->open(g_spi_lcdc.p_ctrl, (spi_cfg_t *)g_spi_lcdc.p_cfg);
     if (err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("failed to start the lcd \n");
         while(1);
     }
     /** Setup the ILI9341V (SK-S7G2) **/
@@ -169,12 +196,16 @@ void main_thread_entry(void) {
     err = false;
     if (err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("board define failed \n");
         while(1);
     }
 #elif defined(BSP_BOARD_S7G2_PE_HMI1)
     err = false;
     if (err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("board define failed");
         while(1);
     }
 #endif
@@ -184,6 +215,8 @@ void main_thread_entry(void) {
     err = g_pwm_backlight.p_api->open(g_pwm_backlight.p_ctrl, g_pwm_backlight.p_cfg);
     if (err)
     {
+        printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+        printf("backlight failed");
         while(1);
     }
 #endif
@@ -195,7 +228,8 @@ void main_thread_entry(void) {
 		err = g_sf_message0.p_api->pend(g_sf_message0.p_ctrl, &main_thread_message_queue, (sf_message_header_t **) &p_message, TX_WAIT_FOREVER);
 		if (err)
 		{
-			/** TODO: Handle error. */
+		    printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+		    printf("invalid message \n");
 		}
 
 		switch (p_message->event_b.class_code)
@@ -223,7 +257,8 @@ void main_thread_entry(void) {
 		
 		if (err)
 		{
-			/** TODO: Handle error. */
+            printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+            printf("invalid message \n");
 		}
 
 		/** Post message. */
@@ -380,6 +415,7 @@ void Timer1_callback(timer_callback_args_t * p_args){
         g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_01, OnOff);   // Red LED
         g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, true);   // GREEN LED
         OnOff = !OnOff;
+        printf("Connect the RTC! \n");
     }
     //call on the EEPROM write function
     //only if something has changed and 5 seconds have passed to make sure to not strain the rtc4

@@ -128,11 +128,15 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
                 button_enabled = true;
                 update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_ON);
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, IOPORT_LEVEL_LOW);
+                printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                printf("led off \n");
                 break;
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_OFF):
                 button_enabled = false;
                 update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
-                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, IOPORT_LEVEL_LOW);
+                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, IOPORT_LEVEL_HIGH);
+                printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
+                printf("led high \n");
                 break;
         default:
             result = gx_window_event_process(widget, event_ptr);
@@ -322,9 +326,11 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
             break;
         case GX_SIGNAL(BUTALARM, GX_EVENT_CLICKED):
                 show_window((GX_WINDOW*)&setAlarm_1, (GX_WIDGET*)widget, true);
+                printf("normal alarm mode \n");
             break;
         case GX_SIGNAL(BUTPWM, GX_EVENT_CLICKED):
-            show_window((GX_WINDOW*)&SetPWM, (GX_WIDGET*)widget, true);
+                show_window((GX_WINDOW*)&SetPWM, (GX_WIDGET*)widget, true);
+                printf("pwm mode \n");
             break;
         default:
             break;
