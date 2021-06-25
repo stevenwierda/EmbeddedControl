@@ -6,7 +6,11 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
+<<<<<<< HEAD
 /*  Date (dd.mm.yyyy): 25. 6.2021   Time (hh:mm): 16:24                        */
+=======
+/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 09:37                        */
+>>>>>>> parent of c0a3388 (Compleet project)
 /*******************************************************************************/
 
 

@@ -106,6 +106,9 @@ UINT settingsWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(BUTTERUGSETTINGS, GX_EVENT_CLICKED):
             show_window((GX_WINDOW*)&Main, (GX_WIDGET*)widget, true);
         break;
+        case GX_SIGNAL(BUTLEDINTERUPT, GX_EVENT_CLICKED):
+                show_window((GX_WINDOW*)&setLedOneInterupt, (GX_WIDGET*)widget, true);
+                break;
         case GX_SIGNAL(BUTSETTIME, GX_EVENT_CLICKED):
                 sync_time();
                 show_window((GX_WINDOW*)&setTime, (GX_WIDGET*)widget, true);
@@ -127,16 +130,24 @@ UINT LEDWindowHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_ON):
                 button_enabled = true;
                 update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_ON);
+<<<<<<< HEAD
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, IOPORT_LEVEL_LOW);
                 printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
                 printf("led off \n");
+=======
+                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_LOW);
+>>>>>>> parent of c0a3388 (Compleet project)
                 break;
         case GX_SIGNAL(LEDSWITCH, GX_EVENT_TOGGLE_OFF):
                 button_enabled = false;
                 update_text_id(widget->gx_widget_parent, LEDSTATUS, GX_STRING_ID_LED_OFF);
+<<<<<<< HEAD
                 g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_02, IOPORT_LEVEL_HIGH);
                 printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
                 printf("led high \n");
+=======
+                g_ioport.p_api->pinWrite(IOPORT_PORT_06_PIN_00, IOPORT_LEVEL_HIGH);
+>>>>>>> parent of c0a3388 (Compleet project)
                 break;
         default:
             result = gx_window_event_process(widget, event_ptr);
@@ -282,9 +293,35 @@ UINT timeSetHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
     return result;
 }
 
+UINT setLedOneInteruptHandler(GX_WINDOW *widget, GX_EVENT *event_ptr)
+{
+    UINT result = gx_window_event_process(widget, event_ptr);
+    update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
+    switch (event_ptr->gx_event_type){
+        case GX_SIGNAL(BUTTERUGINTERUPTSET, GX_EVENT_CLICKED):
+            show_window((GX_WINDOW*)&Settings, (GX_WIDGET*)widget, true);
+            break;
+        case GX_SIGNAL(BUTDECREASE, GX_EVENT_CLICKED):
+            if(InteruptTimer >> 0){
+                InteruptTimer = InteruptTimer - 50;
+                //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+                update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
+            }
+        break;
+        case GX_SIGNAL(BUTINCREASE, GX_EVENT_CLICKED):
+            InteruptTimer = InteruptTimer + 50;
+            //led_timer0.p_api->periodSet(led_timer0.p_ctrl, InteruptTimer, TIMER_UNIT_PERIOD_MSEC);
+            update_number_id(widget->gx_widget_parent, TIME, (int)InteruptTimer);
+        break;
+        default:
+            result = gx_window_event_process(widget, event_ptr);
+            break;
+    }
+    return result;
+}
+
 //Screen with the 4 different Alarms
 UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
-    update_number_id(widget->gx_widget_parent, PRMPTAUTO,  AutostartR());
     UINT result = gx_window_event_process(widget, event_ptr);
     switch (event_ptr->gx_event_type){
         case GX_SIGNAL(BUTBACKALSEL, GX_EVENT_CLICKED):
@@ -305,10 +342,6 @@ UINT SELALARM(GX_WINDOW *widget, GX_EVENT *event_ptr){
         case GX_SIGNAL(ALARM4, GX_EVENT_CLICKED):
             setAlarmsel(4);
             show_window((GX_WINDOW*)&AlarmSwitch, (GX_WIDGET*)widget, true);
-            break;
-        case GX_SIGNAL(AUTOSTART, GX_EVENT_CLICKED):
-            AutoStartW();
-            update_number_id(widget->gx_widget_parent, PRMPTAUTO,  AutostartR());
             break;
         default:
             break;
@@ -337,7 +370,9 @@ UINT SELALARMMODE(GX_WINDOW *widget, GX_EVENT *event_ptr)
     }
     return result;
 }
-
+UINT SetAlarmData(GX_WINDOW *widget, GX_EVENT *event_ptr){
+    return 0;
+}
 //Settings of all 4 alarms
 UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
     //as i remember day 0 is Monday so that is how i make the code
@@ -345,10 +380,7 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     int CurrentAlarm = getAlarm();
 
-    int active;
-    active = Aactive(CurrentAlarm);
-
-    update_number_id(widget->gx_widget_parent, PRMPTACT, active);
+    update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
 
     update_number_id(widget->gx_widget_parent, PRMPTHOUR,  AgetHour());
     update_number_id(widget->gx_widget_parent, PRMPTMIN, AgetMin());
@@ -372,7 +404,7 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     //Enable the selected alarm
     case GX_SIGNAL(ALARMACTIEF, GX_EVENT_CLICKED):
-        if(active == 0){
+        if(Aactive(CurrentAlarm) == 0){
             switch (CurrentAlarm){
             case 1:
                 startAlarm1();
@@ -390,7 +422,7 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 break;
             }
         }
-        if(active == 1){
+        else{
             switch (CurrentAlarm){
                 case 1:
                     stopAlarm1();
@@ -407,8 +439,7 @@ UINT SetAlarmData_1(GX_WINDOW *widget, GX_EVENT *event_ptr){
                 default:
                     break;
             }
-            active = Aactive(CurrentAlarm);
-            update_number_id(widget->gx_widget_parent, PRMPTACT, active);
+            update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
         }
     break;
     //Every setting that has to do with time
@@ -492,10 +523,7 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
 
     int CurrentAlarm = getAlarm();
 
-    int active;
-    active = Aactive(CurrentAlarm);
-
-    update_number_id(widget->gx_widget_parent, PRMPTACT, active);
+    update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
 
     update_number_id(widget->gx_widget_parent, PRMPTHOUR, intervalHour());
     update_number_id(widget->gx_widget_parent, PRMPTMIN, intervalMin());
@@ -540,13 +568,13 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
                       activatePWM1();
                       break;
                   case 2:
-                      activatePWM2();
+                      activatePWM1();
                       break;
                   case 3:
-                      activatePWM3();
+                      activatePWM1();
                       break;
                   case 4:
-                      activatePWM4();
+                      activatePWM1();
                       break;
                   default:
                       break;
@@ -555,8 +583,7 @@ UINT PWMHandler(GX_WINDOW *widget, GX_EVENT *event_ptr){
               else{
                   deactivatePWM();
               }
-              active = Aactive(CurrentAlarm);
-              update_number_id(widget->gx_widget_parent, PRMPTACT, active);
+              update_number_id(widget->gx_widget_parent, PRMPTACT,  Aactive(CurrentAlarm));
           break;
           /*
         case GX_SIGNAL(ACTIVEALARM, GX_EVENT_TOGGLE_ON):

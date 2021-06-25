@@ -709,6 +709,7 @@ int checkAlarm1(){
                (alarm1Fri == 1 && weekday == 5)||
                (alarm1Sat == 1 && weekday == 6)||
                (alarm1Sun == 1 && weekday == 7)){
+<<<<<<< HEAD
                if (action1 == 0){
                    action1 = 1;
                    printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
@@ -719,6 +720,9 @@ int checkAlarm1(){
                    printf( "%i/%i/%i - %i:%i:%i :", getYear(), getMonth(), getDate(), getHour(), getMin(), getSec());
                    printf("alarm 1 low \n");
                }
+=======
+               action1 = 1;
+>>>>>>> parent of c0a3388 (Compleet project)
            }
        }
        else if(alarm1Mode == 2 && sec == alarm1Sec && alarm1Msec == msec){
