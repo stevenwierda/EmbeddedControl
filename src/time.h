@@ -90,10 +90,7 @@ int getweekday();
 int AgetHour();
 int AgetMin();
 int Aactive();
-void saveauto(int);
-void readauto();
-void AutoStartW();
-int AutostartR();
+
 
 
 //I2C stuff

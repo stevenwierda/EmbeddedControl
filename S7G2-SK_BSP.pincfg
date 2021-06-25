@@ -786,6 +786,4 @@
   <v1:configSetting configurationId="p404.gpio_mode" altId="p404.gpio_mode.gpio_mode_out.low"/>
   <v1:configSetting configurationId="usbhs0.ovrcura" altId="usbhs0.ovrcura.none"/>
   <v1:configSetting configurationId="p405.gpio_mode" altId="p405.gpio_mode.gpio_mode_out.low"/>
-  <v1:configSetting configurationId="p406.gpio_mode" altId="p406.gpio_mode.gpio_mode_out.low"/>
-  <v1:configSetting configurationId="p406" altId="p406.output.low"/>
 </v1:pinSettings>
