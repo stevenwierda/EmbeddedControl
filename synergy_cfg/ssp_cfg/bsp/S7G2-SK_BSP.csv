@@ -301,7 +301,7 @@ POEG0: GTETRG
 SCI4: CTS_RTS_SS
 SCI7: SDA
 SCI7: TXD_MOSI"
-"P402","3","GPIO","","Low","None","Output mode (Initial Low)","CMOS","None","AGT0: AGTIO
+"P402","3","GPIO","","Medium","None","Output mode (Initial Low)","CMOS","None","AGT0: AGTIO
 AGT1: AGTIO
 CAN0: CRX
 ETHERC0: MDIO

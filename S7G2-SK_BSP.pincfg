@@ -788,4 +788,5 @@
   <v1:configSetting configurationId="p405.gpio_mode" altId="p405.gpio_mode.gpio_mode_out.low"/>
   <v1:configSetting configurationId="p406.gpio_mode" altId="p406.gpio_mode.gpio_mode_out.low"/>
   <v1:configSetting configurationId="p406" altId="p406.output.low"/>
+  <v1:configSetting configurationId="p402.gpio_drivecapacity" altId="p402.gpio_speed.gpio_speed_medium"/>
 </v1:pinSettings>

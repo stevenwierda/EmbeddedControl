@@ -287,9 +287,7 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     Flag = !Flag;
     g_ioport.p_api->pinWrite(FlagPin, Flag);
 
-
     addMs();
-
     //Alarm 1
     value  = checkAlarm1();
     if (value == 1){
@@ -300,7 +298,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     }
     AL0 = !AL0;
     g_ioport.p_api->pinWrite(Alarm1Pin, AL0);
-
     //Alarm 2
     value1 = checkAlarm2();
     if (value1 == 1){
@@ -311,7 +308,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     }
     AL1 = !AL1;
     g_ioport.p_api->pinWrite(Alarm2Pin, AL1);
-
     //Alarm 3
     value2 = checkAlarm3();
     if (value2 == 1){
@@ -322,7 +318,6 @@ void led_timer0_callback(timer_callback_args_t * p_args){
     }
     AL2 = !AL2;
     g_ioport.p_api->pinWrite(Alarm3Pin, AL2);
-
     //Alarm 4
     value3 = checkAlarm4();
     if (value3 == 1){
@@ -362,7 +357,6 @@ void Timer1_callback(timer_callback_args_t * p_args){
             case 5:
                 alarmpwm4read();
                 break;
-
             default:
                 break;
             }
