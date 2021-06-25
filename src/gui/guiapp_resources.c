@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.6.1.0                                               */
-/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 15:13                        */
+/*  Date (dd.mm.yyyy): 24. 6.2021   Time (hh:mm): 09:37                        */
 /*******************************************************************************/
 
 
